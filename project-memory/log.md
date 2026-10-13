@@ -21,3 +21,6 @@ Auto 모드에서는 .claude/ 수정이 self-modification으로 차단되어, Ac
 ## [2026-10-13] release | v0.1.0 태그·릴리즈 생성과 자동화
 클라우드 세션에서 태그 push가 프록시에서 403으로 막혀, v0.1.0은 사용자가 GitHub 웹에서 Release로 만듦.
 다음 버전부터는 .github/workflows/release.yml이 VERSION 변경을 보고 태그·릴리즈를 자동 생성 (decisions/release-automation.md).
+
+## [2026-10-13] release | v0.1.1 — 릴리즈 자동화
+학습 내용 변화 없이 메인테이너 도구만 바뀌어 PATCH로 판단. Release 워크플로가 실제로 도는 첫 릴리즈.
