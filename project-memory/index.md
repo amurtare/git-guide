@@ -9,6 +9,7 @@
 ## 설계 결정
 - [decisions/version-source.md](decisions/version-source.md) — 버전 소스를 `VERSION` 파일로 둔 이유
 - [decisions/update-delivery.md](decisions/update-delivery.md) — 앱 내 업데이트 확인 기능을 만들지 않는 이유
+- [decisions/release-automation.md](decisions/release-automation.md) — 태그·릴리즈를 GitHub Actions가 만드는 이유
 
 ## 함정
 - [gotchas.md](gotchas.md) — 반복해서 부딪힐 문제와 해법

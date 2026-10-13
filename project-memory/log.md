@@ -17,3 +17,7 @@ amurtare/release_management_guide를 정적 HTML 프로젝트에 맞게 조정�
 ## [2026-10-13] design | hook 등록
 release_management_guide의 hook 4개를 .claude/settings.json에 등록. 세션 시작 brief는 VERSION 파일을 읽도록 조정.
 Auto 모드에서는 .claude/ 수정이 self-modification으로 차단되어, Accept edits 모드로 바꿔서 등록함.
+
+## [2026-10-13] release | v0.1.0 태그·릴리즈 생성과 자동화
+클라우드 세션에서 태그 push가 프록시에서 403으로 막혀, v0.1.0은 사용자가 GitHub 웹에서 Release로 만듦.
+다음 버전부터는 .github/workflows/release.yml이 VERSION 변경을 보고 태그·릴리즈를 자동 생성 (decisions/release-automation.md).

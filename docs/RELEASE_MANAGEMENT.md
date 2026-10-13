@@ -11,7 +11,7 @@
 | `VERSION` | 버전 번호 단일 소스 (매니페스트 파일이 없으므로 plain-text 파일 사용) |
 | `docs/UPDATE_CHECKLIST.md` | 릴리즈 시 순서대로 따르는 체크리스트 |
 | `release-notes/v{버전}.md` | 버전별 변경 내역 (학습자·기여자용) |
-| Git 태그 `vX.Y.Z` | 코드베이스에서 버전 지점 고정 |
+| Git 태그 `vX.Y.Z` + GitHub Release | 버전 지점 고정. `.github/workflows/release.yml`이 자동 생성 |
 | `CLAUDE.md` | Claude Code가 릴리즈 요청 시 체크리스트를 따르도록 하는 트리거 |
 | `project-memory/` | 개발 맥락 누적 — 설계 결정·함정·구조·미해결 이슈 |
 | `handoff.md` | 세션 이월용 (로컬 전용, `.gitignore`) |
@@ -53,14 +53,22 @@ Windows에서 `python` 명령이 없고 `py`만 있으면 `settings.json`의 `py
 프리릴리즈 식별자(`-alpha`, `-beta`, `-rc`)는 사용하지 않는다. 정적 사이트라 바로 정식 버전을 올려도 되고,
 미완성 레슨은 브랜치에서 작업한다.
 
-## Git 태그
+## Git 태그와 GitHub Release
 
-릴리즈 커밋 직후 태그를 만들고, 태그는 커밋과 별도로 push한다.
+태그와 GitHub Release는 [`.github/workflows/release.yml`](../.github/workflows/release.yml)이 자동으로 만든다.
+
+- `VERSION`이 바뀐 커밋이 main에 push되면 실행된다
+- `v{VERSION}` 태그가 아직 릴리즈되지 않았으면, 그 커밋에 태그를 붙이고 GitHub Release를 만든다
+- 제목은 `release-notes/v{VERSION}.md`의 첫 줄(`## ` 제외), 본문은 나머지 내용
+- 이미 릴리즈된 버전이면 아무것도 하지 않는다. Actions 탭에서 수동으로 다시 실행할 수도 있다
+
+태그를 손으로 만들지 않는 이유는
+[project-memory/decisions/release-automation.md](../project-memory/decisions/release-automation.md) 참고.
 
 ```bash
-git tag v0.2.0
-git push origin v0.2.0
+git fetch --tags
 git tag --sort=-version:refname   # 최신순 목록
+git switch --detach v0.1.0        # 특정 버전으로 이동
 ```
 
 ## 릴리즈 노트 형식
@@ -112,9 +120,9 @@ docs/UPDATE_CHECKLIST.md 순서대로 실행
     ├── 콘텐츠 정확성 · 안전성 · 브라우저 확인
     └── project-memory 갱신 점검
     ↓
-커밋 "vX.Y.Z: 변경 요약" → git tag vX.Y.Z
+커밋 "vX.Y.Z: 변경 요약" → git push origin main
     ↓
-git push origin main && git push origin vX.Y.Z
+GitHub Actions가 태그 vX.Y.Z + GitHub Release 생성
 ```
 
 ## 체크리스트 항목 추가 기준

@@ -1,0 +1,47 @@
+name: Release
+
+# main의 VERSION이 바뀌면 v{VERSION} 태그와 GitHub Release를 만든다.
+# 본문은 release-notes/v{VERSION}.md. 이미 릴리즈된 버전이면 아무것도 하지 않는다.
+on:
+  push:
+    branches: [main]
+    paths: [VERSION]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Read version
+        id: version
+        run: |
+          version="$(tr -d '[:space:]' < VERSION)"
+          if ! [[ "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "::error::VERSION '$version' is not MAJOR.MINOR.PATCH"
+            exit 1
+          fi
+          echo "tag=v$version" >> "$GITHUB_OUTPUT"
+
+      - name: Create tag and release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ steps.version.outputs.tag }}
+        run: |
+          if gh release view "$TAG" > /dev/null 2>&1; then
+            echo "$TAG is already released"
+            exit 0
+          fi
+          notes="release-notes/$TAG.md"
+          if [ ! -f "$notes" ]; then
+            echo "::error::$notes is missing"
+            exit 1
+          fi
+          # 첫 줄 "## vX.Y.Z — 요약"은 제목으로, 나머지는 본문으로 쓴다
+          title="$(head -n 1 "$notes" | sed 's/^## *//')"
+          tail -n +2 "$notes" > "$RUNNER_TEMP/body.md"
+          gh release create "$TAG" --target "$GITHUB_SHA" --title "$title" --notes-file "$RUNNER_TEMP/body.md"

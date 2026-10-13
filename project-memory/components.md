@@ -15,6 +15,8 @@ git-guide/
 │   ├── RELEASE_MANAGEMENT.md
 │   └── UPDATE_CHECKLIST.md
 ├── release-notes/          # v{버전}.md
+├── .github/workflows/release.yml  # VERSION 변경 시 태그·GitHub Release 자동 생성
+├── .claude/                # hook 스크립트와 등록 설정
 └── project-memory/
 ```
 

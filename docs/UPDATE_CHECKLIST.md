@@ -68,7 +68,9 @@
 
 - [ ] 관련 파일 모두 `git add` (VERSION, release-notes, README.md, 레슨·assets 파일, project-memory)
 - [ ] 커밋 메시지에 버전 포함: `v0.2.0: 3단계 커밋 레슨 추가`
-- [ ] `git tag v0.2.0` 후 `git push origin v0.2.0`
-- [ ] `git push origin main`
+- [ ] `git push origin main` — 태그는 직접 만들지 않는다
+- [ ] GitHub Actions의 **Release** 워크플로가 성공했는지 확인
+  - `VERSION`이 바뀐 push에서 자동 실행되어 `v{버전}` 태그와 GitHub Release를 만든다 (본문 = `release-notes/v{버전}.md`)
+  - 실패했으면 로그 확인: `VERSION` 형식 오류이거나 릴리즈 노트 파일 누락이 대부분
+  - 다시 돌리려면 Actions 탭에서 Release → Run workflow (이미 릴리즈된 버전이면 아무것도 하지 않음)
 - [ ] (GitHub Pages 사용 시) 배포된 페이지에서 새 버전이 보이는지 확인
-- [ ] (선택) GitHub Release 생성 — 본문에 `release-notes/v{버전}.md` 내용 붙여넣기
