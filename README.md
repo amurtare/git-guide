@@ -1,6 +1,8 @@
 # Git Guide 🌱
 
 > Git을 처음 접하는 사람을 위한 **인터랙티브 도식 기반 Git 학습 가이드**
+>
+> v0.1.0 기준 · [변경 내역](release-notes/)
 
 명령어를 외우기 전에, Git 안에서 **무슨 일이 일어나는지 눈으로 보면서** 이해하는 것을 목표로 합니다.
 각 단계는 브라우저에서 바로 열 수 있는 HTML 페이지로 제공되며, 버튼을 누르거나 명령을 실행하면
@@ -62,8 +64,28 @@ git-guide/
 ├── assets/
 │   ├── css/            # 공통 스타일
 │   └── js/             # 도식 렌더링 · 인터랙션 스크립트
+├── docs/               # 릴리즈 관리 규칙 · 체크리스트
+├── release-notes/      # 버전별 변경 내역
+├── project-memory/     # 설계 결정 · 함정 · 개발 로그
+├── VERSION             # 현재 버전
 └── README.md
 ```
+
+---
+
+## 🏷️ 버전과 릴리즈
+
+[Semver](https://semver.org)(`MAJOR.MINOR.PATCH`)를 따르며, 버전은 `VERSION` 파일 하나로 관리합니다.
+
+| 구분 | 언제 올리나 |
+|---|---|
+| MAJOR | 커리큘럼 단계 재편, 레슨 경로 변경처럼 기존 링크가 깨질 때 |
+| MINOR | 새 레슨이나 새 인터랙티브 도식이 추가될 때 |
+| PATCH | 오탈자, 설명 수정, 도식 버그 수정 |
+
+- 커리큘럼 0~10단계가 모두 완성되면 `1.0.0`이 됩니다.
+- 버전별 변경 내역은 [`release-notes/`](release-notes/)에서 볼 수 있습니다.
+- 릴리즈 절차는 [`docs/RELEASE_MANAGEMENT.md`](docs/RELEASE_MANAGEMENT.md)와 [`docs/UPDATE_CHECKLIST.md`](docs/UPDATE_CHECKLIST.md)를 따릅니다.
 
 ---
 
