@@ -15,6 +15,19 @@
 | `CLAUDE.md` | Claude Code가 릴리즈 요청 시 체크리스트를 따르도록 하는 트리거 |
 | `project-memory/` | 개발 맥락 누적 — 설계 결정·함정·구조·미해결 이슈 |
 | `handoff.md` | 세션 이월용 (로컬 전용, `.gitignore`) |
+| `.claude/hooks/` + `.claude/settings.json` | 세션 시작 brief · 커밋 후 회고 · 압축 전 회고 · 플랜 리뷰 게이트 |
+
+### hook
+
+| 파일 | 시점 | 하는 일 |
+|------|------|---------|
+| `session_start_brief.py` | 세션 시작 | `VERSION`, 최근 log·insight, `handoff.md` 남은 작업을 요약 출력 |
+| `post_commit_review.py` | Bash 실행 후 HEAD가 전진했을 때 | project-memory 회고 리마인더 (설치 후 첫 커밋은 기준점만 기록, `project-memory/`·`.claude/`만 바꾼 커밋은 제외) |
+| `pre_compact_review.py` | 수동 `/compact` 직전 | 편집이 있었으면 회고 리마인더 |
+| `pre_plan_exit_review.py` | 플랜 모드 종료 시 | Codex/Copilot 플러그인이 있으면 플랜 리뷰 요청, 없으면 통과 |
+
+끄려면 홈 디렉터리에 빈 파일을 만든다: `.no-git-guide-session-brief`, `.no-commit-review`, `.no-pre-compact-review`, `.no-plan-exit-review`.
+Windows에서 `python` 명령이 없고 `py`만 있으면 `settings.json`의 `python`을 `py`로 바꾼다.
 
 ## 버전 규칙
 
