@@ -20,12 +20,10 @@ LOG_FILE     = MEM_DIR / "log.md"
 INSIGHT_DIR  = MEM_DIR / "insight"
 HANDOFF_FILE = REPO_ROOT / "handoff.md"
 
-# 버전 소스는 프로젝트에 맞게 조정
-VERSION_FILE = REPO_ROOT / "VERSION"           # plain-text
-# import json; json.loads((REPO_ROOT / "package.json").read_text())["version"]
+# 정적 HTML 프로젝트라 매니페스트가 없으므로 루트의 VERSION 파일이 버전 단일 소스
+VERSION_FILE = REPO_ROOT / "VERSION"
 
-# suppress 마커 경로는 프로젝트 전용으로 변경할 것
-SUPPRESS_MARKER = Path.home() / ".no-session-brief"
+SUPPRESS_MARKER = Path.home() / ".no-git-guide-session-brief"
 
 LOG_TAIL     = 3
 INSIGHT_TAIL = 3
