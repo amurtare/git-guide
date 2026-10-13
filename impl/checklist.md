@@ -13,8 +13,9 @@ Phase별 항목. 각 항목은 플랜 모드 → 승인 → **승인된 명세�
       **플랜에서 정할 것**: [open-questions.md A1](open-questions.md#a1-공용-도식-상세안)
 - [ ] **0단계 흐름** — `docs/design/lesson-00.md`. Git 이전의 로컬/서버 버전 관리 개념부터 시작하는 장면 구성(R2).
       **플랜에서 정할 것**: [A2](open-questions.md#a2-0단계-장면-구성), [A3](open-questions.md#a3-git-clone을-다루는-단계)
-- [ ] **개발 도구 결정** — 검수자 지정 모델, 자동 확인 도구. 결정은 `impl/README.md` 확정 전제와 `project-memory/decisions/`에 반영.
-      **플랜에서 정할 것**: [C1](open-questions.md#c1-검수자-지정-모델), [C2](open-questions.md#c2-자동-확인-도구)
+- [ ] **자동 확인 도구 결정** — 결정은 `impl/README.md` 확정 전제와 `project-memory/decisions/`에 반영.
+      **플랜에서 정할 것**: [C2](open-questions.md#c2-자동-확인-도구)
+- [x] 검수자 지정 모델(2026-10-13) — 사용자 결정: Opus 5.5 서브에이전트. C1 해소 → `project-memory/decisions/reviewer.md`
 
 ## Phase 1 — 최소 end-to-end 슬라이스
 

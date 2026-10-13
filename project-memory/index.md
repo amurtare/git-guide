@@ -10,6 +10,7 @@
 - [decisions/version-source.md](decisions/version-source.md) — 버전 소스를 `VERSION` 파일로 둔 이유
 - [decisions/update-delivery.md](decisions/update-delivery.md) — 앱 내 업데이트 확인 기능을 만들지 않는 이유
 - [decisions/release-automation.md](decisions/release-automation.md) — 태그·릴리즈를 GitHub Actions가 만드는 이유
+- [decisions/reviewer.md](decisions/reviewer.md) — 독립 검수자 = Opus 5.5 서브에이전트 (사용자 결정)
 - [decisions/curriculum-foundations.md](decisions/curriculum-foundations.md) — 로컬·리모트 공용 틀, 0단계는 버전 관리 개념부터 (사용자 지시)
 
 ## 함정
