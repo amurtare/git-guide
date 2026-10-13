@@ -24,3 +24,8 @@ Auto 모드에서는 .claude/ 수정이 self-modification으로 차단되어, Ac
 
 ## [2026-10-13] release | v0.1.1 — 릴리즈 자동화
 학습 내용 변화 없이 메인테이너 도구만 바뀌어 PATCH로 판단. Release 워크플로가 실제로 도는 첫 릴리즈.
+
+## [2026-10-13] design | 장기 단계별 구현 프로세스(impl/) 도입
+사용자가 준 process-guide.md(perforce-ax-template)를 정적 HTML 학습 사이트에 맞게 이식. 단위 테스트 → 브라우저 스모크, 설계 문서 → docs/design/.
+사용자 지시 R1(로컬·리모트 공용 틀)·R2(0단계는 로컬/서버 버전 관리부터)를 절대 규칙으로 고정. 대화 중 제안안은 확정하지 않고 impl/open-questions.md A1~A3으로 남김.
+미해결 장부를 impl/open-questions.md 하나로 일원화.

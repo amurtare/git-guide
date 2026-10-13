@@ -19,6 +19,7 @@ MEM_DIR      = REPO_ROOT / "project-memory"
 LOG_FILE     = MEM_DIR / "log.md"
 INSIGHT_DIR  = MEM_DIR / "insight"
 HANDOFF_FILE = REPO_ROOT / "handoff.md"
+PROGRESS_FILE = REPO_ROOT / "impl" / "progress.md"
 
 # 정적 HTML 프로젝트라 매니페스트가 없으므로 루트의 VERSION 파일이 버전 단일 소스
 VERSION_FILE = REPO_ROOT / "VERSION"
@@ -70,6 +71,27 @@ def _insight_tail() -> list[tuple[str, str]]:
             pass
         out.append((p.name, first))
     return out
+
+
+def _next_start() -> list[str]:
+    """impl/progress.md 의 '## 다음 착수 지점' 섹션 본문."""
+    if not PROGRESS_FILE.exists():
+        return []
+    try:
+        text = PROGRESS_FILE.read_text(encoding="utf-8")
+    except OSError:
+        return []
+    in_section = False
+    lines: list[str] = []
+    for line in text.splitlines():
+        if line.startswith("## 다음 착수 지점"):
+            in_section = True
+            continue
+        if in_section and line.startswith("## "):
+            break
+        if in_section and line.strip():
+            lines.append(line.strip())
+    return lines
 
 
 def _handoff_pending() -> list[str]:
@@ -149,6 +171,13 @@ def main() -> int:
         parts.append(f"최근 insight ({len(insights)}건):")
         for name, ctx in insights:
             parts.append(f"  - {name}  // {ctx}" if ctx else f"  - {name}")
+        parts.append("")
+
+    next_start = _next_start()
+    if next_start:
+        parts.append("[구현] 다음 착수 지점 (impl/progress.md — 새 단계는 impl/README.md를 읽고 플랜 모드부터):")
+        for line in next_start:
+            parts.append(f"  {line}")
         parts.append("")
 
     handoff = _handoff_pending()

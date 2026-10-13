@@ -58,7 +58,8 @@
 - [ ] 설계 의도/정책 변경 → `project-memory/decisions/<topic>.md` 추가 (기존 결정을 뒤집으면 superseded 표시)
 - [ ] 반복 가능한 함정 발견 → `project-memory/gotchas.md` 항목 추가
 - [ ] 레슨·공통 스크립트 구조 변경 → `project-memory/components.md` 갱신
-- [ ] 미해결 이슈 진척/해결 → `project-memory/open-questions.md` 갱신
+- [ ] 미해결 이슈 진척/해결 → `impl/open-questions.md` 갱신
+- [ ] `impl/checklist.md`에서 이번 릴리즈에 포함된 항목이 `[x]`인지, `impl/progress.md` "다음 착수 지점"이 맞는지 확인
 - [ ] `project-memory/log.md`에 이번 릴리즈 항목 append (1~3줄, 의도 위주)
 - [ ] `project-memory/insight/` 정리 — 6개월 이상 참조 0회 항목 삭제
 - [ ] staleness 점검: decisions에 superseded 누락 없는지, gotchas에 해결된 항목 없는지,
