@@ -37,7 +37,7 @@ Windows에서 `python` 명령이 없고 `py`만 있으면 `settings.json`의 `py
 | 세그먼트 | 올리는 조건 | 예시 |
 |----------|------------|------|
 | **MAJOR** | 기존 링크·학습 순서가 깨지는 변경 | 커리큘럼 단계 재편·번호 변경, 레슨 파일 경로 변경, 페이지 구조 전면 개편 |
-| **MINOR** | 기존을 유지하며 학습 내용 추가 | 새 레슨(단계) 추가, 새 인터랙티브 도식, 기존 레슨에 새 실습 추가 |
+| **MINOR** | 기존을 유지하며 학습 내용 추가 | 새 레슨(단계) 추가, 새 인터랙티브 도식, 기존 레슨에 새 장면 추가 |
 | **PATCH** | 내용 추가 없는 수정 | 오탈자·설명 다듬기, 도식 동작 버그 수정, 스타일·접근성 개선 |
 
 **판단이 애매할 때:**
@@ -100,10 +100,10 @@ git switch --detach v0.1.0        # 특정 버전으로 이동
 ## 업데이트 전달 방식
 
 앱 내 업데이트 확인 기능은 만들지 않는다. 근거는
-[project-memory/decisions/update-delivery.md](../project-memory/decisions/update-delivery.md).
+[project-memory/decisions/update-delivery-download.md](../project-memory/decisions/update-delivery-download.md).
 
 - **웹으로 보는 학습자** — GitHub Pages 등 배포된 사이트가 push 시점에 바로 갱신된다.
-- **클론해서 보는 학습자** — `git pull`로 갱신한다. 무엇이 바뀌었는지는 `release-notes/`에서 확인한다.
+- **내려받아 보는 학습자** — 새 버전을 다시 내려받는다. 무엇이 바뀌었는지는 `release-notes/`에서 확인한다.
 - **버전 표시** — 페이지가 생기면 `index.html` 푸터에 현재 버전과 릴리즈 노트 링크를 둔다.
 
 ## 워크플로 요약

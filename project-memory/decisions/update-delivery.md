@@ -1,3 +1,5 @@
+> **Superseded by**: [update-delivery-download.md](update-delivery-download.md)
+
 # 업데이트 전달: 앱 내 확인 기능을 만들지 않는다
 
 **결정 (2026-10-13)**: 원본 가이드 6단계의 "앱 내 업데이트 배너"는 구현하지 않는다.
