@@ -21,7 +21,7 @@
 
 | 파일 | 시점 | 하는 일 |
 |------|------|---------|
-| `session_start_brief.py` | 세션 시작 | `VERSION`, 최근 log·insight, `impl/progress.md` 다음 착수 지점, `handoff.md` 남은 작업을 요약 출력 |
+| `session_start_brief.py` | 세션 시작 | `VERSION`, 최근 log·insight, `dev/impl/progress.md` 다음 착수 지점, `dev/plan/README.md` 현재 위치, `handoff.md` 남은 작업을 요약 출력 |
 | `post_commit_review.py` | Bash 실행 후 HEAD가 전진했을 때 | project-memory 회고 리마인더 (설치 후 첫 커밋은 기준점만 기록, `project-memory/`·`.claude/`만 바꾼 커밋은 제외) |
 | `pre_compact_review.py` | 수동 `/compact` 직전 | 편집이 있었으면 회고 리마인더 |
 | `pre_plan_exit_review.py` | 플랜 모드 종료 시 | Codex/Copilot 플러그인이 있으면 플랜 리뷰 요청, 없으면 통과 |
@@ -102,7 +102,7 @@ git switch --detach v0.1.0        # 특정 버전으로 이동
 앱 내 업데이트 확인 기능은 만들지 않는다. 근거는
 [project-memory/decisions/update-delivery-download.md](../project-memory/decisions/update-delivery-download.md).
 
-- **웹으로 보는 학습자** — (웹 배포 여부는 미정, [impl/open-questions.md B2](../impl/open-questions.md#b2-공개-방식-github-pages-여부)) 배포하게 되면 사이트가 push 시점에 바로 갱신된다.
+- **웹으로 보는 학습자** — (웹 배포 여부는 미정, [dev/plan/open-questions.md B2](../dev/plan/open-questions.md#b2-공개-방식-github-pages-여부)) 배포하게 되면 사이트가 push 시점에 바로 갱신된다.
 - **내려받아 보는 학습자** — 새 버전을 다시 내려받는다. 무엇이 바뀌었는지는 `release-notes/`에서 확인한다.
 - **버전 표시** — 페이지가 생기면 `index.html` 푸터에 현재 버전과 릴리즈 노트 링크를 둔다.
 

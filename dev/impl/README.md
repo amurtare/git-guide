@@ -1,8 +1,11 @@
-# git-guide 구현 — 진행 관리 (impl/)
+# git-guide 구현 — 진행 관리 (dev/impl/)
+
+> ⚠️ **지금은 Design 단계다.** Design → Impl 게이트(모든 단위 설계 완료 + 구현 준비 상태 점검) 전에는 구현할 단계가 없다.
+> "다음 단계 진행해줘"를 받으면 **[`dev/plan/README.md`](../plan/README.md)의 "현재 위치"**를 따른다.
 
 여러 세션에 걸쳐 레슨과 공용 도식을 단계별로 구현하기 위한 진행 관리 폴더다.
-코드는 `index.html` · `lessons/` · `assets/`에 있고, 여기에는 **무엇을 어디까지 만들었나 / 다음에 뭘 하나 / 무엇이 미확인인가**만 둔다.
-프로세스 원문: 사용자가 제공한 "장기 단계별 구현 프로세스 가이드"(perforce-ax-template `impl/process-guide.md`)를 이 프로젝트에 맞게 옮겼다.
+코드는 루트의 `index.html` · `lessons/` · `assets/`(예정)에 있고, 여기에는 **무엇을 어디까지 만들었나 / 다음에 뭘 하나 / 무엇이 미확인인가**만 둔다.
+프로세스 원문: [`dev/LONG_TERM_DEV_PROCESS.md`](../LONG_TERM_DEV_PROCESS.md) (사용자 제공 가이드의 git-guide 적용본). 앞단(계획·설계)은 [`dev/plan/`](../plan/README.md).
 
 ## 시작하기 — 구현 세션 진입점
 
@@ -12,10 +15,10 @@
 1. 이 파일 — 확정 전제 + 진행 방식
 2. [progress.md](progress.md)의 **"다음 착수 지점"** / [open-questions.md](open-questions.md) — 착수할 단계에 걸린 항목이 있는지
 3. [checklist.md](checklist.md) — 해당 항목의 승인된 명세
-4. 설계 문서 — `docs/design/` (아래 "설계 문서" 참고)
+4. [`dev/design/map.md`](../design/map.md)와 해당 단위의 설계 문서 (아래 "설계 문서" 참고)
 5. → 곧장 파일을 만들지 않고 **플랜 모드**로 들어간다
 
-> 사용자의 한 줄 지시 **"impl/README.md를 읽고 다음 단계 진행해줘"**만으로 위 순서가 성립해야 한다.
+> 사용자의 한 줄 지시 **"dev/impl/README.md를 읽고 다음 단계 진행해줘"**만으로 위 순서가 성립해야 한다.
 
 ## 확정 전제
 
@@ -23,12 +26,12 @@
 
 | # | 규칙 | 날짜 · 근거 |
 |---|---|---|
-| R1 | **모든 도식은 로컬·리모트 두 공간을 공용 틀로 쓴다.** 레슨마다 새 화면을 만들지 않고, 같은 틀에서 필요한 부분을 켜고 끈다 | 2026-10-13 사용자 지시 · [decisions/curriculum-foundations.md](../project-memory/decisions/curriculum-foundations.md) |
+| R1 | **모든 도식은 로컬·리모트 두 공간을 공용 틀로 쓴다.** 레슨마다 새 화면을 만들지 않고, 같은 틀에서 필요한 부분을 켜고 끈다 | 2026-10-13 사용자 지시 · [decisions/curriculum-foundations.md](../../project-memory/decisions/curriculum-foundations.md) |
 | R2 | **0단계는 Git 설명 전에 로컬/서버 버전 관리 개념부터 설명한다** | 2026-10-13 사용자 지시 · 같은 문서 |
 | R3 | **추론은 확인받고, 설계는 의논 없이 바꾸지 않는다.** 설계 변경 근거는 구조적 문제·구조적 개선뿐이며 구현 편의는 근거가 아니다 | 2026-10-13 프로세스 도입 |
-| R4 | **빌드 없이 `index.html`을 `file://`로 열어 동작해야 한다.** `fetch`·ES 모듈 금지, 외부 스크립트는 정확한 버전이 고정된 CDN만 | 프로젝트 출범 · [gotchas.md](../project-memory/gotchas.md) |
-| R5 | **학습자는 Git을 직접 사용하지 않고 개념만 배운다.** 명령 입력·실행 UI를 만들지 않는다. 용어만 나오고 명령어 형태는 사이트와 README 어디에도 쓰지 않는다 | 2026-10-14 사용자 지시 · [decisions/learning-scope-and-terms.md](../project-memory/decisions/learning-scope-and-terms.md) |
-| R6 | **용어는 정확하게.** [docs/design/glossary.md](../docs/design/glossary.md) 하나를 따르고, 근거는 Pro Git 한국어판 원고(고정 커밋)다. 비유는 설명 보조로만 쓴다 | 2026-10-14 사용자 지시 · 같은 문서 |
+| R4 | **빌드 없이 `index.html`을 `file://`로 열어 동작해야 한다.** `fetch`·ES 모듈 금지, 외부 스크립트는 정확한 버전이 고정된 CDN만 | 프로젝트 출범 · [gotchas.md](../../project-memory/gotchas.md) |
+| R5 | **학습자는 Git을 직접 사용하지 않고 개념만 배운다.** 명령 입력·실행 UI를 만들지 않는다. 용어만 나오고 명령어 형태는 사이트와 README 어디에도 쓰지 않는다 | 2026-10-14 사용자 지시 · [decisions/learning-scope-and-terms.md](../../project-memory/decisions/learning-scope-and-terms.md) |
+| R6 | **용어는 정확하게.** [dev/design/glossary.md](../design/glossary.md) 하나를 따르고, 근거는 Pro Git 한국어판 원고(고정 커밋)다. 비유는 설명 보조로만 쓴다 | 2026-10-14 사용자 지시 · 같은 문서 |
 | R7 | **전체 계획을 먼저 세운 뒤, 한 단계씩 세부 구현까지 끝내고 다음 단계로 간다** | 2026-10-14 사용자 지시 · 같은 문서 |
 
 ### 실행 환경
@@ -38,14 +41,14 @@
 - **스모크 표준 대상**: `index.html` (생기기 전에는 `lessons/00-*.html`)
   - 절차: Chromium(Playwright, 컨테이너에 설치됨)으로 `file://` 열기 → 콘솔 에러 0 · 404 0 확인 → 데스크톱/모바일 폭 스크린샷 → 핵심 인터랙션 1회 조작
   - 원상복구 확인: 저장소에 남는 산출물 0개(스크린샷·임시 파일은 스크래치 디렉터리에만), `git status` 깨끗함
-- **검수자 (2026-10-13 사용자 결정)**: 이 대화 맥락을 물려받지 않는 새 서브에이전트(`Agent`, `subagent_type: general-purpose`, **`model: opus` = Opus 5.5**). 플랜 검수·구현 검수 모두 같은 지정을 쓰고, 실제 실행 모델을 로그에 남긴다. 근거: [decisions/reviewer.md](../project-memory/decisions/reviewer.md)
+- **검수자 (2026-10-13 사용자 결정)**: 이 대화 맥락을 물려받지 않는 새 서브에이전트(`Agent`, `subagent_type: general-purpose`, **`model: opus` = Opus 5.5**). 플랜 검수·구현 검수 모두 같은 지정을 쓰고, 실제 실행 모델을 로그에 남긴다. 근거: [decisions/reviewer.md](../../project-memory/decisions/reviewer.md)
   - Codex/Copilot 플러그인이 설치되면 플랜 종료 hook이 그쪽 검수를 요청한다. 그 경우에도 위 지정 검수는 생략하지 않는다
 
 ### 설계 문서
 
-- **설계의 단일 진실 소스는 `docs/design/`** 이다. 구현 중 설계와 어긋나면 `impl/`을 맞추지 말고 설계 문서를 먼저 고친다(사용자와 의논 후, R3).
-- `docs/design/`이 채워지기 전(Phase 0 완료 전)까지는 [README.md](../README.md) 커리큘럼 표 + [decisions/curriculum-foundations.md](../project-memory/decisions/curriculum-foundations.md)가 설계 기준이다.
-- 저장소의 현재 상태(설계 문서·코드)가 항상 `impl/` 기록보다 우선한다. 충돌하면 기록을 갱신한다.
+- **설계의 단일 소스는 `dev/design/`([map.md](../design/map.md))** 이다. README 커리큘럼 표는 map.md의 요약이다.
+- 구현 중 설계와 어긋나면 `dev/impl/`을 맞추지 말고 설계 문서를 먼저 고치고 `dev/plan/`까지 역전파한다(사용자와 의논 후, R3).
+- 저장소의 현재 상태(설계 문서·코드)가 항상 `dev/impl/`·`project-memory/` 기록보다 우선한다. 설계 문서와 코드가 어긋나면 설계 문서가 기준이다.
 
 ## 진행 방식
 
@@ -65,11 +68,6 @@
  9. 로그           progress.md에 날짜·완료분·다음 착수 지점
 10. 핸드오프 점검  맥락 없는 서브에이전트로 "다음 단계 진행해줘"가 통하는지 확인
 ```
-
-### Phase 0(설계 문서만 만드는 단계)에서는
-
-- 5. 자동 확인(스모크)은 대상 파일이 없으므로 생략한다.
-- 6. 구현 검수는 **문서 검수**로 한다: 설계 문서가 R1~R7, 사용자와 합의한 내용, open-questions 해소 결과와 일치하는지를 독립 검수자가 판정한다.
 
 ### 1~2. 플랜 모드 (코드 전 필수)
 
@@ -91,7 +89,7 @@
 - **계약 우선**: 공용 도식 컴포넌트가 받는 설정 형식(공간·영역·커밋 히스토리 상태)을 먼저 고정하고, 레슨은 그 계약만 쓴다.
 - **수직 슬라이스 우선**: 공용 틀 + 레슨 한 장면을 끝까지 먼저 완성해 `file://` 동작과 계약을 조기 검증한 뒤 확장한다.
 - 레슨의 설명과 도식 전이가 Pro Git 원고 내용과 일치하는지, 화면의 모든 용어가 용어집 표기와 일치하는지 확인한다 (R5·R6).
-- 스모크는 위 "실행 환경"의 절차대로 하고 원상복구까지 확인한다. 자동 테스트 도구는 미정 → [open-questions.md C2](open-questions.md#c2-자동-확인-도구)
+- 스모크는 위 "실행 환경"의 절차대로 하고 원상복구까지 확인한다. 자동 테스트 도구는 미정 → [dev/plan/open-questions.md C2](../plan/open-questions.md#c2-자동-확인-도구)
 
 ### 6. 구현 검수 — 커밋 게이트, GO까지 반복
 
@@ -109,11 +107,11 @@
 
 - 커밋 단위는 checklist 항목 단위. GO 전에는 커밋하지 않는다.
 - `progress.md` 맨 위에 로그를 추가하고 "다음 착수 지점"을 갱신한다.
-- **단계 완료 ≠ 릴리즈.** 레슨 하나가 완성되면 [docs/UPDATE_CHECKLIST.md](../docs/UPDATE_CHECKLIST.md)로 MINOR 릴리즈를 따로 진행한다(사용자 요청 시).
+- **단계 완료 ≠ 릴리즈.** 레슨 하나가 완성되면 [docs/UPDATE_CHECKLIST.md](../../docs/UPDATE_CHECKLIST.md)로 MINOR 릴리즈를 따로 진행한다(사용자 요청 시).
 
 ### 10. 핸드오프 점검 (커밋·푸시 뒤)
 
-맥락을 물려받지 않는 새 서브에이전트에 **"impl/README.md를 읽고, 다음 단계 진행해줘."**를 그대로 주고, 실행하지 말고 무엇을 읽고 어떤 단계를 어떤 절차로 시작할지, 막히는 점만 보고하게 한다.
+맥락을 물려받지 않는 새 서브에이전트에 **"dev/impl/README.md를 읽고, 다음 단계 진행해줘."**를 그대로 주고, 실행하지 말고 무엇을 읽고 어떤 단계를 어떤 절차로 시작할지, 막히는 점만 보고하게 한다.
 
 통과 기준 (전부):
 1. 다음 단계를 `progress.md`의 "다음 착수 지점"과 같게 짚는다

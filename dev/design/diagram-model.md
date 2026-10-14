@@ -3,7 +3,7 @@
 모든 레슨이 쓰는 하나의 도식 틀이다 (R1). 레슨마다 새 화면을 만들지 않고, 이 틀에서 공간·영역을 켜고 끄며 라벨만 바꾼다.
 용어는 모두 [glossary.md](glossary.md) 표기를 따른다 (R6). 학습자는 Git을 실행하지 않고 도식을 보며 개념을 배운다 (R5).
 
-> 확정: 2026-10-14 사용자 승인 (D1~D8, [impl/checklist.md](../../impl/checklist.md) Phase 0 "공용 도식 모델")
+> 확정: 2026-10-14 사용자 승인 (D1~D8, [dev/plan/checklist.md](../plan/checklist.md) "완료된 설계 · 공용 도식 모델")
 
 ## 1. 공간 (D3)
 

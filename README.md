@@ -62,8 +62,7 @@ git-guide/
 │   └── js/             # 도식 렌더링 · 인터랙션 스크립트
 ├── .github/workflows/  # 릴리즈 자동화 (태그 · GitHub Release)
 ├── docs/               # 릴리즈 관리 규칙 · 체크리스트
-│   └── design/         # 설계 문서 (용어집 · 공용 도식 모델)
-├── impl/               # 단계별 구현 진행 관리
+├── dev/                # 개발 프로세스: plan(계획) · design(설계) · impl(구현 관리) · evidence(실측)
 ├── release-notes/      # 버전별 변경 내역
 ├── project-memory/     # 설계 결정 · 함정 · 개발 로그
 ├── VERSION             # 현재 버전
@@ -98,6 +97,6 @@ git-guide/
 4. 그 브랜치를 리모트 저장소에 Push 합니다.
 5. Pull Request를 생성합니다.
 
-용어와 표기는 [`docs/design/glossary.md`](docs/design/glossary.md)를 따릅니다.
+용어와 표기는 [`dev/design/glossary.md`](dev/design/glossary.md)를 따릅니다.
 
 > 이 과정 자체가 이 가이드의 8~9단계에서 배우는 내용입니다 😉

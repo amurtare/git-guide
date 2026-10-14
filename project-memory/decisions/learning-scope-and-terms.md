@@ -5,7 +5,7 @@
 | # | 규칙 |
 |---|---|
 | R5 | 학습자는 Git을 직접 사용하지 않고 **개념만** 배운다. 명령 입력·실행 UI를 만들지 않는다 |
-| R6 | 학습이 목적이므로 **용어는 정확하게** 다룬다. 기준은 Pro Git 한국어판이고, `docs/design/glossary.md` 하나를 따른다 |
+| R6 | 학습이 목적이므로 **용어는 정확하게** 다룬다. 기준은 Pro Git 한국어판이고, `dev/design/glossary.md` 하나를 따른다 |
 | R7 | **전체 계획을 먼저 세운 뒤, 한 단계씩 세부 구현까지 끝내고 다음 단계로 간다** |
 
 **계기**
@@ -24,4 +24,4 @@
 
 **근거 원고**: <https://github.com/progit/progit2-ko> 커밋 `f50647da032bf210ef91802290d60d05da1a9416` (2025-03-05). 이 환경에서는 git-scm.com이 막혀 GitHub 원고를 근거로 삼았다.
 
-**적용 범위 밖**: 메인테이너용 운영 문서(`.github/`, `.claude/`, `docs/RELEASE_MANAGEMENT.md`, `docs/UPDATE_CHECKLIST.md`, `impl/`의 절차 속 git 명령)는 학습자가 보는 곳이 아니라 D8 적용 대상이 아니다.
+**적용 범위 밖**: 메인테이너용 운영 문서(`.github/`, `.claude/`, `docs/RELEASE_MANAGEMENT.md`, `docs/UPDATE_CHECKLIST.md`, `dev/`의 절차 속 git 명령)는 학습자가 보는 곳이 아니라 D8 적용 대상이 아니다.

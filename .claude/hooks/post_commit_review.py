@@ -125,7 +125,7 @@ REMINDER = (
     "- 비자명한 디버깅 결론·의외의 동작 → project-memory/insight/YYYY-MM-DD-<주제>.md + index.md 등록\n"
     "- 반복적으로 부딪힐 함정 → project-memory/gotchas.md 항목 추가\n"
     "- 설계 결정의 의도 → project-memory/decisions/<topic>.md\n"
-    "- 미해결 이슈/미검증 사항 → impl/open-questions.md\n"
+    "- 미해결 이슈/미검증 사항 → 설계 중이면 dev/plan/open-questions.md, 구현 중이면 dev/impl/open-questions.md\n"
     "- 미완료 작업이 남아 있으면 → handoff.md '남은 작업' 섹션에 기록\n"
     "\n"
     "원칙: raw 코드·release-notes·git log에 이미 있는 사실은 다시 적지 않음.\n"

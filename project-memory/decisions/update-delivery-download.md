@@ -10,4 +10,4 @@
 **결정 내용**
 - 앱 내 업데이트 확인 기능은 여전히 만들지 않는다. 배포된 사이트를 보는 학습자는 항상 최신본을 보고, 내려받은 학습자는 새 버전을 다시 내려받는다.
 - 무엇이 바뀌었는지는 `release-notes/`로 알린다. 페이지가 생기면 `index.html` 푸터에 현재 버전과 릴리즈 노트 링크를 둔다.
-- 공개 방식(GitHub Pages 여부)과 내려받기 안내는 [impl/open-questions.md B2](../../impl/open-questions.md#b2-공개-방식-github-pages-여부)에서 함께 정한다.
+- 공개 방식(GitHub Pages 여부)과 내려받기 안내는 [dev/plan/open-questions.md B2](../../dev/plan/open-questions.md#b2-공개-방식-github-pages-여부)에서 함께 정한다.

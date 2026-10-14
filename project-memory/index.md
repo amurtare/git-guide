@@ -11,6 +11,7 @@
 - [decisions/update-delivery-download.md](decisions/update-delivery-download.md) — 내려받기 안내, 앱 내 업데이트 확인 기능은 만들지 않음 (update-delivery.md를 대체)
 - [decisions/release-automation.md](decisions/release-automation.md) — 태그·릴리즈를 GitHub Actions가 만드는 이유
 - [decisions/reviewer.md](decisions/reviewer.md) — 독립 검수자 = Opus 5.5 서브에이전트 (사용자 결정)
+- [decisions/dev-process.md](decisions/dev-process.md) — 장기 개발 프로세스 적용, 루트 `dev/`, 설계 완료 범위 A (사용자 결정·위임)
 - [decisions/learning-scope-and-terms.md](decisions/learning-scope-and-terms.md) — 개념만 배운다·용어는 정확하게·단계별 완성 (R5~R7, 사용자 지시)
 - [decisions/curriculum-foundations.md](decisions/curriculum-foundations.md) — 로컬·리모트 공용 틀, 0단계는 버전 관리 개념부터 (사용자 지시)
 
@@ -21,7 +22,7 @@
 - [components.md](components.md) — 파일 구조와 레슨·공통 스크립트 관계
 
 ## 미해결 이슈
-- [../impl/open-questions.md](../impl/open-questions.md) — 장부는 여기 하나 (구현 진행 상황은 [../impl/progress.md](../impl/progress.md))
+- [open-questions.md](open-questions.md) — 장부 안내: 설계 중 [dev/plan/open-questions.md](../dev/plan/open-questions.md), 구현 중 [dev/impl/open-questions.md](../dev/impl/open-questions.md) (진행 상황은 [dev/plan/README.md](../dev/plan/README.md) "현재 위치")
 
 ## insight
 - [insight/README.md](insight/README.md) — raw 메모 규칙

@@ -9,6 +9,6 @@
 - 레슨마다 화면이 달라지면 학습자가 "지금 어느 공간에서 일어나는 일인지"를 놓친다. 같은 틀 위에서 영역을 켜고 끄면 8단계(원격)도 새 화면이 아니라 알던 화면의 확장이 된다.
 - Git의 로컬·리모트 구조는 앞선 방식(로컬만, 서버만)의 한계를 해결한 결과라, 그 흐름을 먼저 보여 줘야 구조가 이해된다.
 
-**아직 정하지 않은 것**: 공용 틀의 구체 영역·표현, 0단계 장면 구성 → [impl/open-questions.md](../../impl/open-questions.md) A1~A3.
+**아직 정하지 않은 것**: 공용 틀의 구체 영역·표현, 0단계 장면 구성 → [dev/plan/open-questions.md](../../dev/plan/open-questions.md) A1~A3.
 
-> **진행 상황 (2026-10-14)**: 공용 틀의 구체 영역·표현은 [docs/design/diagram-model.md](../../docs/design/diagram-model.md)로 확정했다 (A1 해소). 남은 것은 [impl/open-questions.md](../../impl/open-questions.md) A2·A3.
+> **진행 상황 (2026-10-14)**: 공용 틀의 구체 영역·표현은 [dev/design/diagram-model.md](../../dev/design/diagram-model.md)로 확정했다 (A1 해소). 남은 것은 [dev/plan/open-questions.md](../../dev/plan/open-questions.md) A2·A3.

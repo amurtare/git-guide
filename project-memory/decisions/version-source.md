@@ -9,4 +9,4 @@
 **알려진 제약**
 - `file://`로 연 페이지는 `fetch("VERSION")`이 브라우저 보안 정책으로 막혀서, 페이지가 이 파일을 런타임에 읽을 수 없다.
   화면에 버전을 표시하려면 HTML에 값을 직접 적어야 하고, 이건 두 번째 사본이 된다.
-  → 릴리즈 체크리스트 1번에서 두 값이 같은지 확인하는 것으로 대응한다. 자동화 방법은 [impl/open-questions.md B1](../../impl/open-questions.md#b1-화면-버전-표시와-version-동기화) 참고.
+  → 릴리즈 체크리스트 1번에서 두 값이 같은지 확인하는 것으로 대응한다. 자동화 방법은 [dev/plan/open-questions.md B1](../../dev/plan/open-questions.md#b1-화면-버전-표시와-version-동기화) 참고.

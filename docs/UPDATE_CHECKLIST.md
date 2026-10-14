@@ -27,7 +27,7 @@
 
 ## 4. 콘텐츠 정확성 점검 (레슨이 추가·수정된 경우)
 
-- [ ] 화면·설명의 모든 용어가 [용어집](design/glossary.md) 표기와 일치하는지 확인 (별칭은 처음 소개할 때만)
+- [ ] 화면·설명의 모든 용어가 [용어집](../dev/design/glossary.md) 표기와 일치하는지 확인 (별칭은 처음 소개할 때만)
 - [ ] 개념 설명과 도식 전이가 Pro Git 원고(용어집의 고정 커밋) 내용과 일치하는지 확인
 - [ ] 명령어 형태가 사이트와 README에 없는지 확인 (R5·D8), 기본 브랜치 이름 `main` (D7)
 - [ ] 이전·다음 레슨 링크가 올바른지 확인
@@ -58,8 +58,8 @@
 - [ ] 설계 의도/정책 변경 → `project-memory/decisions/<topic>.md` 추가 (기존 결정을 뒤집으면 superseded 표시)
 - [ ] 반복 가능한 함정 발견 → `project-memory/gotchas.md` 항목 추가
 - [ ] 레슨·공통 스크립트 구조 변경 → `project-memory/components.md` 갱신
-- [ ] 미해결 이슈 진척/해결 → `impl/open-questions.md` 갱신
-- [ ] `impl/checklist.md`에서 이번 릴리즈에 포함된 항목이 `[x]`인지, `impl/progress.md` "다음 착수 지점"이 맞는지 확인
+- [ ] 미해결 이슈 진척/해결 → 설계 중이면 `dev/plan/open-questions.md`, 구현 중이면 `dev/impl/open-questions.md` 갱신
+- [ ] `dev/impl/checklist.md`(설계 중이면 `dev/plan/checklist.md`)에서 이번 릴리즈에 포함된 항목이 `[x]`인지, `dev/impl/progress.md` "다음 착수 지점"과 `dev/plan/README.md` "현재 위치"가 맞는지 확인
 - [ ] `project-memory/log.md`에 이번 릴리즈 항목 append (1~3줄, 의도 위주)
 - [ ] `project-memory/insight/` 정리 — 6개월 이상 참조 0회 항목 삭제
 - [ ] staleness 점검: decisions에 superseded 누락 없는지, gotchas에 해결된 항목 없는지,

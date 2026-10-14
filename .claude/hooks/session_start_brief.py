@@ -19,7 +19,8 @@ MEM_DIR      = REPO_ROOT / "project-memory"
 LOG_FILE     = MEM_DIR / "log.md"
 INSIGHT_DIR  = MEM_DIR / "insight"
 HANDOFF_FILE = REPO_ROOT / "handoff.md"
-PROGRESS_FILE = REPO_ROOT / "impl" / "progress.md"
+PROGRESS_FILE = REPO_ROOT / "dev" / "impl" / "progress.md"
+PLAN_README   = REPO_ROOT / "dev" / "plan" / "README.md"
 
 # 정적 HTML 프로젝트라 매니페스트가 없으므로 루트의 VERSION 파일이 버전 단일 소스
 VERSION_FILE = REPO_ROOT / "VERSION"
@@ -73,18 +74,18 @@ def _insight_tail() -> list[tuple[str, str]]:
     return out
 
 
-def _next_start() -> list[str]:
-    """impl/progress.md 의 '## 다음 착수 지점' 섹션 본문."""
-    if not PROGRESS_FILE.exists():
+def _section(path: Path, heading: str) -> list[str]:
+    """markdown 파일에서 '## <heading>' 섹션 본문(빈 줄 제외)."""
+    if not path.exists():
         return []
     try:
-        text = PROGRESS_FILE.read_text(encoding="utf-8")
+        text = path.read_text(encoding="utf-8")
     except OSError:
         return []
     in_section = False
     lines: list[str] = []
     for line in text.splitlines():
-        if line.startswith("## 다음 착수 지점"):
+        if line.startswith(f"## {heading}"):
             in_section = True
             continue
         if in_section and line.startswith("## "):
@@ -173,9 +174,16 @@ def main() -> int:
             parts.append(f"  - {name}  // {ctx}" if ctx else f"  - {name}")
         parts.append("")
 
-    next_start = _next_start()
+    plan_now = _section(PLAN_README, "현재 위치")
+    if plan_now:
+        parts.append("[계획·설계] 현재 위치 (dev/plan/README.md — 설계는 이 파일을 읽고 플랜 모드부터):")
+        for line in plan_now:
+            parts.append(f"  {line}")
+        parts.append("")
+
+    next_start = _section(PROGRESS_FILE, "다음 착수 지점")
     if next_start:
-        parts.append("[구현] 다음 착수 지점 (impl/progress.md — 새 단계는 impl/README.md를 읽고 플랜 모드부터):")
+        parts.append("[구현] 다음 착수 지점 (dev/impl/progress.md — 새 단계는 dev/impl/README.md를 읽고 플랜 모드부터):")
         for line in next_start:
             parts.append(f"  {line}")
         parts.append("")

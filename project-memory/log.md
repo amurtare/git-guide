@@ -34,3 +34,8 @@ Auto 모드에서는 .claude/ 수정이 self-modification으로 차단되어, Ac
 사용자 정정: 학습자는 Git을 쓰지 않고 개념만(R5), 용어는 Pro Git 한국어판 기준으로 정확하게(R6), 전체 계획 후 단계별 완성(R7).
 에이전트가 "명령 실행형 실습"을 전제로 문서를 써 둔 것이 오류였고, README·impl·체크리스트에서 그 전제와 명령어 형태를 걷어냄.
 git-scm.com이 막혀 GitHub의 progit2-ko 원고(커밋 고정)를 용어 근거로 삼음. "워킹 트리"/"워킹 디렉토리"처럼 원고 안 이표기가 있어 주 표기+별칭 규칙(D6)을 둠.
+
+## [2026-10-14] design | 장기 개발 프로세스(최신 가이드) 적용, dev/로 재배치
+사용자가 준 최신 LONG_TERM_DEV_PROCESS.md(Plan → Design → Impl)를 적용. plan·design·impl·evidence를 루트 dev/ 아래로 모으고(사용자 지시), 가이드 사본은 경로·폴더 구조를 반영한 적용본으로 둠.
+A5는 사용자 위임으로 설계 완료 범위 A(모든 단위 설계 후 구현)로 해소 — 0단계 장면 설계는 Design 단계. 설계 대기: 커리큘럼 범위 → U-diagram → 자동 확인 도구 → L0~L10.
+옛 Phase 0(설계)과 미결 장부는 dev/plan/으로 옮기고, dev/impl/에는 구현 초안만 남김. 결정: decisions/dev-process.md.
