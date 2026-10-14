@@ -14,7 +14,7 @@ git-guide/
 ├── docs/
 │   ├── RELEASE_MANAGEMENT.md
 │   ├── UPDATE_CHECKLIST.md
-│   └── design/             # 설계 문서 (authoritative). Phase 0에서 채움
+│   └── design/             # 설계 문서 (authoritative) — glossary.md, diagram-model.md
 ├── impl/                   # 구현 진행 관리 — README(진입점)·checklist·progress·open-questions
 ├── release-notes/          # v{버전}.md
 ├── .github/workflows/release.yml  # VERSION 변경 시 태그·GitHub Release 자동 생성

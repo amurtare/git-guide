@@ -29,3 +29,8 @@ Auto 모드에서는 .claude/ 수정이 self-modification으로 차단되어, Ac
 사용자가 준 process-guide.md(perforce-ax-template)를 정적 HTML 학습 사이트에 맞게 이식. 단위 테스트 → 브라우저 스모크, 설계 문서 → docs/design/.
 사용자 지시 R1(로컬·리모트 공용 틀)·R2(0단계는 로컬/서버 버전 관리부터)를 절대 규칙으로 고정. 대화 중 제안안은 확정하지 않고 impl/open-questions.md A1~A3으로 남김.
 미해결 장부를 impl/open-questions.md 하나로 일원화.
+
+## [2026-10-14] design | Phase 0 용어집·공용 도식 모델, 전제 정정
+사용자 정정: 학습자는 Git을 쓰지 않고 개념만(R5), 용어는 Pro Git 한국어판 기준으로 정확하게(R6), 전체 계획 후 단계별 완성(R7).
+에이전트가 "명령 실행형 실습"을 전제로 문서를 써 둔 것이 오류였고, README·impl·체크리스트에서 그 전제와 명령어 형태를 걷어냄.
+git-scm.com이 막혀 GitHub의 progit2-ko 원고(커밋 고정)를 용어 근거로 삼음. "워킹 트리"/"워킹 디렉토리"처럼 원고 안 이표기가 있어 주 표기+별칭 규칙(D6)을 둠.

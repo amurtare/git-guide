@@ -10,3 +10,5 @@
 - Git의 로컬·리모트 구조는 앞선 방식(로컬만, 서버만)의 한계를 해결한 결과라, 그 흐름을 먼저 보여 줘야 구조가 이해된다.
 
 **아직 정하지 않은 것**: 공용 틀의 구체 영역·표현, 0단계 장면 구성 → [impl/open-questions.md](../../impl/open-questions.md) A1~A3.
+
+> **진행 상황 (2026-10-14)**: 공용 틀의 구체 영역·표현은 [docs/design/diagram-model.md](../../docs/design/diagram-model.md)로 확정했다 (A1 해소). 남은 것은 [impl/open-questions.md](../../impl/open-questions.md) A2·A3.
