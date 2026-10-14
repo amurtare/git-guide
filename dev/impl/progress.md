@@ -7,7 +7,7 @@
 **구현 단계 아님 — 지금은 Design 단계.** [`dev/plan/README.md`](../plan/README.md)의 "현재 위치"(다음 설계: 커리큘럼 단계별 범위 확정)를 따른다.
 구현은 Design → Impl 게이트(모든 단위 설계 완료 + 구현 준비 상태 점검) 뒤 [checklist.md](checklist.md)를 다시 편성해 시작한다.
 
-## 2026-10-14 — 장기 개발 프로세스(최신 가이드) 적용, `dev/`로 재배치 (코드 없음)
+## 2026-10-14 — 장기 개발 프로세스(최신 가이드) 적용, `dev/`로 재배치 (커밋 `fe95fde`, 코드 없음)
 
 - **사용자 결정**: 최신 `LONG_TERM_DEV_PROCESS.md` 적용, plan·design·impl을 상위 폴더 하나로 → 루트 `dev/`("구현은 실제 코드잖아? 그러면 최상위 폴더를 docs 가 아닌 dev 가 좋겠는데?"), 가이드 사본도 폴더 구조에 맞게 고칠 것. A5는 위임("그건 니가 결정해도 되는데?") → 설계 완료 범위 A
 - **구현**: `impl/` → `dev/impl/`, `docs/design/{glossary,diagram-model}.md` → `dev/design/`(git mv), `dev/plan/` 4문서·`dev/design/map.md`·`dev/evidence/` 신설, 가이드 적용본, Phase 0 항목·미결 장부를 `dev/plan/`으로 이관, 경로 갱신(CLAUDE.md·README·docs·project-memory·hook), 결정 `decisions/dev-process.md`
@@ -15,7 +15,7 @@
 - **문서 검수**: Opus 5.5(실행 모델 claude-opus-5-5 확인) — **GO**, P2 3건 중 2건 반영(U-diagram 시안 시점 문구, 범위 확정 예시 복원). `curriculum-foundations.md`의 "A1~A3"은 결정 본문 불변 규칙상 두고 바로 아래 진행 상황 주석으로 정정됨
 - **확인**: 옛 경로 grep 허용 위치 외 0, 상대 링크·앵커 깨짐 0, 설계 문서 rename+링크 1줄, 가이드 적용본 diff는 규칙 1·3·4·상자 정렬뿐, hook 실행 확인
 - **미검증**: A5 해소(→ 결정 문서), A2·A3·A4·B1·B2·C2는 `dev/plan/open-questions.md`로 이관(ID 유지). 구현 장부 0건
-- **핸드오프 점검**: (커밋 뒤 기록)
+- **핸드오프 점검**: Design 진입·Impl 진입 모두 통과(5/5) — 둘 다 plan의 "커리큘럼 단계별 범위 확정"을 플랜 모드로 짚음. 고친 곳: `curriculum-foundations.md` 진행 상황 주석에 A4 추가
 
 > 아래 로그는 재배치 전 기록이라 당시 경로(`impl/`, `docs/design/`)를 그대로 둔다.
 

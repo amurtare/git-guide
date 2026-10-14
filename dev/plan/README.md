@@ -76,4 +76,4 @@
 
 ## 점검 기록
 
-(핸드오프 점검 결과를 날짜별 한 줄로)
+- 2026-10-14 `dev/` 재배치(커밋 `fe95fde`) — Design 진입("dev/plan/README.md를 읽고, 다음 설계 진행해줘.")·Impl 진입("dev/impl/README.md를 읽고, 다음 단계 진행해줘.") 모두 통과(5/5): 둘 다 "커리큘럼 단계별 범위 확정"을 플랜 모드로 짚음. 고친 곳: `curriculum-foundations.md` 진행 상황 주석에 A4 추가

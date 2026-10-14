@@ -11,4 +11,4 @@
 
 **아직 정하지 않은 것**: 공용 틀의 구체 영역·표현, 0단계 장면 구성 → [dev/plan/open-questions.md](../../dev/plan/open-questions.md) A1~A3.
 
-> **진행 상황 (2026-10-14)**: 공용 틀의 구체 영역·표현은 [dev/design/diagram-model.md](../../dev/design/diagram-model.md)로 확정했다 (A1 해소). 남은 것은 [dev/plan/open-questions.md](../../dev/plan/open-questions.md) A2·A3.
+> **진행 상황 (2026-10-14)**: 공용 틀의 구체 영역·표현은 [dev/design/diagram-model.md](../../dev/design/diagram-model.md)로 확정했다 (A1 해소). 남은 것은 [dev/plan/open-questions.md](../../dev/plan/open-questions.md) A2·A3 (이후 추가된 커리큘럼 관련 미결 A4 포함).
