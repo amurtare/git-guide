@@ -39,3 +39,8 @@ git-scm.com이 막혀 GitHub의 progit2-ko 원고(커밋 고정)를 용어 근�
 사용자가 준 최신 LONG_TERM_DEV_PROCESS.md(Plan → Design → Impl)를 적용. plan·design·impl·evidence를 루트 dev/ 아래로 모으고(사용자 지시), 가이드 사본은 경로·폴더 구조를 반영한 적용본으로 둠.
 A5는 사용자 위임으로 설계 완료 범위 A(모든 단위 설계 후 구현)로 해소 — 0단계 장면 설계는 Design 단계. 설계 대기: 커리큘럼 범위 → U-diagram → 자동 확인 도구 → L0~L10.
 옛 Phase 0(설계)과 미결 장부는 dev/plan/으로 옮기고, dev/impl/에는 구현 초안만 남김. 결정: decisions/dev-process.md.
+
+## [2026-10-16] design | 레슨 공통 폼 파일럿, visualize 스킬을 시각 스타일 기준으로
+- 레슨 페이지 공통 폼(히어로·전이 표시·공용 도식·장면 설명·용어 카드·장면 이동)을 파일럿으로 만들어 사용자에게 보임. 저장소에는 넣지 않음(Design 단계, U-diagram 설계 근거 자료)
+- 사용자 평: 구성은 괜찮고 "딱딱하다" → 사용자 제공 visualize 스킬의 디자인 컨셉을 기준으로 삼음 (`decisions/visual-style.md`)
+- 파일럿에서 설계 문서에 없던 임시 판단: 커밋 뒤 파일 카드는 워킹 트리에 Committed로 다시 그림, HEAD는 브랜치 이름표 아래 — U-diagram 설계에서 확인할 것
