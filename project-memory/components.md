@@ -21,7 +21,7 @@ git-guide/
 │   └── evidence/           # 실측 증거
 ├── release-notes/          # v{버전}.md
 ├── .github/workflows/release.yml  # VERSION 변경 시 태그·GitHub Release 자동 생성
-├── .claude/                # hook 스크립트와 등록 설정
+├── .claude/                # hook 스크립트와 등록 설정, skills/visualize(디자인 컨셉 원본)
 └── project-memory/
 ```
 

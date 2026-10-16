@@ -35,6 +35,12 @@ Git 입문자를 위한 인터랙티브 도식 기반 학습 사이트. 빌드 �
 - 저장소의 현재 상태(설계 문서·코드)가 항상 `dev/impl/`·`project-memory/` 기록보다 우선한다 — 충돌하면 기록을 갱신한다.
   설계 문서와 코드가 어긋나면 설계 문서가 기준이다.
 
+## HTML 시각 스타일
+
+사이트·레슨·파일럿 HTML을 만들 때는 `.claude/skills/visualize/references/html-design-guide.md`의 디자인 컨셉(Part 1 Foundation: 토큰·타이포·프리미티브·배경)을 따른다.
+한국어 서체, 명령어 블록 금지(R5) 같은 이 사이트 전용 조정은 [project-memory/decisions/visual-style.md](project-memory/decisions/visual-style.md)가 우선한다.
+문서(md)를 HTML로 보고 싶을 때는 `/visualize` 스킬을 쓴다 (출력 `.viz/`는 커밋하지 않는다).
+
 ## 버전 업데이트
 
 릴리즈 시 반드시 [docs/UPDATE_CHECKLIST.md](docs/UPDATE_CHECKLIST.md)의 체크리스트를 순서대로 따른다.
