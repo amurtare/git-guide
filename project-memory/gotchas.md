@@ -18,3 +18,8 @@
 - **증상**: Pro Git 용어를 확인하려고 git-scm.com을 열면 이름 해석 실패(ENOTFOUND)가 난다.
 - **원인**: 클라우드 세션의 네트워크 정책. GitHub는 git 프록시로 공개 저장소 읽기가 된다.
 - **해법**: Pro Git 한국어판 원고를 GitHub `progit/progit2-ko`에서 스크래치 디렉터리로 클론해 대조한다. 용어집의 근거 커밋(`dev/design/glossary.md` 머리말)으로 체크아웃해야 출처가 맞는다.
+
+## 클라우드 세션에서 원격 브랜치 삭제가 막힌다
+- **증상**: 원격 브랜치를 지우는 push가 "unexpected disconnect while reading sideband packet / the remote end hung up unexpectedly"로 실패한다. 일반 커밋 push는 된다 (2026-10-16 실측).
+- **원인**: 세션 git 프록시가 ref 삭제를 거부한다 (태그 push 403과 같은 계열, `decisions/release-automation.md`).
+- **해법**: 사용자가 GitHub 웹(저장소 → Branches)에서 지운다. 브랜치 규칙상 main에서만 작업하므로 새로 생길 일은 드물다.
