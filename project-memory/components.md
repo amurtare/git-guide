@@ -17,6 +17,7 @@ git-guide/
 ├── dev/                    # 개발 프로세스(Plan → Design → Impl) — LONG_TERM_DEV_PROCESS.md(적용본)
 │   ├── plan/               # 진입점(README)·overview·checklist·open-questions
 │   ├── design/             # 설계 단일 소스 — map.md, glossary.md, diagram-model.md
+│   ├── pilot/              # 화면 시안(설계 참고용, 레슨 코드 아님)
 │   ├── impl/               # 구현 진행 관리 — README·checklist(초안)·progress·open-questions
 │   └── evidence/           # 실측 증거
 ├── release-notes/          # v{버전}.md
