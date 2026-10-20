@@ -5,7 +5,7 @@
 
 ## 현재 위치
 
-**다음 설계: 커리큘럼 단계별 범위 확정 (플랜 모드부터).** 명세·결정할 것: [checklist.md](checklist.md) "단위별 남은 상세 설계" 첫 항목, [open-questions.md](open-questions.md) A3·A4.
+**다음 설계: `U-diagram` 공용 도식 컴포넌트 구현 구분 (플랜 모드부터).** 명세·결정할 것: [checklist.md](checklist.md) "단위별 남은 상세 설계"의 첫 미완료 항목, [open-questions.md](open-questions.md) B1·`file://` 실측. 참고 자료: [`dev/pilot/`](../pilot/README.md) 파일럿, `project-memory/decisions/visual-style.md`.
 
 ## 시작하기 — 새 세션 진입점
 
@@ -44,7 +44,7 @@
  8. 핸드오프 점검  맥락 없는 서브에이전트에 "dev/plan/README.md를 읽고, 다음 설계 진행해줘." → 결과를 아래 "점검 기록"에 남겨 추가 커밋
 ```
 
-- **문서 검수 확인 항목**: 설계 문서가 R1~R7·사용자와 합의한 내용·open-questions 해소 결과와 일치하는가, 용어가 용어집과 일치하는가(용어를 추가했다면 원고 출처 대조), 역전파 누락이 없는가.
+- **문서 검수 확인 항목**: 설계 문서가 R1~R8·사용자와 합의한 내용·open-questions 해소 결과와 일치하는가, 용어가 용어집과 일치하는가(용어를 추가했다면 원고 출처 대조), 역전파 누락이 없는가.
 - **검수자**: 맥락 없는 서브에이전트, Opus 5.5 (`project-memory/decisions/reviewer.md`). 실제 실행 모델을 기록한다.
 - **설계 수호**: 추론은 확인받고(R3), 설계는 의논 없이 바꾸지 않는다. 진행 방식(문서 배치·ID·백로그 구성)은 에이전트가 정해도 된다 — 경계는 `project-memory/decisions/dev-process.md`.
 - **Design → Impl 게이트**: checklist "남은 상세 설계" 전건 `[x]`, 외부 리뷰 보강 반영, open-questions 해소 또는 preflight·구현 단계로 이관, 역전파 grep 잔존 0, 그리고 "구현 준비 상태 점검" 세션(가이드 §0-6) — 그 뒤 `dev/impl/README.md`가 진입점이 된다.
@@ -69,10 +69,13 @@
 
 - ~~학습자가 명령을 실행하는 실습~~ → 학습자는 Git을 쓰지 않고 개념만 배운다(R5). 근거: 사용자 정정 2026-10-14, `project-memory/decisions/learning-scope-and-terms.md`
 - ~~쉬운 말로 용어를 대체("기록하기", "준비 영역")~~ → 용어는 Pro Git 한국어판 그대로(R6). 근거: 같은 결정 문서
+  - 주의: 2026-10-19의 R8("한글 표현 (원고 표기)" **병기**)은 이 폐기안과 다르다 — 공식 용어를 대신하지 않고 함께 적는다. 근거: `project-memory/decisions/term-notation.md`
 - ~~0단계 장면 설계를 0단계 구현 때 함께 한다(A5의 a안)~~ → 모든 단위 설계 후 구현(설계 완료 범위 A). 근거: 사용자 위임 2026-10-14, `project-memory/decisions/dev-process.md`
 - ~~"커밋 그래프" 표기~~ → "커밋 히스토리"(원고 표기). 근거: 커밋 `39dc587`·`c7cb0bc`
 
-(단계 이름 "리베이스"는 [A4](open-questions.md#a4-용어집-처음-나오는-단계-잠정값과-readme의-용어-미정-항목)가 열려 있어 여기 넣지 않는다. 구현 Phase 1/2 분할은 폐기가 아니라 [`dev/impl/checklist.md`](../impl/checklist.md)에 초안으로 보존했다.)
+- ~~단계 이름 "병합"·"리베이스"~~ → "병합 (Merge)"·"커밋 다시 쌓기 (Rebase)"(R8). 근거: [`dev/design/curriculum-scope-design.md`](../design/curriculum-scope-design.md) 결정 근거 Q7
+
+(구현 Phase 1/2 분할은 폐기가 아니라 [`dev/impl/checklist.md`](../impl/checklist.md)에 초안으로 보존했다.)
 
 ## 점검 기록
 

@@ -14,6 +14,7 @@
 - [decisions/dev-process.md](decisions/dev-process.md) — 장기 개발 프로세스 적용, 루트 `dev/`, 설계 완료 범위 A (사용자 결정·위임)
 - [decisions/learning-scope-and-terms.md](decisions/learning-scope-and-terms.md) — 개념만 배운다·용어는 정확하게·단계별 완성 (R5~R7, 사용자 지시)
 - [decisions/visual-style.md](decisions/visual-style.md) — HTML 시각 스타일은 visualize 스킬의 디자인 컨셉을 따른다 (사용자 지시)
+- [decisions/term-notation.md](decisions/term-notation.md) — 용어 표기 "한글 표현 (원고 표기)" 병기 R8 (사용자 지시)
 - [decisions/curriculum-foundations.md](decisions/curriculum-foundations.md) — 로컬·리모트 공용 틀, 0단계는 버전 관리 개념부터 (사용자 지시)
 
 ## 함정

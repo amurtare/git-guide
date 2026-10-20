@@ -24,4 +24,6 @@
 
 **근거 원고**: <https://github.com/progit/progit2-ko> 커밋 `f50647da032bf210ef91802290d60d05da1a9416` (2025-03-05). 이 환경에서는 git-scm.com이 막혀 GitHub 원고를 근거로 삼았다.
 
+> **추가 (2026-10-19)**: 원고 표기가 영문인 용어의 화면 표기 형식은 R8 "한글 표현 (원고 표기)" — [term-notation.md](term-notation.md). D5는 그대로 유지된다.
+
 **적용 범위 밖**: 메인테이너용 운영 문서(`.github/`, `.claude/`, `docs/RELEASE_MANAGEMENT.md`, `docs/UPDATE_CHECKLIST.md`, `dev/`의 절차 속 git 명령)는 학습자가 보는 곳이 아니라 D8 적용 대상이 아니다.

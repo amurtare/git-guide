@@ -4,7 +4,7 @@
 
 ## 다음 착수 지점
 
-**구현 단계 아님 — 지금은 Design 단계.** [`dev/plan/README.md`](../plan/README.md)의 "현재 위치"(다음 설계: 커리큘럼 단계별 범위 확정)를 따른다.
+**구현 단계 아님 — 지금은 Design 단계.** [`dev/plan/README.md`](../plan/README.md)의 "현재 위치"(다음 설계: U-diagram 공용 도식 컴포넌트 구현 구분)를 따른다.
 구현은 Design → Impl 게이트(모든 단위 설계 완료 + 구현 준비 상태 점검) 뒤 [checklist.md](checklist.md)를 다시 편성해 시작한다.
 
 ## 2026-10-14 — 장기 개발 프로세스(최신 가이드) 적용, `dev/`로 재배치 (커밋 `fe95fde`, 코드 없음)

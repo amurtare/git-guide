@@ -33,6 +33,7 @@
 | R5 | **학습자는 Git을 직접 사용하지 않고 개념만 배운다.** 명령 입력·실행 UI를 만들지 않는다. 용어만 나오고 명령어 형태는 사이트와 README 어디에도 쓰지 않는다 | 2026-10-14 사용자 지시 · [decisions/learning-scope-and-terms.md](../../project-memory/decisions/learning-scope-and-terms.md) |
 | R6 | **용어는 정확하게.** [dev/design/glossary.md](../design/glossary.md) 하나를 따르고, 근거는 Pro Git 한국어판 원고(고정 커밋)다. 비유는 설명 보조로만 쓴다 | 2026-10-14 사용자 지시 · 같은 문서 |
 | R7 | **전체 계획을 먼저 세운 뒤, 한 단계씩 세부 구현까지 끝내고 다음 단계로 간다** | 2026-10-14 사용자 지시 · 같은 문서 |
+| R8 | **원고 표기가 영문인 용어는 "한글 표현 (원고 표기)"로 함께 적는다** — 예: 다른 브랜치의 커밋 가져오기 (Cherry-Pick). 한글 표현으로 맥락을 잡고 공식 용어도 익히게 한다. 대상·빈도는 [glossary.md](../design/glossary.md) 표기 원칙 | 2026-10-19 사용자 지시 · [decisions/term-notation.md](../../project-memory/decisions/term-notation.md) |
 
 ### 실행 환경
 
