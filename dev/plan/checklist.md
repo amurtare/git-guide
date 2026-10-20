@@ -61,7 +61,7 @@
       새 절대 규칙 **R8**: 원고가 영문인 용어는 "한글 표현 (원고 표기)"로 병기(대상·빈도·Checkout 0단계 예외는 용어집 표기 원칙). 단계 이름 `L6` "병합 (Merge)", `L7` "커밋 다시 쌓기 (Rebase)".
       용어집에 "한글 표현" 칸과 용어 13개 추가, A3·A4 해소, 새 미결 A6(Fork 장면 서버 저장소 개수). 결정: `project-memory/decisions/term-notation.md`
 - [ ] **`U-diagram` 공용 도식 컴포넌트 구현 구분** — 공용 도식 모델(확정)을 구현할 설정 계약(공간·영역·커밋 히스토리 상태의 입력 형식)과 파일 구조(`index.html`·`lessons/`·`assets/`). R4·`file://` 제약 포함. 이 항목은 구현 계약만 정한다 — 도식 모양 시안은 `diagram-model.md` 3절대로 구현 Phase 1에서 확인한다(시점을 바꾸려면 사용자와 의논).
-      결정할 것: [B1](open-questions.md#b1-화면-버전-표시와-version-동기화), `file://` 실측(open-questions "확보할 자료·실측")
+      결정할 것: [B1](open-questions.md#b1-화면-버전-표시와-version-동기화)(이 세션에서 못 정하면 구현 단계로 이관 가능 — B1 "언제"), `file://` 실측(open-questions "확보할 자료·실측")
 - [ ] **자동 확인 도구 결정** — 결과는 `dev/impl/README.md` 확정 전제에 반영.
       결정할 것: [C2](open-questions.md#c2-자동-확인-도구)
 - [ ] **L0 · 버전 관리란?** — 결정할 것: [A2](open-questions.md#a2-0단계-장면-구성)

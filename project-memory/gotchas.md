@@ -23,3 +23,8 @@
 - **증상**: 원격 브랜치를 지우는 push가 "unexpected disconnect while reading sideband packet / the remote end hung up unexpectedly"로 실패한다. 일반 커밋 push는 된다 (2026-10-16 실측).
 - **원인**: 세션 git 프록시가 ref 삭제를 거부한다 (태그 push 403과 같은 계열, `decisions/release-automation.md`).
 - **해법**: 사용자가 GitHub 웹(저장소 → Branches)에서 지운다. 브랜치 규칙상 main에서만 작업하므로 새로 생길 일은 드물다.
+
+## 앱 패널에 문서를 띄우려면 작업 디렉토리 안 HTML로
+- **증상**: 플랜 파일(`/root/.claude/plans/…`)이나 스크래치패드의 `.md`를 파일 보내기로 띄우면 사용자 앱 패널에 뜨지 않는다 (2026-10-16 실측).
+- **원인**: 앱은 작업 디렉토리(와 허용된 경로) 안 파일만 열고, 마크다운은 렌더가 불안정하다.
+- **해법**: 저장소 안 `.viz/<이름>.html`(gitignore 대상)로 HTML을 만들어 render로 보낸다. 커밋되지 않는다.

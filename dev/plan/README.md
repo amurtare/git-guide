@@ -79,4 +79,5 @@
 
 ## 점검 기록
 
+- 2026-10-19 커리큘럼 단계별 범위 확정(커밋 `454e91d`) — Design 진입("dev/plan/README.md를 읽고, 다음 설계 진행해줘.") 통과: `U-diagram`을 플랜 모드로 짚고 B1·`file://` 실측·A6 조건, 지운 ID(A1·A3·A4·A5·C1) 비대상, git 깨끗·원격과 같음 확인. 고친 곳: checklist U-diagram의 B1을 "이관 가능"으로 open-questions와 맞춤
 - 2026-10-14 `dev/` 재배치(커밋 `fe95fde`) — Design 진입("dev/plan/README.md를 읽고, 다음 설계 진행해줘.")·Impl 진입("dev/impl/README.md를 읽고, 다음 단계 진행해줘.") 모두 통과(5/5): 둘 다 "커리큘럼 단계별 범위 확정"을 플랜 모드로 짚음. 고친 곳: `curriculum-foundations.md` 진행 상황 주석에 A4 추가

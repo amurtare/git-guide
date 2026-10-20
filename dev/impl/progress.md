@@ -7,6 +7,11 @@
 **구현 단계 아님 — 지금은 Design 단계.** [`dev/plan/README.md`](../plan/README.md)의 "현재 위치"(다음 설계: U-diagram 공용 도식 컴포넌트 구현 구분)를 따른다.
 구현은 Design → Impl 게이트(모든 단위 설계 완료 + 구현 준비 상태 점검) 뒤 [checklist.md](checklist.md)를 다시 편성해 시작한다.
 
+## 2026-10-19 — 커리큘럼 단계별 범위 확정, 용어 표기 R8 (커밋 `454e91d`, Design 단계 · 코드 없음)
+
+- 설계: `dev/design/curriculum-scope-design.md`. 플랜 검수 Opus 5.5 3회차 GO, 문서 검수 1회차 GO(P2 2건 반영). 핸드오프 점검 통과
+- 다음: `U-diagram` 설계(`dev/plan/README.md` 현재 위치)
+
 ## 2026-10-14 — 장기 개발 프로세스(최신 가이드) 적용, `dev/`로 재배치 (커밋 `fe95fde`, 코드 없음)
 
 - **사용자 결정**: 최신 `LONG_TERM_DEV_PROCESS.md` 적용, plan·design·impl을 상위 폴더 하나로 → 루트 `dev/`("구현은 실제 코드잖아? 그러면 최상위 폴더를 docs 가 아닌 dev 가 좋겠는데?"), 가이드 사본도 폴더 구조에 맞게 고칠 것. A5는 위임("그건 니가 결정해도 되는데?") → 설계 완료 범위 A
