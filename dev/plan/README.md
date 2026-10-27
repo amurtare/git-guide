@@ -5,7 +5,7 @@
 
 ## 현재 위치
 
-**다음 설계: `U-diagram` 공용 도식 컴포넌트 구현 구분 (플랜 모드부터).** 명세·결정할 것: [checklist.md](checklist.md) "단위별 남은 상세 설계"의 첫 미완료 항목, [open-questions.md](open-questions.md) B1·`file://` 실측. 참고 자료: [`dev/pilot/`](../pilot/README.md) 파일럿, `project-memory/decisions/visual-style.md`.
+**다음 설계: 자동 확인 도구 결정 (플랜 모드부터).** 명세·결정할 것: [checklist.md](checklist.md) "단위별 남은 상세 설계"의 첫 미완료 항목, [open-questions.md](open-questions.md) C2(확인 대상 후보 포함). 참고 자료: [`dev/design/diagram-component-design.md`](../design/diagram-component-design.md)(실패 처리의 콘솔 오류 검사·사본 일치), [`dev/impl/README.md`](../impl/README.md) "실행 환경" 스모크 절차.
 
 ## 시작하기 — 새 세션 진입점
 
@@ -62,6 +62,7 @@
 | 2026-10-13 | 세션에서 태그 push | 403 — 세션 git 프록시가 거부. 릴리즈는 GitHub Actions가 만든다 |
 | 2026-10-14 | git-scm.com | 접근 불가(ENOTFOUND). Pro Git 원고는 GitHub에서 클론 |
 | 2026-10-14 | 용어집 출처 대조 | 고정 커밋 원고와 대조, 누락 0 |
+| 2026-10-21 | `file://` (Chromium 141) | `fetch`·XHR·ES 모듈 막힘, 일반 `<script src>`는 됨 — [`dev/evidence/2026-10-21-file-scheme.md`](../evidence/2026-10-21-file-scheme.md). Firefox·Safari 미측정 |
 
 미실측 가정은 [open-questions.md](open-questions.md) "확보할 자료·실측".
 

@@ -10,3 +10,5 @@
 - `file://`로 연 페이지는 `fetch("VERSION")`이 브라우저 보안 정책으로 막혀서, 페이지가 이 파일을 런타임에 읽을 수 없다.
   화면에 버전을 표시하려면 HTML에 값을 직접 적어야 하고, 이건 두 번째 사본이 된다.
   → 릴리즈 체크리스트 1번에서 두 값이 같은지 확인하는 것으로 대응한다. 자동화 방법은 [dev/plan/open-questions.md B1](../../dev/plan/open-questions.md#b1-화면-버전-표시와-version-동기화) 참고.
+
+> **보충 (2026-10-24)**: B1이 해소됐다 — 화면 사본은 `assets/js/version.js` 하나, 릴리즈 워크플로가 `VERSION`과 비교한다. → [version-display.md](version-display.md). 위 "수동 확인" 대응은 비교 단계가 생기기 전까지만 해당한다. 버전 소스가 `VERSION` 하나라는 결정은 그대로다.

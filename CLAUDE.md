@@ -75,7 +75,7 @@ Codex에 검수(플랜·구현·재검수 등 모든 리뷰)를 요청할 때는
 릴리즈 시 반드시 [docs/UPDATE_CHECKLIST.md](docs/UPDATE_CHECKLIST.md)의 체크리스트를 순서대로 따른다.
 사용자가 "업데이트 해줘", "버전 올려줘", "릴리즈 해줘", "배포 준비해줘" 등을 요청하면 체크리스트를 실행한다.
 
-- 버전 소스: 루트 `VERSION` 파일 하나뿐
+- 버전 소스: 루트 `VERSION` 파일 하나뿐 (화면 표시용 사본 `assets/js/version.js`는 릴리즈 워크플로가 `VERSION`과 비교 — [version-display 결정](project-memory/decisions/version-display.md))
 - 버전 규칙: [docs/RELEASE_MANAGEMENT.md](docs/RELEASE_MANAGEMENT.md#버전-규칙)
   (새 레슨·도식 = MINOR, 오탈자·버그 = PATCH, 링크·단계 번호가 깨지는 개편 = MAJOR)
 

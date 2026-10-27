@@ -15,4 +15,6 @@
 - 이미 릴리즈된 태그면 통과 (멱등)
 - `VERSION`이 `X.Y.Z` 형식이 아니거나 릴리즈 노트 파일이 없으면 실패 → 체크리스트 8번에서 확인
 
+> **보충 (2026-10-24)**: 구현 Phase 1에서 `assets/js/version.js`가 생기면, 그 값이 `VERSION`과 다를 때도 실패하는 비교 단계를 더한다 → [version-display.md](version-display.md).
+
 **참고**: v0.1.0은 이 워크플로 도입 전에 사용자가 GitHub 웹에서 수동으로 만들었다.

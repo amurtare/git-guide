@@ -54,12 +54,12 @@ Git을 직접 다루지 않고도, Git 안에서 **무슨 일이 일어나는지
 git-guide/
 ├── index.html          # 메인 페이지 (커리큘럼 목차)
 ├── lessons/            # 단계별 학습 페이지
-│   ├── 00-what-is-git.html
+│   ├── 00-version-control.html
 │   ├── 01-repository.html
-│   └── ...
+│   └── ...             # … 10-tools.html
 ├── assets/
-│   ├── css/            # 공통 스타일
-│   └── js/             # 도식 렌더링 · 인터랙션 스크립트
+│   ├── css/            # 공통 스타일 · 도식 스타일
+│   └── js/             # 도식 렌더링 · 장면 이동 스크립트, 용어집 · 단계 목록 · 버전
 ├── .github/workflows/  # 릴리즈 자동화 (태그 · GitHub Release)
 ├── docs/               # 릴리즈 관리 규칙 · 체크리스트
 ├── dev/                # 개발 프로세스: plan(계획) · design(설계) · impl(구현 관리) · evidence(실측)

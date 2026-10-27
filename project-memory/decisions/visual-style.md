@@ -7,6 +7,8 @@
 
 **이유 (사용자 의도)**: 첫 파일럿(공통 폼)의 구성은 괜찮지만 "딱딱하다"는 평. 따뜻한 종이 톤·세리프 제목·부드러운 카드·움직임이 있는 이 컨셉을 기본 시각 언어로 삼는다.
 
+> **보충·일부 대체 (2026-10-27)**: 위 "구성은 괜찮지만"의 구성 평가와 아래 표의 "화면 구성은 diagram-model.md와 레슨 설계가 정한다"는 [lesson-layout.md](lesson-layout.md)로 보충·대체된다 — 레슨 화면은 파일럿의 상자형 공통 폼 대신 슬라이드형(도식 중심, 나레이션·툴팁)이고, 화면 구성은 lesson-layout과 [diagram-component-design.md](../../dev/design/diagram-component-design.md)도 함께 정한다. 이 문서의 시각 언어(토큰·서체·배경)는 그대로다.
+
 ## 무엇을 가져오나
 
 기준 문서: [`.claude/skills/visualize/references/html-design-guide.md`](../../.claude/skills/visualize/references/html-design-guide.md)
@@ -26,4 +28,4 @@
 | 다크 모드 | 같은 hue로 다크 토큰을 따로 정의한다 (스킬 문서에는 라이트 토큰만 있다) | 접근성 |
 | Google Fonts 필수 | 링크는 넣되 `file://` 오프라인에서는 대체 서체로 보인다. 대체 서체 스택을 반드시 둔다 | R4 |
 
-도식 색 배정(공간·파일 상태)과 모양은 U-diagram 설계에서 확정한다. 파일럿의 배정은 시안이다. "색만으로 상태를 구분하지 않는다"는 그대로다.
+~~도식 색 배정(공간·파일 상태)과 모양은 U-diagram 설계에서 확정한다.~~ [대체됨 2026-10-24: U-diagram 설계는 구현 계약만 정하고, 색 배정과 모양은 구현 Phase 1 시안에서 사용자 확인을 받는다 — [dev/design/diagram-component-design.md](../../dev/design/diagram-component-design.md) 결정 11] 파일럿의 배정은 시안이다. "색만으로 상태를 구분하지 않는다"는 그대로다.

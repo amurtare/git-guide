@@ -15,7 +15,7 @@ LLM 코딩 에이전트와 **여러 세션·여러 주에 걸쳐** 계획 → �
 
 | 항목 | 값 | 근거 |
 |---|---|---|
-| 단위 | 커리큘럼 단계 `L0`~`L10` (+ 공용 참조: 용어집·공용 도식 모델, 설계 대기 `U-diagram`) | `dev/design/map.md` |
+| 단위 | 커리큘럼 단계 `L0`~`L10` (+ 공용 참조: 용어집·공용 도식 모델, 공용 컴포넌트 구현 계약 `U-diagram` — `dev/design/diagram-component-design.md`) | `dev/design/map.md` |
 | 설계 완료 범위 | **A — 모든 단위 설계 후 구현** | 사용자 위임 2026-10-14 · `project-memory/decisions/dev-process.md` |
 | 폴더 위치 | 루트 `dev/` (사이트 코드는 루트) | 같은 결정 문서 |
 | 독립 검수자 | 맥락 없는 서브에이전트, 모델 Opus 5.5 | `project-memory/decisions/reviewer.md` |

@@ -60,8 +60,13 @@
       단계 0~10의 범위를 원고 장·절에 맞춰 확정했다. Clone은 1단계(히스토리 복제까지, `origin`·리모트 트래킹 브랜치는 8단계 — 1~7단계 도식에서 숨김), 4단계 되돌리기는 원고 2장 범위(Reset·revert 제외), 9·10단계는 원고 표기로.
       새 절대 규칙 **R8**: 원고가 영문인 용어는 "한글 표현 (원고 표기)"로 병기(대상·빈도·Checkout 0단계 예외는 용어집 표기 원칙). 단계 이름 `L6` "병합 (Merge)", `L7` "커밋 다시 쌓기 (Rebase)".
       용어집에 "한글 표현" 칸과 용어 13개 추가, A3·A4 해소, 새 미결 A6(Fork 장면 서버 저장소 개수). 결정: `project-memory/decisions/term-notation.md`
-- [ ] **`U-diagram` 공용 도식 컴포넌트 구현 구분** — 공용 도식 모델(확정)을 구현할 설정 계약(공간·영역·커밋 히스토리 상태의 입력 형식)과 파일 구조(`index.html`·`lessons/`·`assets/`). R4·`file://` 제약 포함. 이 항목은 구현 계약만 정한다 — 도식 모양 시안은 `diagram-model.md` 3절대로 구현 Phase 1에서 확인한다(시점을 바꾸려면 사용자와 의논).
-      결정할 것: [B1](open-questions.md#b1-화면-버전-표시와-version-동기화)(이 세션에서 못 정하면 구현 단계로 이관 가능 — B1 "언제"), `file://` 실측(open-questions "확보할 자료·실측")
+- [x] **`U-diagram` 공용 도식 컴포넌트 구현 구분**(2026-10-27 완료 · 플랜 검수 Opus 5.5 4회차 GO · 문서 검수 Opus 5.5 3회차 GO) — [`dev/design/diagram-component-design.md`](../design/diagram-component-design.md).
+      `file://`에서 `fetch`·ES 모듈이 막히고 일반 `<script src>`만 된다는 것을 Chromium으로 실측했다([evidence](../evidence/2026-10-21-file-scheme.md)). 그래서 용어집·단계 목록·버전은 `assets/js/`의 사본 스크립트로, 장면 데이터는 각 레슨 HTML 안에 두고, 화면 뼈대·도식·R8 표기는 공용 스크립트(`site.js`·`diagram.js`)가 맡는다.
+      설정 계약은 장면마다 kind·전이·공간·영역 상태를 적는 형식이고, 커밋 히스토리는 부모와 줄(lane) 번호로 적는다. 레슨 파일 이름 11개(`00-version-control` … `10-tools`)를 고정했다.
+      B1 해소: 화면 버전 사본은 `assets/js/version.js` 하나, 릴리즈 워크플로가 `VERSION`과 비교(구현 Phase 1에서 비교 단계 추가) → `project-memory/decisions/version-display.md`.
+      범위의 새 요소(충돌·태그·Stash·무시한 파일·Pull Request)는 이름과 자리만, 전이 8개는 이름만 정하고 뜻·모양은 해당 레슨 설계로 넘겼다(`diagram-model.md` 3·4절). 도식 색 배정·모양은 구현 Phase 1 시안. 새 장부 항목 B3(경로 변경 대응), Firefox·Safari 실측. 후반 결정은 사용자 위임(2026-10-24).
+      레슨 화면 방향(2026-10-27 사용자 결정): 상자로 나누지 않는 슬라이드형, 도식 중심, 텍스트 최소·나레이션 컨셉, 툴팁(용어 정의 + 도식 요소 설명 `notes`) → `project-memory/decisions/lesson-layout.md`.
+      구체 배치, `notes` 툴팁 표시 방식, 텍스트 용어 표식 클릭을 포함한 D1 조작과의 관계는 구현 Phase 1 시안의 미결(14 세부, 위임)
 - [ ] **자동 확인 도구 결정** — 결과는 `dev/impl/README.md` 확정 전제에 반영.
       결정할 것: [C2](open-questions.md#c2-자동-확인-도구)
 - [ ] **L0 · 버전 관리란?** — 결정할 것: [A2](open-questions.md#a2-0단계-장면-구성)

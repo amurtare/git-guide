@@ -104,7 +104,7 @@ git switch --detach v0.1.0        # 특정 버전으로 이동
 
 - **웹으로 보는 학습자** — (웹 배포 여부는 미정, [dev/plan/open-questions.md B2](../dev/plan/open-questions.md#b2-공개-방식-github-pages-여부)) 배포하게 되면 사이트가 push 시점에 바로 갱신된다.
 - **내려받아 보는 학습자** — 새 버전을 다시 내려받는다. 무엇이 바뀌었는지는 `release-notes/`에서 확인한다.
-- **버전 표시** — 페이지가 생기면 `index.html` 푸터에 현재 버전과 릴리즈 노트 링크를 둔다.
+- **버전 표시** — 페이지가 생기면 `index.html` 푸터에 현재 버전과 릴리즈 노트 링크를 둔다. 값은 `assets/js/version.js`의 사본이고, 릴리즈 워크플로가 `VERSION`과 비교한다([version-display 결정](../project-memory/decisions/version-display.md)).
 
 ## 워크플로 요약
 

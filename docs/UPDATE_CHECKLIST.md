@@ -11,6 +11,7 @@
   - MINOR: 새 레슨(단계) 추가, 새 인터랙티브 도식 추가, 기존 레슨에 새 장면 추가
   - PATCH: 오탈자·설명 수정, 도식 동작 버그 수정, 스타일 조정
 - [ ] 화면에 버전을 표시하는 곳이 생겼다면(예: `index.html` 푸터) 같은 값으로 맞춰졌는지 확인
+  - `assets/js/version.js`가 생긴 뒤부터: 그 파일의 값을 `VERSION`과 같게 고친다. 릴리즈 워크플로가 두 값을 비교해 다르면 실패한다([version-display 결정](../project-memory/decisions/version-display.md))
 
 ## 2. 릴리즈 노트 작성
 
@@ -28,6 +29,7 @@
 ## 4. 콘텐츠 정확성 점검 (레슨이 추가·수정된 경우)
 
 - [ ] 화면·설명의 모든 용어가 [용어집](../dev/design/glossary.md) 표기와 일치하는지 확인 (별칭은 처음 소개할 때만)
+- [ ] 사이트 쪽 사본이 소스와 같은지 확인 — `assets/js/glossary.js` ↔ [용어집](../dev/design/glossary.md), `assets/js/curriculum.js` ↔ [단계 범위](../dev/design/curriculum-scope-design.md)의 단계 이름 (자동 확인 도구가 정해지기 전까지 사람이 대조)
 - [ ] 개념 설명과 도식 전이가 Pro Git 원고(용어집의 고정 커밋) 내용과 일치하는지 확인
 - [ ] 명령어 형태가 사이트와 README에 없는지 확인 (R5·D8), 기본 브랜치 이름 `main` (D7)
 - [ ] 이전·다음 레슨 링크가 올바른지 확인
@@ -72,6 +74,6 @@
 - [ ] `git push origin main` — 태그는 직접 만들지 않는다
 - [ ] GitHub Actions의 **Release** 워크플로가 성공했는지 확인
   - `VERSION`이 바뀐 push에서 자동 실행되어 `v{버전}` 태그와 GitHub Release를 만든다 (본문 = `release-notes/v{버전}.md`)
-  - 실패했으면 로그 확인: `VERSION` 형식 오류이거나 릴리즈 노트 파일 누락이 대부분
+  - 실패했으면 로그 확인: `VERSION` 형식 오류이거나 릴리즈 노트 파일 누락이 대부분 (워크플로에 비교 단계가 생긴 뒤에는 `assets/js/version.js`와 `VERSION`의 불일치도)
   - 다시 돌리려면 Actions 탭에서 Release → Run workflow (이미 릴리즈된 버전이면 아무것도 하지 않음)
 - [ ] (GitHub Pages 사용 시) 배포된 페이지에서 새 버전이 보이는지 확인

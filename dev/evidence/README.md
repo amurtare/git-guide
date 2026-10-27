@@ -6,4 +6,8 @@
 - 머리에 날짜·대상·방법·결과를 적는다. 나중에 방식이 바뀌어도 **당시 기록 보관용**이라고 적고 지우지 않는다.
 - 실측 목록과 진행 상태는 [`dev/plan/open-questions.md`](../plan/open-questions.md) "확보할 자료·실측"에 있다.
 
-(현재 파일 없음 — 지금까지의 실측 3건은 `project-memory/gotchas.md`·`project-memory/decisions/release-automation.md`·용어집 머리말에 기록되어 있다.)
+| 파일 | 대상 |
+|---|---|
+| [2026-10-21-file-scheme.md](2026-10-21-file-scheme.md) | `file://`에서 `fetch`·ES 모듈·일반 스크립트 (Chromium 141) |
+
+이 폴더를 만들기 전의 실측 3건은 `project-memory/gotchas.md`·`project-memory/decisions/release-automation.md`·용어집 머리말에 기록되어 있다.

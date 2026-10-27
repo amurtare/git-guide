@@ -6,7 +6,7 @@
 
 ## `file://`로 열면 `fetch`·ES 모듈이 막힌다
 - **증상**: 로컬에서 `index.html`을 더블클릭해 열면 JSON·텍스트 파일 로드나 `<script type="module">`의 `import`가 CORS 에러로 실패한다.
-- **원인**: 브라우저는 `file://` 출처의 `fetch`와 모듈 로드를 막는다.
+- **원인**: 브라우저는 `file://` 출처의 `fetch`와 모듈 로드를 막는다. 2026-10-21 Chromium 141 실측: `fetch`·XHR·`import()`·`<script type="module">` 모두 실패, 일반 `<script src>`는 다른 폴더 파일도 성공([`dev/evidence/2026-10-21-file-scheme.md`](../dev/evidence/2026-10-21-file-scheme.md)). Firefox·Safari는 미측정.
 - **해법**: 레슨 데이터는 JS 파일 안에 넣고 일반 `<script src>`로 불러온다. "설치 없이 열기만 하면 동작"이 이 프로젝트의 약속이므로 로컬 서버를 요구하지 않는다.
 
 ## Auto 모드에서는 `.claude/` 수정이 막힌다

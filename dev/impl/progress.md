@@ -4,8 +4,16 @@
 
 ## 다음 착수 지점
 
-**구현 단계 아님 — 지금은 Design 단계.** [`dev/plan/README.md`](../plan/README.md)의 "현재 위치"(다음 설계: U-diagram 공용 도식 컴포넌트 구현 구분)를 따른다.
+**구현 단계 아님 — 지금은 Design 단계.** [`dev/plan/README.md`](../plan/README.md)의 "현재 위치"(다음 설계: 자동 확인 도구 결정)를 따른다.
 구현은 Design → Impl 게이트(모든 단위 설계 완료 + 구현 준비 상태 점검) 뒤 [checklist.md](checklist.md)를 다시 편성해 시작한다.
+
+## 2026-10-24 — U-diagram 공용 도식 컴포넌트 구현 구분 (커밋은 다음 커밋에서 채움, Design 단계 · 코드 없음)
+
+- 설계: `dev/design/diagram-component-design.md`. 실측 `dev/evidence/2026-10-21-file-scheme.md`. 결정 1~5-c-2는 사용자, 이후는 사용자 위임(2026-10-24). 문서 검수 중 사용자 제안으로 레슨 화면 방향(슬라이드형·나레이션·툴팁, 결정 14·15, 2026-10-27) 추가
+- 플랜 검수: Opus 5.5 서브에이전트 — 1회차 NO-GO(P1 3) → 2회차 NO-GO(P1 1) → 3회차 NO-GO(P1 1, 회귀) → 4회차 GO
+- 문서 검수: Opus 5.5 서브에이전트(맥락 없음, model opus 지정) — 1회차 NO-GO(P1 1: `window.GitGuide` 생성 주체) → 2회차 NO-GO(P1 2: 결정 14 세부를 사용자 결정으로 적음, D1·overview 역전파·`notes` 표시 방식) → 3회차 GO(P2 2건 반영, 참고 1건은 Phase 1 미결에 추가)
+- 미검증: 해소 B1, 추가 B3·Firefox/Safari `file://` 실측(`dev/plan/open-questions.md`)
+- 다음: 자동 확인 도구 결정(C2)
 
 ## 2026-10-19 — 커리큘럼 단계별 범위 확정, 용어 표기 R8 (커밋 `454e91d`, Design 단계 · 코드 없음)
 

@@ -10,9 +10,10 @@ Phase별 항목. 각 항목은 플랜 모드 → 승인 → **승인된 명세�
 
 ## Phase 1 — 최소 end-to-end 슬라이스
 
-- [ ] **공용 틀 + 첫 장면** — `assets/js/`, `assets/css/`, `index.html`, `lessons/00-*.html`.
+- [ ] **공용 틀 + 첫 장면** — `assets/js/`, `assets/css/`, `index.html`, `lessons/00-version-control.html`.
       공용 도식 컴포넌트 최소판과 0단계 첫 장면 하나를 `file://`에서 끝까지 동작시켜, 컴포넌트 계약·스모크 절차를 조기 검증한다.
-      **설계에서 정함**: 컴포넌트 설정 형식(계약)·파일 구조·B1 → [`dev/plan/checklist.md`](../plan/checklist.md) `U-diagram` 항목
+      **설계에서 정함**: 파일 구조·설정 계약·B1 → [`dev/design/diagram-component-design.md`](../design/diagram-component-design.md)
+      **이 항목에서 함께 할 것**: 슬라이드형 레슨 화면(도식 중심, 나레이션·툴팁 배치, 모바일 폭, `notes` 툴팁을 띄우는 방식과 D1 조작과의 관계)과 도식 모양·색 배정 시안을 화면으로 만들어 사용자 확인(설계 문서 결정 11·14), `assets/js/version.js`를 만드는 커밋에 릴리즈 워크플로의 `VERSION` 비교 단계 추가(결정 3), Firefox·Safari `file://` 확인(가능하면, `dev/plan/open-questions.md`)
 
 ## Phase 2 — 0단계 완성
 
