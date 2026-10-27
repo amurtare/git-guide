@@ -9,6 +9,9 @@
 
 > **보충·일부 대체 (2026-10-27)**: 위 "구성은 괜찮지만"의 구성 평가와 아래 표의 "화면 구성은 diagram-model.md와 레슨 설계가 정한다"는 [lesson-layout.md](lesson-layout.md)로 보충·대체된다 — 레슨 화면은 파일럿의 상자형 공통 폼 대신 슬라이드형(도식 중심, 나레이션·툴팁)이고, 화면 구성은 lesson-layout과 [diagram-component-design.md](../../dev/design/diagram-component-design.md)도 함께 정한다. 이 문서의 시각 언어(토큰·서체·배경)는 그대로다.
 
+> **보충 (2026-10-27, 사용자 제공 — 원문 "https://joonan30.github.io/llm-wiki-labs/evolution/ 이 페이지가 디자인 컨셉의 원본이야 참고 자료로 내부에 남겨줘")**: 이 디자인 컨셉의 원본 페이지는 <https://joonan30.github.io/llm-wiki-labs/evolution/> 이다(스킬 가이드 부록이 말하는 "`index.html` 원본 페이지"). 시각 판단이 가이드 문서만으로 애매하면 이 페이지를 직접 열어 대조한다.
+> 클라우드 세션에서는 네트워크 정책 때문에 열리지 않았다(2026-10-27 실측: 프록시 403) — "내부에 남겨줘"는 URL 기록으로만 처리했고 페이지 사본은 저장소에 두지 못했다(사용자에게 알림, 사용자가 저장한 HTML·스크린샷을 주면 보관), 대조는 사람이 브라우저로 하거나 환경의 네트워크 허용 뒤에 한다.
+
 ## 무엇을 가져오나
 
 기준 문서: [`.claude/skills/visualize/references/html-design-guide.md`](../../.claude/skills/visualize/references/html-design-guide.md)

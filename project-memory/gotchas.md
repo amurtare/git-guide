@@ -19,6 +19,11 @@
 - **원인**: 클라우드 세션의 네트워크 정책. GitHub는 git 프록시로 공개 저장소 읽기가 된다.
 - **해법**: Pro Git 한국어판 원고를 GitHub `progit/progit2-ko`에서 스크래치 디렉터리로 클론해 대조한다. 용어집의 근거 커밋(`dev/design/glossary.md` 머리말)으로 체크아웃해야 출처가 맞는다.
 
+## 클라우드 세션에서 github.io 페이지가 막힌다
+- **증상**: 디자인 컨셉 원본(`joonan30.github.io/...`)을 curl로 열면 "CONNECT tunnel failed, response 403" (2026-10-27 실측).
+- **원인**: 클라우드 세션의 네트워크 정책(허용 목록 밖 도메인). git-scm.com 차단과 같은 계열.
+- **해법**: URL만 `project-memory/decisions/visual-style.md`에 기록해 두고, 대조는 사람이 브라우저로 한다. 꼭 필요하면 환경의 네트워크 허용 목록에 도메인을 더한다.
+
 ## 클라우드 세션에서 원격 브랜치 삭제가 막힌다
 - **증상**: 원격 브랜치를 지우는 push가 "unexpected disconnect while reading sideband packet / the remote end hung up unexpectedly"로 실패한다. 일반 커밋 push는 된다 (2026-10-16 실측).
 - **원인**: 세션 git 프록시가 ref 삭제를 거부한다 (태그 push 403과 같은 계열, `decisions/release-automation.md`).

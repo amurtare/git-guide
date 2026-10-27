@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Noto+Serif+KR:wght@500;600&family=IBM+Plex+Sans+KR:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
 /* 슬라이드형 레슨 시안 (2026-10-27) — dev/design/diagram-component-design.md 결정 14·15, project-memory/decisions/lesson-layout.md
-   레이아웃: 얇은 머리줄 → 도식(화면 대부분) → 나레이션 띠 + 장면 이동. 상자로 나누지 않는다.
+   레이아웃: 타이틀 영역(종이 배경) → 도식 카드 하나(화면 대부분), 나레이션·장면 이동은 카드 위에 얹힌 말풍선 레이어. 카드 안은 색 면 없이 구분선만.
    토큰: lesson-form-pilot.html과 같은 visual-style 토큰(라이트·다크) */
 :root{
   --bg:oklch(0.95 0.02 85); --surface:oklch(0.985 0.012 88); --surface-alt:oklch(0.965 0.018 85);
@@ -58,33 +58,30 @@ button{font:inherit;color:inherit}
 :focus:not(:focus-visible){outline:none}
 noscript p{position:relative;z-index:3;margin:16px;font-size:14px}
 
-/* 슬라이드: 머리줄 · 도식 · 나레이션 */
-#app{position:relative;z-index:2;height:100vh;height:100dvh;display:grid;grid-template-rows:auto 1fr auto;
+/* 슬라이드: 타이틀 영역 · 도식 카드 — 나레이션은 카드 위에 얹힌 레이어 */
+#app{position:relative;z-index:2;height:100vh;height:100dvh;display:grid;grid-template-rows:auto 1fr;grid-template-columns:minmax(0,1fr);
   padding:14px max(16px,env(safe-area-inset-right,0px)) 0 max(16px,env(safe-area-inset-left,0px));max-width:1440px;margin:0 auto}
-.top{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
-.eyebrow{font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--p2);display:flex;align-items:center;gap:10px}
+.top{display:flex;align-items:center;gap:6px 16px;flex-wrap:wrap;padding:10px 0 4px}
+.top .eyebrow{flex:1}
+.eyebrow{font-family:var(--f-mono);font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--p2);display:flex;align-items:center;gap:10px}
 .eyebrow::before{content:"";width:24px;height:1px;background:currentColor}
-.lesson-name{font-family:var(--f-display);font-size:17px;color:var(--ink-soft);word-break:keep-all}
-.count{margin-left:auto;font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--p1)}
-.pilot{flex-basis:100%;display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:12px;color:var(--ink-muted)}
-.pilot .tag{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.1em;border:1px dashed var(--ink-line);border-radius:var(--r-pill);padding:1px 8px}
+.lesson-name{flex-basis:100%;font-family:var(--f-display);font-weight:500;font-size:clamp(32px,4.4vw,56px);line-height:1.1;letter-spacing:-.02em;color:var(--ink);word-break:keep-all;margin:2px 0 6px}
+.count{margin-left:auto;font-family:var(--f-mono);font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--p1)}
+.pilot{flex-basis:100%;display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:14px;color:var(--ink-muted)}
+.pilot .tag{font-family:var(--f-mono);font-size:12px;letter-spacing:.1em;border:1px dashed var(--ink-line);border-radius:var(--r-pill);padding:1px 8px}
 .toggle{display:inline-flex;border:1px dashed var(--ink-line);border-radius:var(--r-pill);overflow:hidden}
-.toggle button{border:0;background:transparent;padding:2px 10px;font-size:12px;cursor:pointer;color:var(--ink-muted)}
+.toggle button{border:0;background:transparent;padding:3px 12px;font-size:14px;cursor:pointer;color:var(--ink-muted)}
 .toggle button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
 
-.stage{position:relative;min-height:0;display:flex;flex-direction:column;padding:10px 0 6px}
-.op{align-self:center;display:inline-flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center;border:0;background:transparent;cursor:pointer;padding:4px 6px;min-height:34px;font-size:14px}
-.op .name{background:var(--ink);color:var(--bg);border-radius:var(--r-pill);padding:2px 14px;font-family:var(--f-display);font-size:15px}
-.op .path{color:var(--ink-soft);font-size:13px}
-.op.none{cursor:default;color:var(--ink-muted);font-family:var(--f-mono);font-size:11.5px;letter-spacing:.08em}
+.stage{position:relative;min-height:0;display:flex;flex-direction:column;margin:18px 0 22px;padding:22px 28px 150px;
+  background:var(--surface);border:1px solid var(--ink-line);border-radius:28px;box-shadow:var(--e2)}
 .diagram{flex:1;min-height:0;display:flex;gap:0;align-items:stretch;margin-top:6px}
 
-/* 공간: 테두리 상자 대신 옅은 색 면 */
-.space{position:relative;min-width:0;display:flex;flex-direction:column;padding:14px 18px 18px;border-radius:28px;
-  background:radial-gradient(ellipse 120% 90% at 0% 0%,var(--sc-soft) 0%,transparent 75%)}
-.space.me{--sc:var(--local);--sc-soft:var(--local-soft);flex:2.5 1 0}
-.space.server{--sc:var(--remote);--sc-soft:var(--remote-soft);flex:1.15 1 0;background:radial-gradient(ellipse 120% 90% at 100% 0%,var(--sc-soft) 0%,transparent 75%)}
-.gap{width:1px;margin:24px 14px;background:linear-gradient(transparent,var(--ink-line),transparent)}
+/* 공간: 도식 카드 안에서 색 면 없이 이름표와 구분선으로 나눈다 (2026-10-27 사용자 요청 — 카드형 프레임) */
+.space{position:relative;min-width:0;display:flex;flex-direction:column;padding:14px 18px 18px}
+.space.me{--sc:var(--local);flex:2.5 1 0;padding-left:0}
+.space.server{--sc:var(--remote);flex:1.15 1 0;padding-right:0}
+.gap{width:1px;margin:14px 0;background:var(--ink-line)}
 .space.dim .areas,.space.dim .space-name{opacity:.45;filter:saturate(.4)}
 .space-name{display:flex;align-items:baseline;gap:10px;border:0;background:transparent;padding:0;cursor:pointer;text-align:left;width:max-content;max-width:100%}
 .space-name .who{font-family:var(--f-display);font-weight:600;font-size:clamp(22px,2.4vw,30px);color:var(--sc);word-break:keep-all}
@@ -96,7 +93,7 @@ noscript p{position:relative;z-index:3;margin:16px;font-size:14px}
 .space.server .area{padding-left:0}
 .area.dim{opacity:.4;filter:saturate(.35)}
 .area-name{border:0;background:transparent;padding:0;cursor:pointer;text-align:left;font-size:13.5px;font-weight:600;color:var(--ink-soft);line-height:1.35;word-break:keep-all}
-.abody{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:14px;padding-bottom:24px}
+.abody{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:safe center;align-items:flex-start;gap:14px;padding-bottom:24px}
 .area-name small{display:block;font-weight:400;color:var(--ink-muted);font-size:11.5px;margin-top:2px}
 .empty{font-size:12.5px;color:var(--ink-muted);font-family:var(--f-display);font-style:italic}
 
@@ -113,7 +110,7 @@ noscript p{position:relative;z-index:3;margin:16px;font-size:14px}
 
 /* 커밋 히스토리 */
 .history{position:relative;flex:none;--nd:60px}
-.history svg{position:absolute;inset:0;overflow:visible;pointer-events:none}
+.history svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
 .history line{stroke:var(--ink-soft);stroke-width:2}
 .history .arrowhead{fill:var(--ink-soft)}
 .node{position:absolute;width:var(--nd);height:var(--nd);margin:calc(var(--nd) / -2) 0 0 calc(var(--nd) / -2);border-radius:50%;border:2px solid var(--ink);background:var(--surface);display:grid;place-items:center;font-family:var(--f-mono);font-size:14px;cursor:pointer;box-shadow:var(--e2);padding:0}
@@ -138,25 +135,39 @@ noscript p{position:relative;z-index:3;margin:16px;font-size:14px}
 .pop p{margin:8px 0 0;word-break:keep-all}
 .pop .src{font-size:11px;color:var(--ink-muted);margin-top:8px;padding-top:8px;border-top:1px solid var(--ink-line);overflow-wrap:anywhere}
 
-/* 나레이션 띠 + 장면 이동 */
-.narr{position:relative;z-index:5;display:flex;align-items:flex-end;gap:18px;padding:14px 0 max(16px,env(safe-area-inset-bottom,0px));border-top:1px solid var(--ink-line);background:linear-gradient(to top,var(--bg) 70%,transparent)}
-.voice{flex:none;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:var(--p2);color:var(--surface);margin-bottom:4px}
-.voice svg{width:18px;height:18px}
-.say{flex:1;min-width:0}
-.say h2{font-family:var(--f-display);font-weight:500;font-size:clamp(20px,2.2vw,26px);line-height:1.2;margin:0 0 4px;word-break:keep-all;text-wrap:balance}
-.say p{margin:0;color:var(--ink-soft);max-width:70ch;word-break:keep-all}
-.say.swap{animation:fadeUp .45s var(--ease-out) both}
+/* 나레이션 레이어: 도식 위에 떠 있는 말풍선, 끌어서 옮길 수 있다 (시안) */
+/* 나레이션은 화면과 반대 시간 테마 — 낮 화면에서는 밤 테마, 밤 화면에서는 낮 테마 (2026-10-27 사용자 제안) */
+.narr{--bg:oklch(0.19 0.015 245); --surface:oklch(0.235 0.018 245); --surface-alt:oklch(0.21 0.016 245); --ink:oklch(0.94 0.012 85); --ink-soft:oklch(0.82 0.015 85); --ink-muted:oklch(0.68 0.015 85); --ink-line:oklch(0.36 0.02 245); --p1:oklch(0.74 0.13 48); --p2:oklch(0.74 0.13 148); --p1-soft:oklch(0.32 0.06 48); --p2-soft:oklch(0.31 0.05 148); color-scheme:dark;}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .narr{--bg:oklch(0.95 0.02 85); --surface:oklch(0.985 0.012 88); --surface-alt:oklch(0.965 0.018 85); --ink:oklch(0.18 0.03 245); --ink-soft:oklch(0.36 0.025 245); --ink-muted:oklch(0.52 0.02 245); --ink-line:oklch(0.85 0.02 80); --p1:oklch(0.58 0.14 48); --p2:oklch(0.52 0.13 148); --p1-soft:oklch(0.93 0.05 50); --p2-soft:oklch(0.93 0.04 148); color-scheme:light;}}
+:root[data-theme="dark"] .narr{--bg:oklch(0.95 0.02 85); --surface:oklch(0.985 0.012 88); --surface-alt:oklch(0.965 0.018 85); --ink:oklch(0.18 0.03 245); --ink-soft:oklch(0.36 0.025 245); --ink-muted:oklch(0.52 0.02 245); --ink-line:oklch(0.85 0.02 80); --p1:oklch(0.58 0.14 48); --p2:oklch(0.52 0.13 148); --p1-soft:oklch(0.93 0.05 50); --p2-soft:oklch(0.93 0.04 148); color-scheme:light;}
+:root[data-theme="light"] .narr{--bg:oklch(0.19 0.015 245); --surface:oklch(0.235 0.018 245); --surface-alt:oklch(0.21 0.016 245); --ink:oklch(0.94 0.012 85); --ink-soft:oklch(0.82 0.015 85); --ink-muted:oklch(0.68 0.015 85); --ink-line:oklch(0.36 0.02 245); --p1:oklch(0.74 0.13 48); --p2:oklch(0.74 0.13 148); --p1-soft:oklch(0.32 0.06 48); --p2-soft:oklch(0.31 0.05 148); color-scheme:dark;}
+.narr{position:fixed;z-index:8;left:50%;bottom:44px;width:min(780px,calc(100vw - 32px));display:flex;gap:12px;align-items:flex-start;
+  transform:translate(calc(-50% + var(--dx,0px)),var(--dy,0px))}
+.voice{flex:none;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--p2);color:var(--surface);box-shadow:var(--e2);margin-top:6px}
+.voice svg{width:20px;height:20px}
+.bubble{position:relative;flex:1;min-width:0;background:color-mix(in oklch,var(--surface) 96%,transparent);color:var(--ink);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+  border:1px solid var(--ink-line);border-radius:20px;box-shadow:var(--e3);padding:22px 18px 10px;cursor:grab;touch-action:none}
+.bubble::before{content:"";position:absolute;left:-7px;top:20px;width:13px;height:13px;background:inherit;border-left:1px solid var(--ink-line);border-bottom:1px solid var(--ink-line);transform:rotate(45deg)}
+.narr.dragging .bubble{cursor:grabbing;box-shadow:0 10px 36px oklch(0.2 0.03 245 / .18)}
+.grip{position:absolute;left:50%;top:5px;width:44px;height:14px;margin-left:-22px;border:0;background:transparent;cursor:grab;padding:0}
+.grip::before{content:"";display:block;width:36px;height:4px;margin:5px auto 0;border-radius:4px;background:var(--ink-line)}
+.say{min-width:0}
+.say h2{font-family:var(--f-display);font-weight:500;font-size:clamp(19px,2vw,24px);line-height:1.25;margin:2px 0 4px;word-break:keep-all;text-wrap:balance}
+.say p{margin:0;color:var(--ink-soft);word-break:keep-all;min-height:1.65em}
+.say.swap h2{animation:fadeUp .4s var(--ease-out) both}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .t{border:0;background:transparent;padding:0 1px;color:var(--ink);font:inherit}
 /* 툴팁이 있는 항목의 공통 표시: 점선 밑줄 + 도움말 커서 (시안) */
 .tip{cursor:help}
-.t.tip,.area-name.tip,.space-name.tip .who,.chip.tip,.node.tip,.card.tip .fname,.op.tip .name{text-decoration-line:underline;text-decoration-style:dotted;text-decoration-color:var(--p2);text-decoration-thickness:1.5px;text-underline-offset:4px}
-.op.tip .name,.chip.head.tip{text-decoration-color:currentColor}
+.t.tip,.area-name.tip,.space-name.tip .who,.chip.tip,.node.tip,.card.tip .fname{text-decoration-line:underline;text-decoration-style:dotted;text-decoration-color:var(--p2);text-decoration-thickness:1.5px;text-underline-offset:4px}
+.chip.head.tip{text-decoration-color:currentColor}
 .tip.on{outline:2px solid var(--p2);outline-offset:3px}
 .legend{display:inline-flex;align-items:center;gap:6px}
 .legend u{text-decoration-style:dotted;text-decoration-color:var(--p2);text-decoration-thickness:1.5px;text-underline-offset:3px;color:var(--ink-soft)}
 .say h2 .t{text-decoration-thickness:1px}
-.nav{flex:none;display:flex;align-items:center;gap:8px}
-.nav .btn{white-space:nowrap;border:1px solid var(--ink-line);background:var(--surface);border-radius:var(--r-pill);padding:7px 14px;cursor:pointer;font-size:13.5px}
+.nav{display:flex;align-items:center;justify-content:flex-end;gap:8px;margin-top:10px;padding-top:8px;border-top:1px solid var(--ink-line)}
+.nav .btn{white-space:nowrap;border:1px solid var(--ink-line);background:var(--surface);border-radius:var(--r-pill);padding:5px 13px;cursor:pointer;font-size:13px}
+.dots{margin-right:auto}
 .nav .btn.primary{background:var(--ink);color:var(--bg);border-color:var(--ink)}
 .nav .btn:disabled{opacity:.4;cursor:default}
 .dots{display:flex;gap:5px}
@@ -170,7 +181,8 @@ noscript p{position:relative;z-index:3;margin:16px;font-size:14px}
 @media (max-width:820px){
   #app{height:auto;min-height:100dvh}
   .diagram{flex-direction:column}
-  .gap{width:auto;height:1px;margin:6px 24px;background:linear-gradient(90deg,transparent,var(--ink-line),transparent)}
+  .gap{width:auto;height:1px;margin:6px 0;background:var(--ink-line)}
+  .space,.space.me{padding-left:4px;padding-right:4px}
   .space.me,.space.server{flex:none}
   .areas{flex-direction:column}
   .area,.area:first-child{border-left:0;border-top:1px solid var(--ink-line);padding:10px 0}
@@ -178,13 +190,17 @@ noscript p{position:relative;z-index:3;margin:16px;font-size:14px}
   .area .history{max-width:100%}
   .history{--nd:46px}
   .abody{padding-bottom:8px}
-  .narr{position:fixed;left:0;right:0;bottom:0;flex-wrap:wrap;align-items:flex-start;gap:10px 12px;padding:10px 16px max(10px,env(safe-area-inset-bottom,0px));background:color-mix(in oklch,var(--bg) 92%,transparent);backdrop-filter:blur(8px)}
-  .voice{width:28px;height:28px}
+  .stage{padding:12px 14px 14px;margin:12px 0 14px;border-radius:20px}
+  .narr{left:10px;right:10px;width:auto;bottom:max(10px,env(safe-area-inset-bottom,0px));transform:none;gap:8px}
+  .voice{width:30px;height:30px;margin-top:4px}
+  .bubble{padding:12px 12px 8px;cursor:default}
+  .grip{display:none}
   .say h2{font-size:17px;margin-bottom:2px}
   .say p{font-size:13.5px;line-height:1.5}
-  #app{padding-bottom:var(--narr-h,190px)}
-  .nav{width:100%;justify-content:space-between;gap:6px}
-  .nav .btn{padding:6px 11px;font-size:13px;white-space:nowrap}
+  #app{padding-bottom:var(--narr-h,200px)}
+  .nav{gap:6px;flex-wrap:wrap;justify-content:space-between}
+  .dots{width:100%;justify-content:center;margin:0 0 4px}
+  .nav .btn{padding:5px 10px}
   .dots button{width:24px;height:24px}
 }
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
@@ -261,8 +277,8 @@ window.GitGuide = window.GitGuide || {};
   }
 
   function history(hist, sp, area){
-    const small = matchMedia("(max-width:820px)").matches, ND = small?46:60;
-    const X = i => (small?34:46) + i*(small?104:150), Y = lane => (small?28:38) + lane*(small?86:118);
+    const small = matchMedia("(max-width:820px)").matches, mid = !small && innerWidth < 1180, ND = small?46:60;
+    const X = i => (small?78:72) + i*(small?104:(mid?118:150)), Y = lane => (small?28:38) + lane*(small?86:118);
     const pos = {}; hist.commits.forEach((c,i)=>pos[c.id]={x:X(i),y:Y(c.lane||0)});
     const lanes = Math.max(0,...hist.commits.map(c=>c.lane||0));
     const box = h("div",{class:"history",style:{width:(X(hist.commits.length-1)+80)+"px",height:(Y(lanes)+(small?118:140))+"px"}});
@@ -333,7 +349,6 @@ window.GitGuide = window.GitGuide || {};
 window.GitGuide = window.GitGuide || {};
 (function(){
   const G = GitGuide, h = (...a)=>G.h(...a);
-  const OPS = {Stage:"워킹 트리 → 커밋 준비 영역 (Staging Area)", Commit:"커밋 준비 영역 (Staging Area) → Git 디렉토리", Push:"로컬 Git 디렉토리 → 리모트 저장소"};
   const ALLOWED_OPS = ["Stage","Commit","Checkout","Clone","Push","Fetch","Merge","Pull","Unstage","Fast-forward","3-way Merge","Rebase","Fork","Pull Request","Stash","Cherry-Pick"];
   const AREA_IDS = {local:{local:["files","db"],server:[]}, cvcs:{local:["files"],server:["db"]}, dvcs:{local:["wt","sa","gd"],server:["repo"]}};
   const SCENE_KEYS = ["title","body","kind","transition","from","through","spaces","notes"];
@@ -433,26 +448,65 @@ window.GitGuide = window.GitGuide || {};
       h("button",{type:"button","data-mode":"always","aria-pressed":"true",text:"설명 항상 보기"}),
       h("button",{type:"button","data-mode":"tap","aria-pressed":"false",text:matchMedia("(hover:hover) and (pointer:fine)").matches?"올렸을 때 보기":"눌러서 보기"}));
     const top = h("header",{class:"top"},
-      h("span",{class:"eyebrow",text:"Lesson pilot"}), h("span",{class:"lesson-name",text:((G.curriculum||[]).find(c=>c.stage===cfg.stage)||{}).title||""}), count,
+      h("span",{class:"eyebrow",text:"Lesson pilot"}), count, h("h1",{class:"lesson-name",text:((G.curriculum||[]).find(c=>c.stage===cfg.stage)||{}).title||""}),
       h("div",{class:"pilot"}, h("span",{class:"tag",text:"PILOT"}),
         h("span",{text:"슬라이드형 시안 — 툴팁 표시 방식과 배치는 Phase 1에서 정할 비교안입니다. 데이터는 8단계 조건으로 검사합니다."}),
         h("span",{class:"legend"}, h("u",{text:"점선 밑줄"}), "= 마우스를 올리면(터치는 누르면) 설명"), toggle));
-    const op = h("div",{class:"op-wrap"});
     const diagram = h("div",{class:"diagram"});
-    const stage = h("main",{class:"stage"}, op, diagram);
-    const say = h("div",{class:"say","aria-live":"polite"});
+    const stage = h("main",{class:"stage"}, diagram); // 전이 줄은 두지 않는다 — 작업 이름은 나레이션 제목에만 (2026-10-27 사용자 결정)
+    const say = h("div",{class:"say"});
+    const sayLive = h("div",{class:"sr","aria-live":"polite"}); // 타자 효과 중에도 화면 낭독기에는 전체 문장을 한 번에
     const voice = h("span",{class:"voice",role:"img","aria-label":"나레이션"});
     voice.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 10v4M8 7v10M12 4v16M16 8v8M20 11v2"/></svg>'; // 고정 아이콘(데이터 아님)
     const first = h("button",{type:"button",class:"btn",text:"처음으로"});
     const prev = h("button",{type:"button",class:"btn",text:"이전"});
     const next = h("button",{type:"button",class:"btn primary",text:"다음"});
     const dots = h("div",{class:"dots"});
-    const narr = h("footer",{class:"narr"}, voice, say, h("nav",{class:"nav","aria-label":"장면 이동"}, first, prev, dots, next));
+    const grip = h("button",{type:"button",class:"grip","aria-label":"나레이션 위치 옮기기 (화살표 키, Home 키나 두 번 누르기로 처음 자리)"});
+    const bubble = h("div",{class:"bubble"}, grip, say, sayLive, h("nav",{class:"nav","aria-label":"장면 이동"}, dots, first, prev, next));
+    const narr = h("aside",{class:"narr","aria-label":"나레이션"}, voice, bubble);
     const pop = h("div",{class:"pop",role:"dialog","aria-label":"용어 정의",hidden:""});
     app.append(top, stage, narr); document.body.append(pop);
 
+    // 본문 타자 효과: 글자는 한 글자씩, 용어 표식은 한 덩어리로 (움직임 줄이기면 바로 전부)
+    let typing = null, applyPos = null;
+    const mq = matchMedia("(max-width:820px)");
+    function typeInto(para, nodes, animate){
+      if(typing) typing.finish();
+      const full = nodes.map(n=>typeof n==="string"?n:n.textContent).join("");
+      sayLive.textContent = `${say.querySelector("h2").textContent}. ${full}`;
+      clearTimeout(sayLive._t); sayLive._t = setTimeout(()=>{ sayLive.textContent = ""; }, 4000);
+      para.replaceChildren(...nodes.map(n=>typeof n==="string"?n:n.cloneNode(true)));
+      para.style.minHeight = para.offsetHeight+"px"; // 타자 중에도 말풍선 높이가 변하지 않게
+      if(!animate || reduced){ para.replaceChildren(...nodes); return; }
+      para.setAttribute("aria-hidden","true");
+      const queue = nodes.slice(); let cur = null, txt = "", i = 0, timer = 0;
+      const finish = () => { clearTimeout(timer); para.replaceChildren(...nodes.map(n=>typeof n==="string"?document.createTextNode(n):n)); para.removeAttribute("aria-hidden"); para.querySelectorAll("button").forEach(b=>b.removeAttribute("tabindex")); typing = null; document.documentElement.style.setProperty("--narr-h", (narr.offsetHeight+12)+"px"); if(applyPos) applyPos(); placeNotes(cfg.scenes[step]); markTips(cfg.scenes[step]); };
+      const tick = () => {
+        if(cur===null){
+          if(!queue.length){ finish(); return; }
+          const n = queue.shift();
+          if(typeof n!=="string"){ n.tabIndex = -1; para.append(n); timer = setTimeout(tick, 60); return; } // 타자 중에는 포커스 제외
+          cur = document.createTextNode(""); para.append(cur); txt = n; i = 0;
+        }
+        cur.data = txt.slice(0, ++i);
+        if(i>=txt.length) cur = null;
+        timer = setTimeout(tick, 24);
+      };
+      typing = {finish}; para.replaceChildren(); tick();
+    }
     function snap(){ const m = new Map(); diagram.querySelectorAll("[data-key]").forEach(el=>m.set(el.dataset.key, el.getBoundingClientRect())); return m; }
 
+    // 히스토리가 칸보다 넓거나 높으면 비율을 줄여 칸 안에 맞춘다(잘리거나 스크롤되지 않게)
+    function fitHistories(){
+      diagram.querySelectorAll(".history").forEach(hb=>{
+        hb.style.transform = ""; hb.style.marginBottom = ""; hb.style.marginRight = "";
+        const body = hb.parentElement, w = hb.offsetWidth, hh = hb.offsetHeight;
+        const k = Math.min(1, (body.clientWidth-4)/w, Math.max(0.45, (body.clientHeight-4)/hh));
+        if(k < 0.999){ hb.style.transformOrigin = "left top"; hb.style.transform = `scale(${k.toFixed(3)})`;
+          hb.style.marginBottom = (-(1-k)*hh)+"px"; hb.style.marginRight = (-(1-k)*w)+"px"; }
+      });
+    }
     // 툴팁이 실제로 있는 요소에만 공통 표시를 붙인다
     function markTips(scene){
       const noted = new Set((scene.notes||[]).map(n=>n._target).filter(Boolean));
@@ -479,7 +533,8 @@ window.GitGuide = window.GitGuide || {};
         const cands = [
           {x:cx-18, y:ty-bh-G8, arrow:"down"}, {x:cx-18, y:ty+r.height+G8, arrow:"up"},
           {x:tx+r.width+G8, y:ty+r.height/2-bh/2, arrow:"side"}, {x:tx-bw-G8, y:ty+r.height/2-bh/2, arrow:"side"}];
-        const others = [...diagram.querySelectorAll(".node,.chip,.card,.empty,.area-name")].filter(o=>o!==el).map(o=>{const q=o.getBoundingClientRect();return {l:q.left-sr.left,t:q.top-sr.top,r:q.right-sr.left,b:q.bottom-sr.top};}).concat(placed);
+        const nq = narr.getBoundingClientRect(), narrBox = {l:nq.left-sr.left-6,t:nq.top-sr.top-6,r:nq.right-sr.left+6,b:nq.bottom-sr.top+6};
+        const others = [...diagram.querySelectorAll(".node,.chip,.card,.empty,.area-name")].filter(o=>o!==el).map(o=>{const q=o.getBoundingClientRect();return {l:q.left-sr.left,t:q.top-sr.top,r:q.right-sr.left,b:q.bottom-sr.top};}).concat(placed, [narrBox,narrBox,narrBox]); // 나레이션은 가중치를 높여 피한다
         const cover = c => others.reduce((sum,o)=>sum + Math.max(0,Math.min(c.x+bw,o.r)-Math.max(c.x,o.l)) * Math.max(0,Math.min(c.y+bh,o.b)-Math.max(c.y,o.t)), 0);
         cands.forEach(k=>{ k.x = Math.max(0, Math.min(k.x, sr.width-bw)); k.cost = (k.y<0?1e9:0) + cover(k); });
         // 겹치지 않는 자리가 없으면 가장 적게 가리는 자리
@@ -496,21 +551,23 @@ window.GitGuide = window.GitGuide || {};
       const s = cfg.scenes[step];
       const before = animate && !reduced ? snap() : null;
       G.diagram.render(diagram, s);
-      // 전이 칩
-      op.replaceChildren(s.transition
-        ? h("button",{type:"button",class:"op","data-term":s.transition}, h("span",{class:"name",text:G.full(s.transition)}), h("span",{class:"path",text:OPS[s.transition]||""}))
-        : h("div",{class:"op none",text:"이 장면에는 전이가 없습니다"}));
       // 나레이션: 제목은 항상 병기, 본문은 용어마다 처음 한 번
       const seen = new Set();
       say.classList.remove("swap"); void say.offsetWidth; if(animate) say.classList.add("swap");
-      say.replaceChildren(h("h2",{}, rich(s.title,"full",null,`장면 ${step+1} 제목`)), h("p",{}, rich(s.body,"body",seen,`장면 ${step+1} 본문`)));
+      const para = h("p",{});
+      say.replaceChildren(h("h2",{}, rich(s.title,"full",null,`장면 ${step+1} 제목`)), para);
+      typeInto(para, rich(s.body,"body",seen,`장면 ${step+1} 본문`), animate);
       markTips(s);
-      document.documentElement.style.setProperty("--narr-h", (narr.offsetHeight+12)+"px");
+      fitHistories();
       placeNotes(s); // 나레이션 높이가 정해진 뒤 배치
       count.textContent = `Scene ${step+1} / ${cfg.scenes.length}`;
       dots.replaceChildren(...cfg.scenes.map((_,i)=>h("button",{type:"button","data-step":i,"aria-label":`장면 ${i+1}`,"aria-current":i===step?"step":null,text:String(i+1)})));
       const had = document.activeElement;
       first.disabled = prev.disabled = step===0; next.disabled = step===cfg.scenes.length-1;
+      document.documentElement.style.setProperty("--narr-h", (narr.offsetHeight+12)+"px"); // 점까지 채운 뒤 측정
+      if(!mq.matches) stage.style.paddingBottom = Math.max(150, narr.offsetHeight+28)+"px"; // 넓은 화면: 나레이션 높이만큼 카드 아래 여백
+      fitHistories(); placeNotes(s);
+      if(typeof applyPos==="function") applyPos(); // 높이가 바뀐 말풍선도 화면 안으로
       if(had && had.disabled) (had===next ? prev : next).focus();
       if(before){
         diagram.querySelectorAll("[data-key]").forEach(el=>{
@@ -550,6 +607,39 @@ window.GitGuide = window.GitGuide || {};
     }
     function closePop(){ pop.hidden = true; if(openEl) openEl.classList.remove("on"); openEl = null; }
 
+    // 나레이션 끌어 옮기기 (넓은 화면만). 화면 밖으로 나가지 않게 제한한다
+    const mqDrag = matchMedia("(max-width:820px)");
+    let dx = 0, dy = 0, drag = null;
+    applyPos = () => {
+      const w = narr.offsetWidth, hgt = narr.offsetHeight;
+      const maxX = Math.max(0, innerWidth/2 - w/2 - 8), minY = -(innerHeight - hgt - 44 - 8);
+      dx = Math.max(-maxX, Math.min(maxX, dx)); dy = Math.max(minY, Math.min(36, dy));
+      narr.style.setProperty("--dx", dx+"px"); narr.style.setProperty("--dy", dy+"px");
+    };
+    bubble.addEventListener("pointerdown", e => {
+      if(mqDrag.matches){ if(typing && !e.target.closest("button")) typing.finish(); return; }
+      if(e.button!==0) return;
+      if(e.target!==grip && e.target.closest("button")) return;
+      drag = {x:e.clientX-dx, y:e.clientY-dy, sx:e.clientX, sy:e.clientY, moved:false, onGrip:e.target===grip}; bubble.setPointerCapture(e.pointerId); narr.classList.add("dragging");
+    });
+    bubble.addEventListener("pointermove", e => { if(!drag) return; if(Math.hypot(e.clientX-drag.sx, e.clientY-drag.sy) < 3 && !drag.moved) return; dx = e.clientX-drag.x; dy = e.clientY-drag.y; drag.moved = true; applyPos(); });
+    let lastGripTap = 0;
+    const resetPos = () => { dx = 0; dy = 0; applyPos(); };
+    const endDrag = () => {
+      if(drag && !drag.moved){
+        if(drag.onGrip){ const now = performance.now(); if(now - lastGripTap < 400){ resetPos(); lastGripTap = 0; } else lastGripTap = now; }
+        else if(typing) typing.finish();
+      }
+      drag = null; narr.classList.remove("dragging");
+    };
+    bubble.addEventListener("pointerup", endDrag); bubble.addEventListener("pointercancel", endDrag);
+    grip.addEventListener("keydown", e => {
+      const step2 = 24, k = {ArrowLeft:[-step2,0],ArrowRight:[step2,0],ArrowUp:[0,-step2],ArrowDown:[0,step2]}[e.key];
+      if(k){ e.preventDefault(); e.stopPropagation(); dx += k[0]; dy += k[1]; applyPos(); }
+      else if(e.key==="Home"){ e.preventDefault(); resetPos(); }
+    });
+    addEventListener("resize", applyPos);
+
     const go = n => { const v = Math.max(0, Math.min(cfg.scenes.length-1, n)); if(v!==step){ step = v; render(true); } };
     next.onclick = ()=>go(step+1); prev.onclick = ()=>go(step-1); first.onclick = ()=>{ step = 0; render(false); };
     dots.onclick = e => { const b = e.target.closest("[data-step]"); if(b) go(+b.dataset.step); };
@@ -585,10 +675,12 @@ window.GitGuide = window.GitGuide || {};
       }
       if(!pop.contains(e.target)) closePop();
     });
-    document.addEventListener("keydown", e => { if(e.altKey||e.ctrlKey||e.metaKey||e.shiftKey) return; if(e.key==="ArrowRight") go(step+1); else if(e.key==="ArrowLeft") go(step-1); else if(e.key==="Escape") closePop(); });
-    const mq = matchMedia("(max-width:820px)");
+    document.addEventListener("keydown", e => { if(e.altKey||e.ctrlKey||e.metaKey||e.shiftKey||e.target===grip) return; if(e.key==="ArrowRight") go(step+1); else if(e.key==="ArrowLeft") go(step-1); else if(e.key==="Escape") closePop(); });
     let narrow = mq.matches;
-    addEventListener("resize", ()=>{ closePop(); if(mq.matches!==narrow){ narrow = mq.matches; render(false); } else placeNotes(cfg.scenes[step]); });
+    addEventListener("resize", ()=>{ closePop(); if(mq.matches!==narrow){ narrow = mq.matches; render(false); return; }
+      fitHistories();
+      const para = say.querySelector("p"); if(para && !typing){ para.style.minHeight = ""; }
+      document.documentElement.style.setProperty("--narr-h", (narr.offsetHeight+12)+"px"); applyPos(); placeNotes(cfg.scenes[step]); });
     addEventListener("scroll", ()=>{ if(!pop.hidden && performance.now()-openedAt>400) closePop(); }, {passive:true}); // 열린 직후의 스크롤은 무시
     render(false);
     if(document.fonts && document.fonts.ready) document.fonts.ready.then(()=>placeNotes(cfg.scenes[step]));
@@ -609,36 +701,36 @@ window.GitGuide = window.GitGuide || {};
     stage: 8,
     scenes: [
       { title:"로컬과 리모트, 두 공간",
-        body:"왼쪽은 내 컴퓨터, 오른쪽은 [[리모트 저장소]]입니다. 지금은 두 곳의 [[커밋 히스토리]]가 같습니다.",
+        body:"왼쪽이 내 컴퓨터, 오른쪽이 [[리모트 저장소]]예요. 지금은 두 곳의 [[커밋 히스토리]]가 같아요.",
         kind:"dvcs", transition:null,
         spaces:{ me:local({commits:C1,branches:[{name:"main",at:"a3f"}],head:"main",tracking:[{name:"origin/main",at:"a3f"}]},{wt:[{name:"README.md",state:"Committed",version:"v1"}]}),
                  server:{show:"active",areas:{repo:{history:{commits:C1,branches:[{name:"main",at:"a3f"}]}}}} },
         notes:[{at:{space:"me",area:"gd",id:"origin/main"},text:"[[리모트 저장소]]의 main이 마지막으로 어디였는지 기억하는 이름표"}] },
       { title:"파일을 고치면 [[Modified]]",
-        body:"[[워킹 트리]]에서 README.md를 고쳤습니다. 아직 [[Staging Area]]에 올리지 않았습니다.",
+        body:"[[워킹 트리]]에서 README.md를 고쳤어요.",
         kind:"dvcs", transition:null,
         spaces:{ me:local({commits:C1,branches:[{name:"main",at:"a3f"}],head:"main",tracking:[{name:"origin/main",at:"a3f"}]},{wt:[{name:"README.md",state:"Modified",version:"v2"}],saShow:"dim",gdShow:"dim"}),
                  server:{show:"dim",areas:{repo:{history:{commits:C1,branches:[{name:"main",at:"a3f"}]}}}} },
-        notes:[{at:{space:"me",area:"wt",id:"README.md"},text:"고친 파일 — 아직 커밋 준비 전"}] },
+        notes:[{at:{space:"me",area:"wt",id:"README.md"},text:"고친 파일 — 아직 [[Staging Area]]에 올리기 전"}] },
       { title:"[[Stage]]: 다음 커밋에 넣을 파일을 올린다",
-        body:"README.md가 [[Staging Area]]에 올라가 [[Staged]] 상태가 되었습니다. [[Staging Area]]에 있는 파일은 다음 [[스냅샷]]에 들어갑니다.",
+        body:"README.md를 [[Staging Area]]에 올렸어요. [[Staging Area]]에 있는 파일이 다음 [[스냅샷]]에 들어가요.",
         kind:"dvcs", transition:"Stage",
         spaces:{ me:local({commits:C1,branches:[{name:"main",at:"a3f"}],head:"main",tracking:[{name:"origin/main",at:"a3f"}]},{sa:[{name:"README.md",state:"Staged",version:"v2"}],gdShow:"dim"}),
                  server:{show:"dim",areas:{repo:{history:{commits:C1,branches:[{name:"main",at:"a3f"}]}}}} },
-        notes:[{at:{space:"me",area:"sa",id:"README.md"},text:"다음 [[커밋]]에 들어갈 파일"}] },
+        notes:[{at:{space:"me",area:"sa",id:"README.md"},text:"[[Staged]] 상태 — 다음 [[커밋]]에 들어갈 파일"}] },
       { title:"[[Commit]]: 스냅샷으로 저장한다",
-        body:"[[Git 디렉토리]]에 새 [[커밋]] b71이 생기고, [[브랜치]] main이 따라 움직였습니다. README.md는 [[Committed]] 상태입니다.",
+        body:"올려 둔 내용을 [[Git 디렉토리]]에 새 [[커밋]]으로 저장했어요.",
         kind:"dvcs", transition:"Commit",
         spaces:{ me:local({commits:C2,branches:[{name:"main",at:"b71"}],head:"main",tracking:[{name:"origin/main",at:"a3f"}]},{wt:[{name:"README.md",state:"Committed",version:"v2"}],saShow:"dim"}),
                  server:{show:"dim",areas:{repo:{history:{commits:C1,branches:[{name:"main",at:"a3f"}]}}}} },
-        notes:[{at:{space:"me",area:"gd",id:"b71"},text:"새 커밋 — 부모 a3f를 가리킨다"},
+        notes:[{at:{space:"me",area:"gd",id:"b71"},text:"새 커밋 — 부모 a3f를 가리키고, [[브랜치]] main이 따라 왔다"},
                {at:{space:"me",area:"gd",id:"origin/main"},text:"[[리모트 저장소]]와 연결하지 않아 그대로"}] },
       { title:"[[Push]]: 리모트 저장소에 공유한다",
-        body:"b71이 [[리모트 저장소]]로 복사되고, [[리모트 브랜치]] main과 [[리모트 트래킹 브랜치]] origin/main이 함께 b71로 움직였습니다.",
+        body:"새 커밋 b71을 [[리모트 저장소]]로 올려 보냈어요.",
         kind:"dvcs", transition:"Push",
         spaces:{ me:local({commits:C2,branches:[{name:"main",at:"b71"}],head:"main",tracking:[{name:"origin/main",at:"b71"}]},{wt:[{name:"README.md",state:"Committed",version:"v2"}],saShow:"dim"}),
                  server:{show:"active",areas:{repo:{history:{commits:C2,branches:[{name:"main",at:"b71"}]}}}} },
-        notes:[{at:{space:"server",area:"repo",id:"b71"},text:"로컬에서 복사되어 온 커밋"}] }
+        notes:[{at:{space:"server",area:"repo",id:"main"},text:"[[리모트 브랜치]] main도 b71로"},{at:{space:"me",area:"gd",id:"origin/main"},text:"[[리모트 트래킹 브랜치]]도 따라 왔다"}] }
     ]
   });
 })();

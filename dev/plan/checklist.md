@@ -65,7 +65,7 @@
       설정 계약은 장면마다 kind·전이·공간·영역 상태를 적는 형식이고, 커밋 히스토리는 부모와 줄(lane) 번호로 적는다. 레슨 파일 이름 11개(`00-version-control` … `10-tools`)를 고정했다.
       B1 해소: 화면 버전 사본은 `assets/js/version.js` 하나, 릴리즈 워크플로가 `VERSION`과 비교(구현 Phase 1에서 비교 단계 추가) → `project-memory/decisions/version-display.md`.
       범위의 새 요소(충돌·태그·Stash·무시한 파일·Pull Request)는 이름과 자리만, 전이 8개는 이름만 정하고 뜻·모양은 해당 레슨 설계로 넘겼다(`diagram-model.md` 3·4절). 도식 색 배정·모양은 구현 Phase 1 시안. 새 장부 항목 B3(경로 변경 대응), Firefox·Safari 실측. 후반 결정은 사용자 위임(2026-10-24).
-      레슨 화면 방향(2026-10-27 사용자 결정): 상자로 나누지 않는 슬라이드형, 도식 중심, 텍스트 최소·나레이션 컨셉, 툴팁(용어 정의 + 도식 요소 설명 `notes`) → `project-memory/decisions/lesson-layout.md`.
+      레슨 화면 방향(2026-10-27 사용자 결정): 여러 상자로 쪼개지 않는 슬라이드형(타이틀 영역 + 도식 카드 하나), 도식 중심, 텍스트 최소·나레이션 컨셉, 툴팁(용어 정의 + 도식 요소 설명 `notes`) → `project-memory/decisions/lesson-layout.md`.
       구체 배치, `notes` 툴팁 표시 방식, 텍스트 용어 표식 클릭을 포함한 D1 조작과의 관계는 구현 Phase 1 시안의 미결(14 세부, 위임)
 - [ ] **자동 확인 도구 결정** — 결과는 `dev/impl/README.md` 확정 전제에 반영. 별도 설계 문서(`dev/design/`)를 둘지와 map.md 반영 위치는 이 세션 플랜에서 정한다(진행 방식 — 에이전트 결정 가능, 플랜에 명시). Playwright·Node 사용 가능 여부는 플랜에서 다시 실측한다.
       결정할 것: [C2](open-questions.md#c2-자동-확인-도구)
