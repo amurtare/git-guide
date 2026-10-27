@@ -1,0 +1,647 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Git Guide 슬라이드 파일럿</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Noto+Serif+KR:wght@500;600&family=IBM+Plex+Sans+KR:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* 슬라이드형 레슨 시안 (2026-10-27) — dev/design/diagram-component-design.md 결정 14·15, project-memory/decisions/lesson-layout.md
+   레이아웃: 얇은 머리줄 → 도식(화면 대부분) → 나레이션 띠 + 장면 이동. 상자로 나누지 않는다.
+   토큰: lesson-form-pilot.html과 같은 visual-style 토큰(라이트·다크) */
+:root{
+  --bg:oklch(0.95 0.02 85); --surface:oklch(0.985 0.012 88); --surface-alt:oklch(0.965 0.018 85);
+  --ink:oklch(0.18 0.03 245); --ink-soft:oklch(0.36 0.025 245); --ink-muted:oklch(0.52 0.02 245); --ink-line:oklch(0.85 0.02 80);
+  --p1:oklch(0.58 0.14 48); --p2:oklch(0.52 0.13 148); --p3:oklch(0.62 0.15 85); --p4:oklch(0.48 0.14 320); --p5:oklch(0.50 0.09 200);
+  --p1-soft:oklch(0.93 0.05 50); --p2-soft:oklch(0.93 0.04 148); --p3-soft:oklch(0.94 0.06 85); --p4-soft:oklch(0.92 0.04 320); --p5-soft:oklch(0.93 0.03 200);
+  --p3-text:oklch(0.46 0.11 85);
+  --wash-a:oklch(0.66 0.16 85 / .10); --wash-b:oklch(0.50 0.09 200 / .08); --wash-c:oklch(0.48 0.14 320 / .06);
+  --grain-op:.55; --blend:multiply;
+  --r-lg:18px; --r-md:12px; --r-sm:6px; --r-pill:999px;
+  --e1:0 1px 2px oklch(0.20 0.03 245 / .05),0 1px 3px oklch(0.20 0.03 245 / .04);
+  --e2:0 2px 4px oklch(0.20 0.03 245 / .05),0 4px 12px oklch(0.20 0.03 245 / .06);
+  --e3:0 4px 8px oklch(0.20 0.03 245 / .06),0 12px 28px oklch(0.20 0.03 245 / .08);
+  --f-display:"Newsreader","Noto Serif KR","AppleMyungjo","Batang",ui-serif,Georgia,serif;
+  --f-body:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",ui-sans-serif,system-ui,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,"SF Mono",Menlo,monospace;
+  --ease-out:cubic-bezier(0.22,1,0.36,1); --ease-spring:cubic-bezier(0.34,1.56,0.64,1);
+  --local:var(--p5); --local-soft:var(--p5-soft); --remote:var(--p4); --remote-soft:var(--p4-soft);
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:oklch(0.19 0.015 245); --surface:oklch(0.235 0.018 245); --surface-alt:oklch(0.21 0.016 245);
+  --ink:oklch(0.94 0.012 85); --ink-soft:oklch(0.82 0.015 85); --ink-muted:oklch(0.68 0.015 85); --ink-line:oklch(0.36 0.02 245);
+  --p1:oklch(0.74 0.13 48); --p2:oklch(0.74 0.13 148); --p3:oklch(0.82 0.14 85); --p4:oklch(0.74 0.12 320); --p5:oklch(0.76 0.09 200);
+  --p1-soft:oklch(0.32 0.06 48); --p2-soft:oklch(0.31 0.05 148); --p3-soft:oklch(0.33 0.06 85); --p4-soft:oklch(0.31 0.06 320); --p5-soft:oklch(0.31 0.04 200);
+  --p3-text:oklch(0.84 0.13 85);
+  --wash-a:oklch(0.66 0.16 85 / .07); --wash-b:oklch(0.50 0.09 200 / .10); --wash-c:oklch(0.48 0.14 320 / .08);
+  --grain-op:.18; --blend:screen; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:oklch(0.19 0.015 245); --surface:oklch(0.235 0.018 245); --surface-alt:oklch(0.21 0.016 245);
+  --ink:oklch(0.94 0.012 85); --ink-soft:oklch(0.82 0.015 85); --ink-muted:oklch(0.68 0.015 85); --ink-line:oklch(0.36 0.02 245);
+  --p1:oklch(0.74 0.13 48); --p2:oklch(0.74 0.13 148); --p3:oklch(0.82 0.14 85); --p4:oklch(0.74 0.12 320); --p5:oklch(0.76 0.09 200);
+  --p1-soft:oklch(0.32 0.06 48); --p2-soft:oklch(0.31 0.05 148); --p3-soft:oklch(0.33 0.06 85); --p4-soft:oklch(0.31 0.06 320); --p5-soft:oklch(0.31 0.04 200);
+  --p3-text:oklch(0.84 0.13 85);
+  --wash-a:oklch(0.66 0.16 85 / .07); --wash-b:oklch(0.50 0.09 200 / .10); --wash-c:oklch(0.48 0.14 320 / .08);
+  --grain-op:.18; --blend:screen; color-scheme:dark}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15.5px;line-height:1.65;-webkit-font-smoothing:antialiased;position:relative;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;mix-blend-mode:var(--blend);
+  background:radial-gradient(ellipse 80% 60% at 20% 0%,var(--wash-a) 0%,transparent 60%),radial-gradient(ellipse 70% 50% at 100% 30%,var(--wash-b) 0%,transparent 60%),radial-gradient(ellipse 80% 70% at 50% 100%,var(--wash-c) 0%,transparent 60%)}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:1;opacity:var(--grain-op);mix-blend-mode:var(--blend);
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.5  0 0 0 0 0.45  0 0 0 0 0.4  0 0 0 0.07 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--p2);outline-offset:2px}
+:focus:not(:focus-visible){outline:none}
+noscript p{position:relative;z-index:3;margin:16px;font-size:14px}
+
+/* 슬라이드: 머리줄 · 도식 · 나레이션 */
+#app{position:relative;z-index:2;height:100vh;height:100dvh;display:grid;grid-template-rows:auto 1fr auto;
+  padding:14px max(16px,env(safe-area-inset-right,0px)) 0 max(16px,env(safe-area-inset-left,0px));max-width:1440px;margin:0 auto}
+.top{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.eyebrow{font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--p2);display:flex;align-items:center;gap:10px}
+.eyebrow::before{content:"";width:24px;height:1px;background:currentColor}
+.lesson-name{font-family:var(--f-display);font-size:17px;color:var(--ink-soft);word-break:keep-all}
+.count{margin-left:auto;font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--p1)}
+.pilot{flex-basis:100%;display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:12px;color:var(--ink-muted)}
+.pilot .tag{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.1em;border:1px dashed var(--ink-line);border-radius:var(--r-pill);padding:1px 8px}
+.toggle{display:inline-flex;border:1px dashed var(--ink-line);border-radius:var(--r-pill);overflow:hidden}
+.toggle button{border:0;background:transparent;padding:2px 10px;font-size:12px;cursor:pointer;color:var(--ink-muted)}
+.toggle button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+
+.stage{position:relative;min-height:0;display:flex;flex-direction:column;padding:10px 0 6px}
+.op{align-self:center;display:inline-flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center;border:0;background:transparent;cursor:pointer;padding:4px 6px;min-height:34px;font-size:14px}
+.op .name{background:var(--ink);color:var(--bg);border-radius:var(--r-pill);padding:2px 14px;font-family:var(--f-display);font-size:15px}
+.op .path{color:var(--ink-soft);font-size:13px}
+.op.none{cursor:default;color:var(--ink-muted);font-family:var(--f-mono);font-size:11.5px;letter-spacing:.08em}
+.diagram{flex:1;min-height:0;display:flex;gap:0;align-items:stretch;margin-top:6px}
+
+/* 공간: 테두리 상자 대신 옅은 색 면 */
+.space{position:relative;min-width:0;display:flex;flex-direction:column;padding:14px 18px 18px;border-radius:28px;
+  background:radial-gradient(ellipse 120% 90% at 0% 0%,var(--sc-soft) 0%,transparent 75%)}
+.space.me{--sc:var(--local);--sc-soft:var(--local-soft);flex:2.5 1 0}
+.space.server{--sc:var(--remote);--sc-soft:var(--remote-soft);flex:1.15 1 0;background:radial-gradient(ellipse 120% 90% at 100% 0%,var(--sc-soft) 0%,transparent 75%)}
+.gap{width:1px;margin:24px 14px;background:linear-gradient(transparent,var(--ink-line),transparent)}
+.space.dim .areas,.space.dim .space-name{opacity:.45;filter:saturate(.4)}
+.space-name{display:flex;align-items:baseline;gap:10px;border:0;background:transparent;padding:0;cursor:pointer;text-align:left;width:max-content;max-width:100%}
+.space-name .who{font-family:var(--f-display);font-weight:600;font-size:clamp(22px,2.4vw,30px);color:var(--sc);word-break:keep-all}
+.space-name .kind{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-muted)}
+.areas{flex:1;min-height:0;display:flex;margin-top:10px}
+.area{position:relative;flex:1 1 0;min-width:0;display:flex;flex-direction:column;gap:12px;padding:4px 14px 8px;border-left:1px solid var(--ink-line)}
+.area:first-child{border-left:0;padding-left:0}
+.area.gd{flex:1.6 1 0}
+.space.server .area{padding-left:0}
+.area.dim{opacity:.4;filter:saturate(.35)}
+.area-name{border:0;background:transparent;padding:0;cursor:pointer;text-align:left;font-size:13.5px;font-weight:600;color:var(--ink-soft);line-height:1.35;word-break:keep-all}
+.abody{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:14px;padding-bottom:24px}
+.area-name small{display:block;font-weight:400;color:var(--ink-muted);font-size:11.5px;margin-top:2px}
+.empty{font-size:12.5px;color:var(--ink-muted);font-family:var(--f-display);font-style:italic}
+
+/* 파일 카드: 색 + 표식 글자 + 상태 이름 */
+.card{display:flex;align-items:center;gap:10px;border:1.5px solid var(--c);background:var(--cb);border-radius:14px;padding:12px 14px;cursor:pointer;text-align:left;width:100%;max-width:280px;box-shadow:var(--e1);position:relative}
+.card{flex-wrap:wrap}
+.card .fname{font-family:var(--f-mono);font-size:14px;flex:1 0 auto;white-space:nowrap}
+.card .ver{font-family:var(--f-mono);font-size:10.5px;color:var(--ink-muted)}
+.card .badge{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;color:var(--ct,var(--c));white-space:nowrap}
+.card .badge i{font-style:normal;font-family:var(--f-mono);display:inline-grid;place-items:center;width:18px;height:18px;border-radius:var(--r-pill);background:var(--c);color:var(--surface);font-size:10.5px}
+.card.Modified{--c:var(--p1);--cb:var(--p1-soft)}
+.card.Staged{--c:var(--p3);--ct:var(--p3-text);--cb:var(--p3-soft)}
+.card.Committed{--c:var(--p2);--cb:var(--p2-soft)}
+
+/* 커밋 히스토리 */
+.history{position:relative;flex:none;--nd:60px}
+.history svg{position:absolute;inset:0;overflow:visible;pointer-events:none}
+.history line{stroke:var(--ink-soft);stroke-width:2}
+.history .arrowhead{fill:var(--ink-soft)}
+.node{position:absolute;width:var(--nd);height:var(--nd);margin:calc(var(--nd) / -2) 0 0 calc(var(--nd) / -2);border-radius:50%;border:2px solid var(--ink);background:var(--surface);display:grid;place-items:center;font-family:var(--f-mono);font-size:14px;cursor:pointer;box-shadow:var(--e2);padding:0}
+.lbl{position:absolute;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:4px}
+.chip{font-family:var(--f-mono);font-size:12.5px;border-radius:var(--r-pill);padding:2px 11px;cursor:pointer;border:1.5px solid var(--ink);background:var(--surface);white-space:nowrap;position:relative}
+.chip.remote{border-color:var(--remote);color:var(--remote);background:var(--remote-soft)}
+.chip.tracking{border-style:dashed;color:var(--ink-muted);border-color:var(--ink-muted)}
+.chip.head{background:var(--ink);color:var(--bg);border-color:var(--ink);font-family:var(--f-body);font-size:11px}
+.has-note::after{content:"";position:absolute;top:-3px;right:-3px;width:8px;height:8px;border-radius:50%;background:var(--p1);box-shadow:0 0 0 2px var(--bg)}
+
+/* notes 말풍선 · 툴팁 */
+.note{position:absolute;z-index:4;max-width:220px;font-size:12.5px;line-height:1.45;background:var(--ink);color:var(--bg);border-radius:10px;padding:6px 10px;box-shadow:var(--e3);pointer-events:none;word-break:keep-all}
+.note::after{content:"";position:absolute;left:var(--px,18px);bottom:-5px;width:10px;height:10px;background:var(--ink);transform:rotate(45deg)}
+.note[data-arrow="up"]::after{bottom:auto;top:-5px}
+.note[data-arrow="side"]::after{display:none}
+.note .t{color:inherit;text-decoration:underline;text-decoration-color:var(--p3);text-underline-offset:3px}
+.pop{position:fixed;z-index:10;width:min(340px,calc(100vw - 32px));background:var(--surface);color:var(--ink);border:1px solid var(--ink-line);border-top:3px solid var(--p2);border-radius:var(--r-md);box-shadow:var(--e3);padding:12px 14px 12px;font-size:13.5px;line-height:1.55}
+.pop[hidden]{display:none}
+.pop .pnote{background:var(--p1-soft);border-radius:8px;padding:6px 9px;margin-bottom:10px;word-break:keep-all}
+.pop h3{font-family:var(--f-display);font-weight:500;font-size:19px;margin:0;line-height:1.25;word-break:keep-all}
+.pop .meta{font-family:var(--f-mono);font-size:11px;color:var(--ink-muted);margin-top:3px}
+.pop p{margin:8px 0 0;word-break:keep-all}
+.pop .src{font-size:11px;color:var(--ink-muted);margin-top:8px;padding-top:8px;border-top:1px solid var(--ink-line);overflow-wrap:anywhere}
+
+/* 나레이션 띠 + 장면 이동 */
+.narr{position:relative;z-index:5;display:flex;align-items:flex-end;gap:18px;padding:14px 0 max(16px,env(safe-area-inset-bottom,0px));border-top:1px solid var(--ink-line);background:linear-gradient(to top,var(--bg) 70%,transparent)}
+.voice{flex:none;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:var(--p2);color:var(--surface);margin-bottom:4px}
+.voice svg{width:18px;height:18px}
+.say{flex:1;min-width:0}
+.say h2{font-family:var(--f-display);font-weight:500;font-size:clamp(20px,2.2vw,26px);line-height:1.2;margin:0 0 4px;word-break:keep-all;text-wrap:balance}
+.say p{margin:0;color:var(--ink-soft);max-width:70ch;word-break:keep-all}
+.say.swap{animation:fadeUp .45s var(--ease-out) both}
+.t{border:0;background:transparent;padding:0 1px;color:var(--ink);font:inherit}
+/* 툴팁이 있는 항목의 공통 표시: 점선 밑줄 + 도움말 커서 (시안) */
+.tip{cursor:help}
+.t.tip,.area-name.tip,.space-name.tip .who,.chip.tip,.node.tip,.card.tip .fname,.op.tip .name{text-decoration-line:underline;text-decoration-style:dotted;text-decoration-color:var(--p2);text-decoration-thickness:1.5px;text-underline-offset:4px}
+.op.tip .name,.chip.head.tip{text-decoration-color:currentColor}
+.tip.on{outline:2px solid var(--p2);outline-offset:3px}
+.legend{display:inline-flex;align-items:center;gap:6px}
+.legend u{text-decoration-style:dotted;text-decoration-color:var(--p2);text-decoration-thickness:1.5px;text-underline-offset:3px;color:var(--ink-soft)}
+.say h2 .t{text-decoration-thickness:1px}
+.nav{flex:none;display:flex;align-items:center;gap:8px}
+.nav .btn{white-space:nowrap;border:1px solid var(--ink-line);background:var(--surface);border-radius:var(--r-pill);padding:7px 14px;cursor:pointer;font-size:13.5px}
+.nav .btn.primary{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.nav .btn:disabled{opacity:.4;cursor:default}
+.dots{display:flex;gap:5px}
+.dots button{width:26px;height:26px;border-radius:50%;border:1px solid var(--ink-line);background:var(--surface);font-family:var(--f-mono);font-size:11px;cursor:pointer;padding:0}
+.dots button[aria-current="step"]{background:var(--p2);color:var(--surface);border-color:var(--p2)}
+
+.enter{animation:enter .55s var(--ease-spring) both}
+@keyframes enter{from{opacity:0;transform:scale(.8)}to{opacity:1;transform:none}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+@media (max-width:820px){
+  #app{height:auto;min-height:100dvh}
+  .diagram{flex-direction:column}
+  .gap{width:auto;height:1px;margin:6px 24px;background:linear-gradient(90deg,transparent,var(--ink-line),transparent)}
+  .space.me,.space.server{flex:none}
+  .areas{flex-direction:column}
+  .area,.area:first-child{border-left:0;border-top:1px solid var(--ink-line);padding:10px 0}
+  .area:first-child{border-top:0}
+  .area .history{max-width:100%}
+  .history{--nd:46px}
+  .abody{padding-bottom:8px}
+  .narr{position:fixed;left:0;right:0;bottom:0;flex-wrap:wrap;align-items:flex-start;gap:10px 12px;padding:10px 16px max(10px,env(safe-area-inset-bottom,0px));background:color-mix(in oklch,var(--bg) 92%,transparent);backdrop-filter:blur(8px)}
+  .voice{width:28px;height:28px}
+  .say h2{font-size:17px;margin-bottom:2px}
+  .say p{font-size:13.5px;line-height:1.5}
+  #app{padding-bottom:var(--narr-h,190px)}
+  .nav{width:100%;justify-content:space-between;gap:6px}
+  .nav .btn{padding:6px 11px;font-size:13px;white-space:nowrap}
+  .dots button{width:24px;height:24px}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<noscript><p>이 페이지는 자바스크립트로 장면과 도식을 그립니다. 브라우저에서 자바스크립트를 켜 주세요.</p></noscript>
+<div id="app"></div>
+
+<script>
+/* ===== glossary.js 자리 — 용어집 사본 (dev/design/glossary.md, 이 시안에 쓰는 용어만) ===== */
+window.GitGuide = window.GitGuide || {};
+GitGuide.glossary = {
+  "저장소":{alias:"Git 저장소",en:"repository",first:0,def:"프로젝트의 파일과 그 히스토리 전체를 담는 곳",src:"01-introduction/sections/about-version-control.asc · 분산 버전 관리 시스템, 02-git-basics/sections/getting-a-repository.asc · Git 저장소 만들기"},
+  "리모트 저장소":{alias:"원격 저장소",en:"remote repository",first:0,def:"인터넷이나 네트워크 어딘가에 있는 저장소. 다른 사람과 함께 일하려면 리모트 저장소에 데이터를 Push 하고 Pull 한다",src:"02-git-basics/sections/remotes.asc · 리모트 저장소"},
+  "워킹 트리":{alias:"워킹 디렉토리",en:"working tree (working directory)",first:2,def:"프로젝트의 특정 버전을 Checkout 한 것. Git 디렉토리 안의 데이터베이스에서 파일을 꺼내 만든, 실제로 파일을 고치는 곳",src:"01-introduction/sections/basics.asc · 세 가지 상태"},
+  "Staging Area":{ko:"커밋 준비 영역",alias:"Index",en:"staging area (index)",first:2,def:"곧 커밋할 파일에 대한 정보를 저장하는 곳. Git 디렉토리 안에 있는 단순한 파일이다. 기술 용어로는 Index라고 한다",src:"01-introduction/sections/basics.asc · 세 가지 상태"},
+  "Git 디렉토리":{en:"Git directory",first:1,def:"Git이 프로젝트의 메타데이터와 객체 데이터베이스를 저장하는 곳. Git의 핵심이며, 저장소를 새로 만들거나 Clone 할 때 만들어진다",src:"01-introduction/sections/basics.asc · 세 가지 상태, 02-git-basics/sections/getting-a-repository.asc · Git 저장소 만들기"},
+  "Modified":{ko:"수정됨",en:"modified",first:2,def:"워킹 트리의 파일을 수정했지만 아직 Staging Area에 올리지 않은 상태",src:"01-introduction/sections/basics.asc · 세 가지 상태"},
+  "Staged":{ko:"커밋 준비됨",en:"staged",first:2,def:"수정한 파일을 Staging Area에 올려, 다음에 저장할 스냅샷에 넣겠다고 표시한 상태",src:"01-introduction/sections/basics.asc · 세 가지 상태"},
+  "Committed":{ko:"커밋됨",en:"committed",first:2,def:"파일이 Git 디렉토리에 안전하게 저장된 상태",src:"01-introduction/sections/basics.asc · 세 가지 상태"},
+  "스냅샷":{en:"snapshot",first:3,def:"어느 순간 프로젝트 파일 전체가 어떤 모습이었는지를 그대로 담은 것. Git은 데이터를 스냅샷의 연속으로 취급한다",src:"01-introduction/sections/basics.asc · 차이가 아니라 스냅샷"},
+  "커밋":{en:"commit",first:3,def:"프로젝트의 상태를 스냅샷으로 Git 디렉토리에 영구히 저장한 것, 또는 그렇게 저장하는 일",src:"01-introduction/sections/basics.asc · 세 가지 상태, 차이가 아니라 스냅샷"},
+  "커밋 히스토리":{alias:"히스토리",en:"commit history",first:3,def:"저장소에 쌓인 커밋들의 기록. 도식에서는 커밋 노드와 부모 방향 화살표로 그린다",src:"02-git-basics/sections/viewing-history.asc · 커밋 히스토리 조회하기"},
+  "브랜치":{en:"branch",first:5,def:"커밋 사이를 가볍게 이동할 수 있는 포인터. 새 커밋을 만들면 지금 브랜치가 그 커밋을 가리키도록 자동으로 움직인다",src:"03-git-branching/sections/nutshell.asc · 브랜치란 무엇인가"},
+  "HEAD":{ko:"지금 위치 표시",en:"HEAD",first:5,def:"지금 작업하는 로컬 브랜치를 가리키는 특수한 포인터",src:"03-git-branching/sections/nutshell.asc · 브랜치란 무엇인가"},
+  "리모트 브랜치":{en:"remote branch",first:8,def:"리모트 저장소에 있는 브랜치",src:"03-git-branching/sections/remote-branches.asc · 리모트 브랜치"},
+  "리모트 트래킹 브랜치":{en:"remote-tracking branch",first:8,def:"리모트 브랜치를 추적하는 레퍼런스이자 브랜치. 로컬에 있지만 마음대로 움직일 수 없고, 리모트 저장소에 마지막으로 연결했던 순간에 그 브랜치가 어느 커밋을 가리켰는지를 나타낸다. 예: origin/main",src:"03-git-branching/sections/remote-branches.asc · 리모트 브랜치"},
+  "Stage":{ko:"커밋 준비 영역에 올리기",en:"stage",first:2,def:"워킹 트리에서 수정한 파일을 Staging Area에 올려 커밋할 스냅샷을 만드는 일",src:"01-introduction/sections/basics.asc · 세 가지 상태"},
+  "Commit":{ko:"커밋하기",en:"commit",first:3,def:"Staging Area에 있는 파일을 Git 디렉토리에 영구적인 스냅샷으로 저장하는 일",src:"01-introduction/sections/basics.asc · 세 가지 상태"},
+  "Push":{ko:"올려 보내기",en:"push",first:8,def:"로컬의 브랜치 내용을 리모트 저장소에 올려 공유하는 일. 다른 사람이 먼저 Push 했다면 그대로는 Push 할 수 없다",src:"02-git-basics/sections/remotes.asc · 리모트 저장소에 Push 하기"}
+};
+GitGuide.sceneNames = {
+  "나":"이 장면에서 설명을 위해 붙인 로컬 공간의 이름입니다. 내 컴퓨터를 뜻합니다."
+};
+
+/* ===== curriculum.js 자리 — 단계 목록 사본 (시안이라 실제 단계 이름 대신 자리 표시) ===== */
+window.GitGuide = window.GitGuide || {};
+GitGuide.curriculum = [{stage:8, title:"N단계 · 레슨 제목 자리", file:"dev/pilot/lesson-slide-pilot.html"}];
+
+/* ===== diagram.js 자리 — 장면 상태 → 도식 ===== */
+window.GitGuide = window.GitGuide || {};
+(function(){
+  const G = GitGuide;
+  // 작은 DOM 도우미: 데이터는 textContent로만 넣는다
+  function h(tag, attrs, ...kids){
+    const el = document.createElement(tag);
+    for(const [k,v] of Object.entries(attrs||{})){
+      if(v==null||v===false) continue;
+      if(k==="class") el.className = v;
+      else if(k==="text") el.textContent = v;
+      else if(k==="style") Object.assign(el.style, v);
+      else el.setAttribute(k, v);
+    }
+    for(const kid of kids.flat()) if(kid!=null) el.append(kid);
+    return el;
+  }
+  G.h = h;
+  // R8: 라벨·칩·툴팁은 항상 "한글 표현 (주 표기)"
+  G.full = key => { const e = G.glossary[key]; return e && e.ko ? `${e.ko} (${key})` : key; };
+
+  const AREAS = {dvcs:{local:[["wt","워킹 트리"],["sa","Staging Area"],["gd","Git 디렉토리"]], server:[["repo","저장소"]]}};
+  const STATE_MARK = {Modified:"M", Staged:"S", Committed:"C"};
+  const SVGNS = "http://www.w3.org/2000/svg";
+
+  function fileCard(f, sp, area){
+    const key = `${sp}:f:${f.name}:${f.version||""}`;
+    const btn = h("button",{type:"button",class:`card ${f.state||""}`,"data-key":key,"data-term":f.state||null,
+      "data-at":`${sp}|${area}|${f.name}`,"aria-label":`${f.name}${f.version?" "+f.version:""}${f.state?", "+G.full(f.state)+" 상태":""}`},
+      h("span",{class:"fname",text:f.name}),
+      f.version ? h("span",{class:"ver",text:f.version}) : null,
+      f.state ? h("span",{class:"badge"}, h("i",{text:STATE_MARK[f.state]||"?"}), G.full(f.state)) : null);
+    return btn;
+  }
+
+  function history(hist, sp, area){
+    const small = matchMedia("(max-width:820px)").matches, ND = small?46:60;
+    const X = i => (small?34:46) + i*(small?104:150), Y = lane => (small?28:38) + lane*(small?86:118);
+    const pos = {}; hist.commits.forEach((c,i)=>pos[c.id]={x:X(i),y:Y(c.lane||0)});
+    const lanes = Math.max(0,...hist.commits.map(c=>c.lane||0));
+    const box = h("div",{class:"history",style:{width:(X(hist.commits.length-1)+80)+"px",height:(Y(lanes)+(small?118:140))+"px"}});
+    const svg = document.createElementNS(SVGNS,"svg"); svg.setAttribute("aria-hidden","true");
+    hist.commits.forEach(c=>(c.parents||[]).forEach(p=>{
+      if(!pos[p]) return;
+      const a = pos[c.id], b = pos[p], dx = b.x-a.x, dy = b.y-a.y, len = Math.hypot(dx,dy)||1, ux = dx/len, uy = dy/len;
+      const R = ND/2+1, x1 = a.x+ux*R, y1 = a.y+uy*R, x2 = b.x-ux*(R+6), y2 = b.y-uy*(R+6);
+      const ln = document.createElementNS(SVGNS,"line");
+      [["x1",x1],["y1",y1],["x2",x2],["y2",y2]].forEach(([k,v])=>ln.setAttribute(k,v));
+      ln.setAttribute("data-key",`${sp}:e:${c.id}:${p}`);
+      const tip = document.createElementNS(SVGNS,"polygon"); tip.setAttribute("class","arrowhead");
+      const px = b.x-ux*R, py = b.y-uy*R, nx = -uy, ny = ux;
+      tip.setAttribute("points",`${px},${py} ${px-ux*8+nx*5},${py-uy*8+ny*5} ${px-ux*8-nx*5},${py-uy*8-ny*5}`);
+      svg.append(ln, tip);
+    }));
+    box.append(svg);
+    hist.commits.forEach(c=>box.append(h("button",{type:"button",class:"node","data-key":`${sp}:c:${c.id}`,"data-term":"커밋",
+      "data-at":`${sp}|${area}|${c.id}`,"aria-label":`커밋 ${c.id}`,style:{left:pos[c.id].x+"px",top:pos[c.id].y+"px"},text:c.id})));
+    // 이름표: 같은 커밋에 붙는 것은 아래로 쌓는다
+    const stacks = {};
+    const add = (at, chips) => { const p = pos[at]; if(!p) return; (stacks[at] = stacks[at] || []).push(...chips); };
+    (hist.branches||[]).forEach(b=>{
+      const isServer = sp==="server";
+      const chips = [h("button",{type:"button",class:`chip ${isServer?"remote":"branch"}`,"data-key":`${sp}:l:${b.name}`,"data-term":isServer?"리모트 브랜치":"브랜치",
+        "data-at":`${sp}|${area}|${b.name}`,text:b.name})];
+      if(hist.head===b.name) chips.push(h("button",{type:"button",class:"chip head","data-key":`${sp}:l:HEAD`,"data-term":"HEAD","data-at":`${sp}|${area}|HEAD`,text:G.full("HEAD")}));
+      add(b.at, chips);
+    });
+    (hist.tracking||[]).forEach(t=>add(t.at,[h("button",{type:"button",class:"chip tracking","data-key":`${sp}:l:${t.name}`,"data-term":"리모트 트래킹 브랜치",
+      "data-at":`${sp}|${area}|${t.name}`,text:t.name})]));
+    for(const [at,chips] of Object.entries(stacks))
+      box.append(h("div",{class:"lbl",style:{left:pos[at].x+"px",top:(pos[at].y+ND/2+10)+"px"}}, chips));
+    return box;
+  }
+
+  function space(role, sp, kind){
+    const isServer = role==="server";
+    const name = isServer
+      ? h("button",{type:"button",class:"space-name","data-term":"리모트 저장소","data-at":`${role}`},h("span",{class:"who",text:"리모트 저장소"}),h("span",{class:"kind",text:"server"}))
+      : h("button",{type:"button",class:"space-name","data-scene":"나","data-at":`${role}`},h("span",{class:"who",text:"나"}),h("span",{class:"kind",text:"local"}));
+    const defs = AREAS[kind][isServer?"server":"local"];
+    const areas = h("div",{class:"areas"}, defs.map(([id,term])=>{
+      const a = sp.areas[id] || {};
+      if(a.show==="hidden") return null;
+      let body;
+      if(a.history) body = history(a.history, role, id);
+      else if(a.files && a.files.length) body = a.files.map(f=>fileCard(f, role, id));
+      else body = h("div",{class:"empty",text:"비어 있음"});
+      return h("div",{class:`area ${id} ${a.show==="dim"?"dim":""}`,"data-at":`${role}|${id}`},
+        h("button",{type:"button",class:"area-name","data-term":term,"data-at":`${role}|${id}`},G.full(term), id==="gd"||id==="repo" ? h("small",{text:"커밋 히스토리"}) : null),
+        h("div",{class:"abody"}, body));
+    }));
+    return h("section",{class:`space ${role} ${sp.show==="dim"?"dim":""}`,"aria-label":isServer?"서버 공간":"로컬 공간"}, name, areas);
+  }
+
+  G.diagram = {
+    render(container, scene){
+      container.replaceChildren();
+      const order = [["me",scene.spaces.me],["server",scene.spaces.server]].filter(x=>x[1]);
+      if(!AREAS[scene.kind]) return; // 시안은 dvcs만 그린다 — 검사가 콘솔 오류로 알림
+      order.forEach(([role,sp],i)=>{ if(i>0) container.append(h("div",{class:"gap","aria-hidden":"true"})); container.append(space(role, sp, scene.kind)); });
+    }
+  };
+})();
+
+/* ===== site.js 자리 — 뼈대 · 장면 이동 · 나레이션 · 툴팁 · R8 · 데이터 검사 ===== */
+window.GitGuide = window.GitGuide || {};
+(function(){
+  const G = GitGuide, h = (...a)=>G.h(...a);
+  const OPS = {Stage:"워킹 트리 → 커밋 준비 영역 (Staging Area)", Commit:"커밋 준비 영역 (Staging Area) → Git 디렉토리", Push:"로컬 Git 디렉토리 → 리모트 저장소"};
+  const ALLOWED_OPS = ["Stage","Commit","Checkout","Clone","Push","Fetch","Merge","Pull","Unstage","Fast-forward","3-way Merge","Rebase","Fork","Pull Request","Stash","Cherry-Pick"];
+  const AREA_IDS = {local:{local:["files","db"],server:[]}, cvcs:{local:["files"],server:["db"]}, dvcs:{local:["wt","sa","gd"],server:["repo"]}};
+  const SCENE_KEYS = ["title","body","kind","transition","from","through","spaces","notes"];
+  const AREA_KEYS = ["show","files","versions","history","stash","requests"];
+  const FILE_KEYS = ["name","state","version","conflict","ignored"];
+
+  // 용어 표식 [[주 표기]] → 조각들. mode "full" = 항상 병기, "body" = 용어마다 처음만 병기
+  function rich(text, mode, seen, where){
+    const out = []; let last = 0;
+    text.replace(/\[\[(.+?)\]\]/g,(m,key,idx)=>{
+      if(idx>last) out.push(text.slice(last,idx));
+      const e = G.glossary[key];
+      if(!e){ console.error(`[GitGuide] ${where}: 용어집 사본에 없는 용어 표식 [[${key}]]`); out.push(key); }
+      else{
+        let label = G.full(key);
+        if(mode==="body"){ if(seen.has(key) && e.ko) label = e.ko; seen.add(key); }
+        out.push(h("button",{type:"button",class:"t tip","data-term":key,text:label}));
+      }
+      last = idx+m.length; return m;
+    });
+    if(last<text.length) out.push(text.slice(last));
+    return out;
+  }
+
+  // 설계 실패 처리 7개 — 콘솔 오류 + 장면 번호, 그릴 수 있는 것은 그린다
+  function check(cfg){
+    Object.keys(cfg).forEach(k=>{ if(!["stage","scenes"].includes(k)) console.error(`[GitGuide] 레슨: 계약 밖 키 "${k}"`); });
+    cfg.scenes.forEach((s,i)=>{
+      const at = `장면 ${i+1}`, err = m => console.error(`[GitGuide] ${at}: ${m}`);
+      Object.keys(s).forEach(k=>{ if(!SCENE_KEYS.includes(k)) err(`계약 밖 키 "${k}"`); });
+      if(s.transition!=null && !ALLOWED_OPS.includes(s.transition)) err(`계약 밖 전이 "${s.transition}"`);
+      const ids = AREA_IDS[s.kind]; if(!ids){ err(`계약 밖 kind "${s.kind}"`); return; }
+      if(s.kind!=="dvcs") err(`이 시안은 kind "dvcs"만 그린다 ("${s.kind}")`);
+      if(s.from!=null && !["me","peer"].includes(s.from)) err(`계약 밖 from "${s.from}"`);
+      if(s.through!=null && (!Array.isArray(s.through) || s.through.some(t=>!t || (t.transition!=null && !ALLOWED_OPS.includes(t.transition)) || !t.spaces))) err("계약 밖 through 값");
+      (s.notes||[]).forEach(n=>{ if(!n || !n.at || !n.at.space){ err("notes 항목에 at.space가 없음"); n && (n._target = undefined); return; } const hits = noteTargets(s, n); if(hits.length!==1) err(`notes.at ${JSON.stringify(n.at)} 대상이 ${hits.length?"둘 이상":"없음"}`); n._target = hits[0]; });
+      [s.title, s.body, ...(s.notes||[]).map(n=>n.text)].forEach(t=>String(t||"").replace(/\[\[(.+?)\]\]/g,(m,k)=>{ if(!G.glossary[k]) err(`용어집 사본에 없는 용어 표식 [[${k}]]`); return m; }));
+      for(const [role,sp] of Object.entries(s.spaces||{})){
+        if(!["me","server","peer"].includes(role)){ err(`계약 밖 공간 "${role}"`); continue; }
+        Object.keys(sp).forEach(k=>{ if(!["show","areas"].includes(k)) err(`계약 밖 키 "${k}" (${role})`); });
+        if(!["dim","active"].includes(sp.show)) err(`계약 밖 show "${sp.show}" (${role})`);
+        const allowed = ids[role==="server"?"server":"local"], fileKeys = new Set();
+        for(const [aid,a] of Object.entries(sp.areas||{})){
+          if(!allowed.includes(aid)) err(`kind "${s.kind}"에 없는 영역 id "${aid}" (${role})`);
+          Object.keys(a).forEach(k=>{ if(!AREA_KEYS.includes(k)) err(`계약 밖 키 "${k}" (${role}.${aid})`); });
+          if(a.show!=null && !["hidden","dim","active"].includes(a.show)) err(`계약 밖 show "${a.show}" (${role}.${aid})`);
+          if(a.files && !["files","wt","sa"].includes(aid)) err(`files는 files·wt·sa에만 (${role}.${aid})`);
+          if(a.history && !["gd","repo"].includes(aid)) err(`history는 gd·repo에만 (${role}.${aid})`);
+          if(a.versions && aid!=="db") err(`versions는 db에만 (${role}.${aid})`);
+          if(a.stash && aid!=="gd") err(`stash는 gd에만 (${role}.${aid})`);
+          if(a.requests && aid!=="repo") err(`requests는 repo에만 (${role}.${aid})`);
+          (a.files||[]).forEach(f=>{
+            Object.keys(f).forEach(k=>{ if(!FILE_KEYS.includes(k)) err(`계약 밖 파일 키 "${k}"`); });
+            if(f.state!=null && !["Modified","Staged","Committed"].includes(f.state)) err(`계약 밖 state "${f.state}" (${f.name})`);
+            if((f.conflict||f.ignored) && aid!=="wt") err(`conflict·ignored는 wt에만 (${role}.${aid} ${f.name})`);
+            const key = `${f.name}:${f.version||""}`; if(fileKeys.has(key)) err(`같은 공간에 같은 파일 키 둘 (${role} ${key})`); fileKeys.add(key);
+          });
+          if(a.history){
+            Object.keys(a.history).forEach(k=>{ if(!["commits","branches","head","tracking","tags"].includes(k)) err(`계약 밖 History 키 "${k}"`); });
+            const cids = new Set(a.history.commits.map(c=>c.id));
+            [...(a.history.branches||[]),...(a.history.tracking||[]),...(a.history.tags||[])].forEach(l=>{ if(!cids.has(l.at)) err(`이름표 ${l.name}이 없는 커밋 ${l.at}을 가리킴`); });
+            if(a.history.tags && a.history.tags.length) err("이 시안은 tags를 그리지 않는다 (L10 설계에서 모양을 정함)");
+            if((a.history.head||a.history.tracking) && aid!=="gd") err(`head·tracking은 gd에만 (${role}.${aid})`);
+            const seen = new Set();
+            a.history.commits.forEach(c=>{ (c.parents||[]).forEach(p=>{ if(!seen.has(p)) err(`앞에 정의되지 않은 부모 커밋 ${p} (${role} ${c.id})`); }); seen.add(c.id); });
+            if(a.history.tracking && a.history.tracking.length && cfg.stage<8) err(`stage ${cfg.stage}에서 리모트 트래킹 브랜치 사용 (8단계부터)`);
+          }
+        }
+      }
+    });
+  }
+
+  function noteTargets(scene, n){
+    const sp = scene.spaces[n.at.space]; if(!sp) return [];
+    const hits = [];
+    for(const [aid,a] of Object.entries(sp.areas||{})){
+      if(n.at.area && n.at.area!==aid) continue;
+      if(!n.at.id){ hits.push(`${n.at.space}|${aid}`); continue; }
+      (a.files||[]).forEach(f=>{ if(f.name===n.at.id) hits.push(`${n.at.space}|${aid}|${f.name}`); });
+      const H = a.history; if(!H) continue;
+      H.commits.forEach(c=>{ if(c.id===n.at.id) hits.push(`${n.at.space}|${aid}|${c.id}`); });
+      [...(H.branches||[]),...(H.tracking||[]),...(H.tags||[])].forEach(l=>{ if(l.name===n.at.id) hits.push(`${n.at.space}|${aid}|${l.name}`); });
+      if(H.head && n.at.id==="HEAD") hits.push(`${n.at.space}|${aid}|HEAD`);
+    }
+    return hits;
+  }
+
+  G.lesson = function(cfg){
+    check(cfg);
+    const app = document.getElementById("app");
+    let step = 0, noteMode = "always", openEl = null, openedAt = 0;
+    const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    // 뼈대
+    const count = h("span",{class:"count"});
+    const toggle = h("span",{class:"toggle",role:"group","aria-label":"설명 툴팁 보기 방식 (시안 비교용)"},
+      h("button",{type:"button","data-mode":"always","aria-pressed":"true",text:"설명 항상 보기"}),
+      h("button",{type:"button","data-mode":"tap","aria-pressed":"false",text:matchMedia("(hover:hover) and (pointer:fine)").matches?"올렸을 때 보기":"눌러서 보기"}));
+    const top = h("header",{class:"top"},
+      h("span",{class:"eyebrow",text:"Lesson pilot"}), h("span",{class:"lesson-name",text:((G.curriculum||[]).find(c=>c.stage===cfg.stage)||{}).title||""}), count,
+      h("div",{class:"pilot"}, h("span",{class:"tag",text:"PILOT"}),
+        h("span",{text:"슬라이드형 시안 — 툴팁 표시 방식과 배치는 Phase 1에서 정할 비교안입니다. 데이터는 8단계 조건으로 검사합니다."}),
+        h("span",{class:"legend"}, h("u",{text:"점선 밑줄"}), "= 마우스를 올리면(터치는 누르면) 설명"), toggle));
+    const op = h("div",{class:"op-wrap"});
+    const diagram = h("div",{class:"diagram"});
+    const stage = h("main",{class:"stage"}, op, diagram);
+    const say = h("div",{class:"say","aria-live":"polite"});
+    const voice = h("span",{class:"voice",role:"img","aria-label":"나레이션"});
+    voice.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 10v4M8 7v10M12 4v16M16 8v8M20 11v2"/></svg>'; // 고정 아이콘(데이터 아님)
+    const first = h("button",{type:"button",class:"btn",text:"처음으로"});
+    const prev = h("button",{type:"button",class:"btn",text:"이전"});
+    const next = h("button",{type:"button",class:"btn primary",text:"다음"});
+    const dots = h("div",{class:"dots"});
+    const narr = h("footer",{class:"narr"}, voice, say, h("nav",{class:"nav","aria-label":"장면 이동"}, first, prev, dots, next));
+    const pop = h("div",{class:"pop",role:"dialog","aria-label":"용어 정의",hidden:""});
+    app.append(top, stage, narr); document.body.append(pop);
+
+    function snap(){ const m = new Map(); diagram.querySelectorAll("[data-key]").forEach(el=>m.set(el.dataset.key, el.getBoundingClientRect())); return m; }
+
+    // 툴팁이 실제로 있는 요소에만 공통 표시를 붙인다
+    function markTips(scene){
+      const noted = new Set((scene.notes||[]).map(n=>n._target).filter(Boolean));
+      app.querySelectorAll("button[data-term],button[data-scene],button[data-at]").forEach(el=>{
+        const has = (el.dataset.term && G.glossary[el.dataset.term]) || (el.dataset.scene && G.sceneNames[el.dataset.scene]) || noted.has(el.dataset.at);
+        el.classList.toggle("tip", !!has);
+      });
+    }
+    function placeNotes(scene){
+      stage.querySelectorAll(".note").forEach(n=>n.remove());
+      diagram.querySelectorAll(".has-note").forEach(el=>el.classList.remove("has-note"));
+      const sr = stage.getBoundingClientRect(), placed = [];
+      (scene.notes||[]).forEach(n=>{
+        const el = diagram.querySelector(`[data-at="${CSS.escape(n._target||"")}"]`);
+        if(!el) return;
+        if(noteMode==="tap"){ el.classList.add("has-note"); return; }
+        const r = el.getBoundingClientRect();
+        const b = h("div",{class:"note"}, rich(n.text,"full",null,"notes"));
+        b.querySelectorAll(".tip").forEach(t=>{ t.classList.remove("tip"); t.tabIndex = -1; }); // 말풍선은 포인터를 받지 않는다
+        stage.append(b);
+        const bw = b.offsetWidth, bh = b.offsetHeight, G8 = 10;
+        const tx = r.left - sr.left, ty = r.top - sr.top, cx = tx + r.width/2;
+        // 후보: 위·아래·오른쪽·왼쪽 — 다른 도식 요소·말풍선과 겹치지 않는 첫 자리
+        const cands = [
+          {x:cx-18, y:ty-bh-G8, arrow:"down"}, {x:cx-18, y:ty+r.height+G8, arrow:"up"},
+          {x:tx+r.width+G8, y:ty+r.height/2-bh/2, arrow:"side"}, {x:tx-bw-G8, y:ty+r.height/2-bh/2, arrow:"side"}];
+        const others = [...diagram.querySelectorAll(".node,.chip,.card,.empty,.area-name")].filter(o=>o!==el).map(o=>{const q=o.getBoundingClientRect();return {l:q.left-sr.left,t:q.top-sr.top,r:q.right-sr.left,b:q.bottom-sr.top};}).concat(placed);
+        const cover = c => others.reduce((sum,o)=>sum + Math.max(0,Math.min(c.x+bw,o.r)-Math.max(c.x,o.l)) * Math.max(0,Math.min(c.y+bh,o.b)-Math.max(c.y,o.t)), 0);
+        cands.forEach(k=>{ k.x = Math.max(0, Math.min(k.x, sr.width-bw)); k.cost = (k.y<0?1e9:0) + cover(k); });
+        // 겹치지 않는 자리가 없으면 가장 적게 가리는 자리
+        let c = cands.reduce((best,k)=>k.cost<best.cost?k:best);
+        c.x = Math.max(0, Math.min(c.x, sr.width-bw)); c.y = Math.max(0, c.y);
+        b.style.left = c.x+"px"; b.style.top = c.y+"px"; b.dataset.arrow = c.arrow;
+        b.style.setProperty("--px", Math.max(8, Math.min(bw-18, cx - c.x - 5))+"px");
+        placed.push({l:c.x,t:c.y,r:c.x+bw,b:c.y+bh});
+      });
+    }
+
+    function render(animate){
+      closePop();
+      const s = cfg.scenes[step];
+      const before = animate && !reduced ? snap() : null;
+      G.diagram.render(diagram, s);
+      // 전이 칩
+      op.replaceChildren(s.transition
+        ? h("button",{type:"button",class:"op","data-term":s.transition}, h("span",{class:"name",text:G.full(s.transition)}), h("span",{class:"path",text:OPS[s.transition]||""}))
+        : h("div",{class:"op none",text:"이 장면에는 전이가 없습니다"}));
+      // 나레이션: 제목은 항상 병기, 본문은 용어마다 처음 한 번
+      const seen = new Set();
+      say.classList.remove("swap"); void say.offsetWidth; if(animate) say.classList.add("swap");
+      say.replaceChildren(h("h2",{}, rich(s.title,"full",null,`장면 ${step+1} 제목`)), h("p",{}, rich(s.body,"body",seen,`장면 ${step+1} 본문`)));
+      markTips(s);
+      document.documentElement.style.setProperty("--narr-h", (narr.offsetHeight+12)+"px");
+      placeNotes(s); // 나레이션 높이가 정해진 뒤 배치
+      count.textContent = `Scene ${step+1} / ${cfg.scenes.length}`;
+      dots.replaceChildren(...cfg.scenes.map((_,i)=>h("button",{type:"button","data-step":i,"aria-label":`장면 ${i+1}`,"aria-current":i===step?"step":null,text:String(i+1)})));
+      const had = document.activeElement;
+      first.disabled = prev.disabled = step===0; next.disabled = step===cfg.scenes.length-1;
+      if(had && had.disabled) (had===next ? prev : next).focus();
+      if(before){
+        diagram.querySelectorAll("[data-key]").forEach(el=>{
+          if(el instanceof SVGElement) return;
+          const r0 = before.get(el.dataset.key), r1 = el.getBoundingClientRect();
+          if(!r0){ el.classList.add("enter"); return; }
+          const dx = r0.left-r1.left, dy = r0.top-r1.top;
+          if(Math.abs(dx)>1||Math.abs(dy)>1) el.animate([{transform:`translate(${dx}px,${dy}px)`},{transform:"none"}],{duration:650,easing:"cubic-bezier(.22,1,.36,1)"});
+        });
+      }
+    }
+
+    function openPop(anchor){
+      clearTimeout(tClose); // 앞서 예약된 닫기가 방금 연 툴팁을 닫지 않게
+      const s = cfg.scenes[step];
+      const termKey = anchor.dataset.term, sceneKey = anchor.dataset.scene;
+      const kids = [];
+      if(noteMode==="tap" && anchor.dataset.at){
+        const n = (s.notes||[]).find(n=>n._target===anchor.dataset.at);
+        if(n) kids.push(h("div",{class:"pnote"}, rich(n.text,"full",null,"notes")));
+      }
+      if(sceneKey){
+        kids.push(h("h3",{text:sceneKey}), h("div",{class:"meta",text:"장면 설명용 이름 (용어집 항목 아님)"}), h("p",{text:G.sceneNames[sceneKey]||""}));
+      } else if(termKey && G.glossary[termKey]){
+        const e = G.glossary[termKey];
+        kids.push(h("h3",{text:G.full(termKey)}),
+          h("div",{class:"meta",text:`${e.en}${e.alias?" · 별칭 "+e.alias:""} · 처음 ${e.first}단계`}),
+          h("p",{text:e.def}), h("div",{class:"src",text:`출처: Pro Git 한국어판 ${e.src}`}));
+      } else if(!kids.length) return;
+      pop.setAttribute("aria-label", sceneKey ? "장면 설명용 이름" : "용어 정의");
+      if(openEl) openEl.classList.remove("on");
+      pop.replaceChildren(...kids); pop.hidden = false; openEl = anchor; anchor.classList.add("on"); openedAt = performance.now();
+      const r = anchor.getBoundingClientRect(), pw = pop.offsetWidth, ph = pop.offsetHeight;
+      let x = Math.max(16, Math.min(r.left + r.width/2 - pw/2, innerWidth - pw - 16));
+      let y = r.bottom + 10; if(y + ph > innerHeight - 8) y = Math.max(8, r.top - ph - 10);
+      pop.style.left = x+"px"; pop.style.top = y+"px";
+    }
+    function closePop(){ pop.hidden = true; if(openEl) openEl.classList.remove("on"); openEl = null; }
+
+    const go = n => { const v = Math.max(0, Math.min(cfg.scenes.length-1, n)); if(v!==step){ step = v; render(true); } };
+    next.onclick = ()=>go(step+1); prev.onclick = ()=>go(step-1); first.onclick = ()=>{ step = 0; render(false); };
+    dots.onclick = e => { const b = e.target.closest("[data-step]"); if(b) go(+b.dataset.step); };
+    toggle.onclick = e => { const b = e.target.closest("[data-mode]"); if(!b) return; noteMode = b.dataset.mode;
+      toggle.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed", String(x===b))); closePop(); placeNotes(cfg.scenes[step]); };
+    // 툴팁 조건: 마우스가 있으면 올렸을 때, 터치는 눌렀을 때, 키보드는 포커스 (시안)
+    const SEL = "button[data-term],button[data-scene],button[data-at]";
+    const canHover = matchMedia("(hover:hover) and (pointer:fine)").matches;
+    let tOpen = 0, tClose = 0;
+    const later = (fn, ms) => setTimeout(fn, ms);
+    const cancel = () => { clearTimeout(tOpen); clearTimeout(tClose); };
+    const isTip = a => a && a.classList.contains("tip");
+    if(canHover){
+      document.addEventListener("pointerover", e => {
+        const a = e.target.closest(SEL);
+        if(pop.contains(e.target)){ clearTimeout(tClose); return; }
+        if(!isTip(a)) return;
+        cancel(); if(openEl!==a) tOpen = later(()=>openPop(a), 140);
+      });
+      document.addEventListener("pointerout", e => {
+        const to = e.relatedTarget;
+        if(to && (pop.contains(to) || (openEl && openEl.contains(to)))) return;
+        clearTimeout(tOpen); tClose = later(closePop, 160);
+      });
+    }
+    document.addEventListener("focusin", e => { const a = e.target.closest(SEL); if(isTip(a) && !pop.contains(a) && a.matches(":focus-visible")){ cancel(); openPop(a); } }); // 키보드 포커스일 때만
+    document.addEventListener("focusout", e => { if(!e.target.isConnected || pop.contains(e.target)) return; if(!pop.contains(e.relatedTarget)) { clearTimeout(tOpen); tClose = later(closePop, 120); } });
+    document.addEventListener("click", e => {
+      const a = e.target.closest(SEL);
+      if(isTip(a) && (!pop.contains(a) || a.classList.contains("t"))){
+        if(canHover){ cancel(); openPop(a); } else if(openEl===a) closePop(); else openPop(a);
+        return;
+      }
+      if(!pop.contains(e.target)) closePop();
+    });
+    document.addEventListener("keydown", e => { if(e.altKey||e.ctrlKey||e.metaKey||e.shiftKey) return; if(e.key==="ArrowRight") go(step+1); else if(e.key==="ArrowLeft") go(step-1); else if(e.key==="Escape") closePop(); });
+    const mq = matchMedia("(max-width:820px)");
+    let narrow = mq.matches;
+    addEventListener("resize", ()=>{ closePop(); if(mq.matches!==narrow){ narrow = mq.matches; render(false); } else placeNotes(cfg.scenes[step]); });
+    addEventListener("scroll", ()=>{ if(!pop.hidden && performance.now()-openedAt>400) closePop(); }, {passive:true}); // 열린 직후의 스크롤은 무시
+    render(false);
+    if(document.fonts && document.fonts.ready) document.fonts.ready.then(()=>placeNotes(cfg.scenes[step]));
+  };
+})();
+</script>
+
+<script>
+/* ===== 레슨 데이터 — 설정 계약 형식 (dev/design/diagram-component-design.md) =====
+   예시 장면 5개는 화면 시안을 보이기 위한 것이며 레슨 설계가 아니다. */
+window.GitGuide = window.GitGuide || {};
+(function(){
+  const C1 = [{id:"a3f",parents:[],lane:0}];
+  const C2 = [{id:"a3f",parents:[],lane:0},{id:"b71",parents:["a3f"],lane:0}];
+  const local = (h, files) => ({show:"active",areas:{
+    wt:{files:files.wt||[]}, sa:Object.assign({files:files.sa||[]}, files.saShow?{show:files.saShow}:{}), gd:Object.assign({history:h}, files.gdShow?{show:files.gdShow}:{})}});
+  GitGuide.lesson({
+    stage: 8,
+    scenes: [
+      { title:"로컬과 리모트, 두 공간",
+        body:"왼쪽은 내 컴퓨터, 오른쪽은 [[리모트 저장소]]입니다. 지금은 두 곳의 [[커밋 히스토리]]가 같습니다.",
+        kind:"dvcs", transition:null,
+        spaces:{ me:local({commits:C1,branches:[{name:"main",at:"a3f"}],head:"main",tracking:[{name:"origin/main",at:"a3f"}]},{wt:[{name:"README.md",state:"Committed",version:"v1"}]}),
+                 server:{show:"active",areas:{repo:{history:{commits:C1,branches:[{name:"main",at:"a3f"}]}}}} },
+        notes:[{at:{space:"me",area:"gd",id:"origin/main"},text:"[[리모트 저장소]]의 main이 마지막으로 어디였는지 기억하는 이름표"}] },
+      { title:"파일을 고치면 [[Modified]]",
+        body:"[[워킹 트리]]에서 README.md를 고쳤습니다. 아직 [[Staging Area]]에 올리지 않았습니다.",
+        kind:"dvcs", transition:null,
+        spaces:{ me:local({commits:C1,branches:[{name:"main",at:"a3f"}],head:"main",tracking:[{name:"origin/main",at:"a3f"}]},{wt:[{name:"README.md",state:"Modified",version:"v2"}],saShow:"dim",gdShow:"dim"}),
+                 server:{show:"dim",areas:{repo:{history:{commits:C1,branches:[{name:"main",at:"a3f"}]}}}} },
+        notes:[{at:{space:"me",area:"wt",id:"README.md"},text:"고친 파일 — 아직 커밋 준비 전"}] },
+      { title:"[[Stage]]: 다음 커밋에 넣을 파일을 올린다",
+        body:"README.md가 [[Staging Area]]에 올라가 [[Staged]] 상태가 되었습니다. [[Staging Area]]에 있는 파일은 다음 [[스냅샷]]에 들어갑니다.",
+        kind:"dvcs", transition:"Stage",
+        spaces:{ me:local({commits:C1,branches:[{name:"main",at:"a3f"}],head:"main",tracking:[{name:"origin/main",at:"a3f"}]},{sa:[{name:"README.md",state:"Staged",version:"v2"}],gdShow:"dim"}),
+                 server:{show:"dim",areas:{repo:{history:{commits:C1,branches:[{name:"main",at:"a3f"}]}}}} },
+        notes:[{at:{space:"me",area:"sa",id:"README.md"},text:"다음 [[커밋]]에 들어갈 파일"}] },
+      { title:"[[Commit]]: 스냅샷으로 저장한다",
+        body:"[[Git 디렉토리]]에 새 [[커밋]] b71이 생기고, [[브랜치]] main이 따라 움직였습니다. README.md는 [[Committed]] 상태입니다.",
+        kind:"dvcs", transition:"Commit",
+        spaces:{ me:local({commits:C2,branches:[{name:"main",at:"b71"}],head:"main",tracking:[{name:"origin/main",at:"a3f"}]},{wt:[{name:"README.md",state:"Committed",version:"v2"}],saShow:"dim"}),
+                 server:{show:"dim",areas:{repo:{history:{commits:C1,branches:[{name:"main",at:"a3f"}]}}}} },
+        notes:[{at:{space:"me",area:"gd",id:"b71"},text:"새 커밋 — 부모 a3f를 가리킨다"},
+               {at:{space:"me",area:"gd",id:"origin/main"},text:"[[리모트 저장소]]와 연결하지 않아 그대로"}] },
+      { title:"[[Push]]: 리모트 저장소에 공유한다",
+        body:"b71이 [[리모트 저장소]]로 복사되고, [[리모트 브랜치]] main과 [[리모트 트래킹 브랜치]] origin/main이 함께 b71로 움직였습니다.",
+        kind:"dvcs", transition:"Push",
+        spaces:{ me:local({commits:C2,branches:[{name:"main",at:"b71"}],head:"main",tracking:[{name:"origin/main",at:"b71"}]},{wt:[{name:"README.md",state:"Committed",version:"v2"}],saShow:"dim"}),
+                 server:{show:"active",areas:{repo:{history:{commits:C2,branches:[{name:"main",at:"b71"}]}}}} },
+        notes:[{at:{space:"server",area:"repo",id:"b71"},text:"로컬에서 복사되어 온 커밋"}] }
+    ]
+  });
+})();
+</script>
+</body>
+</html>
