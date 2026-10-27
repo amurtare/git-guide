@@ -35,7 +35,7 @@
 
 ```
  1. 맥락 잡기      이 README → overview → checklist → open-questions → map·공용 참조
- 2. 플랜 모드      조사(+필요한 실측) → 사용자 결정은 텍스트로 한두 개씩(§5-6) → 플랜에 설계 초안 → [플랜 검수] → 승인
+ 2. 플랜 모드      조사(+필요한 실측) → 사용자 결정은 텍스트로 한 번에 한 개씩(CLAUDE.md "플랜 모드 — 사용자 결정 진행 방식") → 플랜에 설계 초안 → [플랜 검수] → 승인
  3. 설계 문서      dev/design/<개념>-design.md (가이드 §8-5 골격) — 이름은 이때 정해 map.md "참조"에 적는다
  4. 문서 검수      독립 검수자 → NO-GO면 수정 → 재검수, GO까지 (재검수는 직전 지적 해소 + 회귀만)
  5. 역전파         checklist.md 맨 위 체크리스트 — map.md·overview·open-questions·README 커리큘럼 표
@@ -80,5 +80,6 @@
 
 ## 점검 기록
 
+- 2026-10-27 U-diagram 공용 도식 컴포넌트 구현 구분(커밋 `958e1ab`) — Design 진입("dev/plan/README.md를 읽고, 다음 설계 진행해줘.") 통과: "자동 확인 도구 결정"을 플랜 모드로 짚고 C2·확인 대상 후보·실측 필요를 찾음, 지운 ID(A1·A3·A4·A5·B1·C1) 비대상, git 깨끗·원격과 같음. 고친 곳: progress 로그 제목, 진행 방식의 질문 문구(CLAUDE.md와 맞춤), checklist 자동 확인 도구 항목에 산출물 형태 메모
 - 2026-10-19 커리큘럼 단계별 범위 확정(커밋 `454e91d`) — Design 진입("dev/plan/README.md를 읽고, 다음 설계 진행해줘.") 통과: `U-diagram`을 플랜 모드로 짚고 B1·`file://` 실측·A6 조건, 지운 ID(A1·A3·A4·A5·C1) 비대상, git 깨끗·원격과 같음 확인. 고친 곳: checklist U-diagram의 B1을 "이관 가능"으로 open-questions와 맞춤
 - 2026-10-14 `dev/` 재배치(커밋 `fe95fde`) — Design 진입("dev/plan/README.md를 읽고, 다음 설계 진행해줘.")·Impl 진입("dev/impl/README.md를 읽고, 다음 단계 진행해줘.") 모두 통과(5/5): 둘 다 "커리큘럼 단계별 범위 확정"을 플랜 모드로 짚음. 고친 곳: `curriculum-foundations.md` 진행 상황 주석에 A4 추가
